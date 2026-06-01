@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4DX — Las 4 Disciplinas de la Ejecución</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap');
+
+:root {
+  --bg: #FFFBF0;
+  --dark: #2C3E50;
+  --sky: #87CEEB;
+  --skylight: #E8F6FF;
+  --yellow: #FFD93D;
+  --orange: #FF9F43;
+  --red: #FF6B6B;
+  --green: #6BCB77;
+  --greenlight: #E8F8EF;
+  --purple: #C77DFF;
+  --purplelight: #F5EEFF;
+  --teal: #4ECDC4;
+  --teallight: #E0F7F5;
+  --white: #FFFFFF;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  font-family: 'Nunito', sans-serif;
+  color: var(--dark);
+  padding: 22px;
+  background-image:
+    radial-gradient(circle at 5% 10%, rgba(135,206,235,0.18) 0%, transparent 45%),
+    radial-gradient(circle at 95% 90%, rgba(107,203,119,0.14) 0%, transparent 45%);
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #2C3E50 0%, #3D566E 100%);
+  border-radius: 28px;
+  padding: 26px 32px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 8px 28px rgba(44,62,80,0.28);
+  position: relative; overflow: hidden;
+}
+.header::after {
+  content:'🎯';
+  position:absolute; right:32px; top:50%;
+  transform:translateY(-50%);
+  font-size:90px; opacity:0.1;
+}
+.header-emoji { font-size: 70px; }
+.header-text h1 {
+  font-family:'Fredoka One',sans-serif;
+  font-size:40px; color:var(--yellow); line-height:1.1;
+}
+.header-text p { font-size:15px; color:rgba(255,255,255,0.78); margin-top:5px; font-weight:700; }
+.header-pills { margin-left:auto; display:flex; flex-wrap:wrap; gap:8px; max-width:310px; justify-content:flex-end; }
+.hpill {
+  background:rgba(255,255,255,0.13); color:#fff;
+  font-size:12px; font-weight:800;
+  padding:6px 13px; border-radius:22px;
+}
+
+/* ===== 4 DISCIPLINAS BANNER ===== */
+.disciplinas-row {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.disc-card {
+  border-radius: 22px;
+  padding: 18px 14px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+}
+.d1 { background: #FFF9E0; border: 3px solid var(--yellow); }
+.d2 { background: var(--teallight); border: 3px solid var(--teal); }
+.d3 { background: var(--skylight); border: 3px solid var(--sky); }
+.d4 { background: var(--greenlight); border: 3px solid var(--green); }
+.disc-art   { font-size: 52px; margin-bottom: 8px; }
+.disc-num   {
+  display:inline-block;
+  font-family:'Fredoka One',sans-serif; font-size:13px;
+  padding:3px 12px; border-radius:12px; margin-bottom:6px;
+  color: var(--white);
+}
+.d1 .disc-num { background:var(--yellow); color:var(--dark); }
+.d2 .disc-num { background:var(--teal); }
+.d3 .disc-num { background:var(--sky); color:var(--dark); }
+.d4 .disc-num { background:var(--green); }
+.disc-title {
+  font-family:'Fredoka One',sans-serif;
+  font-size: 16px; margin-bottom: 6px;
+}
+.d1 .disc-title { color: #E67E00; }
+.d2 .disc-title { color: #1A8C8C; }
+.d3 .disc-title { color: #4A90D9; }
+.d4 .disc-title { color: #1A8C5B; }
+.disc-desc { font-size: 13px; color: #555; line-height: 1.5; }
+.disc-page { font-size:10px; color:#999; margin-top:6px; font-weight:700; }
+
+/* ===== GRIDS ===== */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:18px; }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px; }
+.g5 { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+
+/* ===== CARD ===== */
+.card {
+  background:var(--white);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,0.07);
+  position:relative; overflow:hidden;
+}
+.card-title {
+  font-family:'Fredoka One',sans-serif;
+  font-size:20px; margin-bottom:16px;
+  display:flex; align-items:center; gap:8px;
+  color:var(--dark);
+}
+.cap-tag {
+  margin-left:auto;
+  font-size:11px; font-weight:900;
+  padding:4px 11px; border-radius:12px;
+  white-space:nowrap;
+}
+.dot-bg { position:absolute; top:8px; right:14px; font-size:32px; opacity:0.07; }
+
+/* ===== MAPA ESTRATÉGICO ===== */
+.mapa { display:flex; gap:8px; align-items:stretch; }
+.mapa-col {
+  flex:1; border-radius:18px; padding:16px 12px;
+  text-align:center; display:flex; flex-direction:column; align-items:center;
+}
+.mc-firma    { background:#F5EEFF; border:2px dashed var(--purple); }
+.mc-cambio   { background:#FFFDE7; border:3px solid var(--yellow); }
+.mc-torb     { background:#FFE9E9; border:2px dashed var(--red); }
+.mc-big-icon { font-size:52px; margin-bottom:8px; }
+.mc-title    { font-family:'Fredoka One',sans-serif; font-size:15px; margin-bottom:8px; }
+.mc-firma  .mc-title  { color:#7B2FBE; }
+.mc-cambio .mc-title  { color:#E67E00; font-size:17px; }
+.mc-torb   .mc-title  { color:#C0392B; }
+.mc-items  { font-size:12px; line-height:1.9; color:#555; }
+.mc-star {
+  background:var(--yellow); color:var(--dark);
+  font-size:10px; font-weight:900; padding:4px 10px;
+  border-radius:12px; display:inline-block; margin-bottom:8px;
+  text-transform:uppercase;
+}
+.mapa-arrow { display:flex; align-items:center; font-size:26px; flex-shrink:0; color:var(--dark); }
+
+/* ===== REGLAS ===== */
+.regla {
+  display:flex; gap:14px; align-items:flex-start;
+  background:var(--skylight); border-radius:18px;
+  padding:14px; margin-bottom:11px;
+  border-left:6px solid var(--sky);
+}
+.regla.g { border-left-color:var(--green); background:var(--greenlight); }
+.regla.o { border-left-color:var(--orange); background:#FFF6E9; }
+.regla.p { border-left-color:var(--purple); background:var(--purplelight); }
+.regla-num {
+  width:42px; height:42px; border-radius:50%;
+  background:var(--sky); color:var(--white);
+  font-family:'Fredoka One',sans-serif; font-size:24px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.regla.g .regla-num { background:var(--green); }
+.regla.o .regla-num { background:var(--orange); }
+.regla.p .regla-num { background:var(--purple); }
+.regla-body strong { font-size:15px; color:var(--dark); display:block; margin-bottom:4px; }
+.regla-body span   { font-size:13.5px; color:#555; line-height:1.5; }
+
+/* ===== TRAMPAS ===== */
+.trampa {
+  display:flex; gap:12px; align-items:flex-start;
+  background:#FFF0F0; border:2px dashed var(--red);
+  border-radius:18px; padding:14px; margin-bottom:11px;
+}
+.trampa-icon { font-size:38px; flex-shrink:0; }
+.trampa-body strong { font-size:15px; color:#C0392B; display:block; margin-bottom:4px; }
+.trampa-body span   { font-size:13px; color:#555; line-height:1.5; }
+
+/* ===== FÓRMULA ===== */
+.formula-box {
+  background: linear-gradient(135deg, #3D566E 0%, #2C3E50 100%);
+  border: 3px solid var(--yellow);
+  border-radius:22px;
+  padding:22px 24px; text-align:center; margin-top:14px;
+}
+.formula-label { font-size:14px; font-weight:900; color:var(--yellow); letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; }
+.formula-row   { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; }
+.f-box  { background:rgba(255,255,255,0.18); border:2px solid rgba(255,255,255,0.3); border-radius:16px; padding:14px 22px; text-align:center; }
+.f-box .fl { font-size:13px; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1px; font-weight:800; margin-bottom:4px; }
+.f-box .fv { font-family:'Fredoka One',sans-serif; font-size:38px; color:var(--yellow); line-height:1; }
+.f-arrow   { font-size:36px; color:var(--yellow); }
+.f-date    { background:var(--yellow); border-radius:16px; padding:14px 22px; }
+.f-date .fl { font-size:13px; color:rgba(0,0,0,0.6); text-transform:uppercase; letter-spacing:1px; font-weight:800; margin-bottom:4px; }
+.f-date .fv { font-family:'Fredoka One',sans-serif; font-size:36px; color:var(--dark); line-height:1; }
+
+/* ===== PASOS ===== */
+.paso {
+  display:flex; gap:14px; align-items:flex-start;
+  background:var(--teallight); border-radius:18px;
+  padding:14px; margin-bottom:11px;
+}
+.paso-icon { font-size:38px; flex-shrink:0; }
+.paso-body strong { font-size:15px; color:var(--dark); display:block; margin-bottom:4px; }
+.paso-body span   { font-size:13px; color:#444; line-height:1.5; }
+
+/* ===== TIPOS ESTRUCTURA ===== */
+.tipo {
+  border-radius:18px; padding:16px;
+  text-align:center; margin-bottom:11px;
+}
+.tipo.a { background:#FFFDE7; border:2px solid var(--yellow); }
+.tipo.b { background:var(--greenlight); border:2px solid var(--green); }
+.tipo.c { background:var(--purplelight); border:2px solid var(--purple); }
+.tipo-icon  { font-size:44px; margin-bottom:8px; }
+.tipo-title { font-family:'Fredoka One',sans-serif; font-size:15px; margin-bottom:6px; }
+.tipo.a .tipo-title { color:#E67E00; }
+.tipo.b .tipo-title { color:#1A8C5B; }
+.tipo.c .tipo-title { color:#7B2FBE; }
+.tipo-desc  { font-size:13px; color:#555; line-height:1.5; }
+.tipo-ej    { font-size:12px; color:#888; margin-top:5px; font-style:italic; }
+
+/* ===== CASOS ===== */
+.caso {
+  background:var(--white); border-radius:20px;
+  padding:16px; box-shadow:0 3px 12px rgba(0,0,0,0.07);
+  border-top:5px solid var(--teal);
+}
+.caso.o { border-top-color:var(--orange); }
+.caso.p { border-top-color:var(--purple); }
+.caso.r { border-top-color:var(--red); }
+.caso-head { display:flex; align-items:center; gap:10px; margin-bottom:9px; }
+.caso-emoji { font-size:32px; }
+.caso-name  { font-family:'Fredoka One',sans-serif; font-size:15px; color:var(--dark); }
+.caso-page  { font-size:10px; color:#999; font-weight:700; margin-left:auto; }
+.caso-body  { font-size:13px; color:#444; line-height:1.7; }
+.caso-win {
+  display:inline-block; background:var(--greenlight);
+  color:#1A8C5B; font-size:11px; font-weight:900;
+  padding:4px 12px; border-radius:12px; margin-top:8px;
+}
+
+/* ===== FASES ===== */
+.fase {
+  background:var(--white); border-radius:20px;
+  padding:16px 10px; text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,0.07);
+  position:relative;
+}
+.fase::after {
+  content:'→';
+  position:absolute; right:-13px; top:50%;
+  transform:translateY(-50%);
+  font-size:20px; color:#ccc; font-weight:900; z-index:2;
+}
+.fase:last-child::after { display:none; }
+.fase-art    { font-size:52px; margin-bottom:8px; }
+.fase-badge  {
+  display:inline-block; width:30px; height:30px;
+  border-radius:50%;
+  font-family:'Fredoka One',sans-serif; font-size:16px;
+  color:#fff; line-height:30px; margin-bottom:7px;
+}
+.f1b { background:var(--sky); color:var(--dark)!important; }
+.f2b { background:var(--orange); }
+.f3b { background:var(--green); }
+.f4b { background:var(--yellow); color:var(--dark)!important; }
+.f5b { background:var(--dark); }
+.fase-name { font-family:'Fredoka One',sans-serif; font-size:14px; margin-bottom:5px; }
+.fase-desc { font-size:12px; color:#777; line-height:1.45; }
+.fase-page { font-size:10px; color:#bbb; margin-top:5px; font-weight:700; }
+
+/* ===== 3 TIPOS PERSONAS ===== */
+.personas-row { display:flex; gap:12px; margin-top:14px; }
+.persona {
+  flex:1; border-radius:20px; padding:16px;
+  text-align:center;
+}
+.ps { background:#FFFACC; border:2px solid var(--yellow); }
+.pw { background:var(--skylight); border:2px solid var(--sky); }
+.pn { background:#FFE9E9; border:2px solid var(--red); }
+.persona-art  { font-size:52px; margin-bottom:8px; }
+.persona-name { font-family:'Fredoka One',sans-serif; font-size:16px; margin-bottom:5px; }
+.ps .persona-name { color:#E6AC00; }
+.pw .persona-name { color:#4A90D9; }
+.pn .persona-name { color:var(--red); }
+.persona-desc { font-size:13px; color:#555; line-height:1.5; }
+
+/* ===== CHECKLIST ===== */
+.chk { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:14px; color:#444; line-height:1.5; }
+.chk span:first-child { font-size:22px; flex-shrink:0; }
+
+/* ===== QUOTE ===== */
+.quote {
+  background:var(--skylight); border-left:5px solid var(--sky);
+  border-radius:0 16px 16px 0;
+  padding:12px 16px; margin-top:12px;
+  display:flex; gap:10px; align-items:flex-start;
+}
+.quote-e { font-size:26px; flex-shrink:0; }
+.quote-t { font-size:14px; color:var(--dark); line-height:1.55; font-style:italic; font-weight:700; }
+
+/* ===== PAGE REF ===== */
+.page-ref {
+  display:inline-block;
+  background:#F0F0F0; color:#888;
+  font-size:10px; font-weight:900;
+  padding:2px 9px; border-radius:9px;
+  margin-left:6px;
+}
+
+/* ===== SECTION TITLE ===== */
+.stitle {
+  font-family:'Fredoka One',sans-serif; font-size:22px; color:var(--dark);
+  margin-bottom:14px; display:flex; align-items:center; gap:8px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background:var(--dark); border-radius:24px;
+  padding:16px 26px;
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:6px;
+  box-shadow:0 4px 16px rgba(44,62,80,0.22);
+}
+.footer-l { font-size:13px; color:rgba(255,255,255,0.65); }
+.footer-l strong { color:var(--yellow); }
+.footer-pills { display:flex; gap:8px; flex-wrap:wrap; }
+.fp {
+  background:rgba(255,255,255,0.12); color:#fff;
+  font-size:12px; font-weight:800;
+  padding:5px 13px; border-radius:22px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="header-emoji">🎯</div>
+  <div class="header-text">
+    <h1>4DX — Desarrollo de Disciplina 1</h1>
+    <p style="font-size:17px; color:var(--yellow); font-weight:900; margin-top:4px;">➜ Enfocarse en la Iniciativa Clave</p>
+    <p style="font-size:13px; color:rgba(255,255,255,0.72); margin-top:4px; font-weight:700;">📘 Capítulos 6 · 7 · 11 · 12 &nbsp;|&nbsp; Resumen Visual para Líderes y Jefaturas</p>
+  </div>
+  <div class="header-pills">
+    <span class="hpill">🌪️ Torbellino</span>
+    <span class="hpill">🔄 Cambio de Conducta</span>
+    <span class="hpill">📏 X → Y en tal plazo</span>
+    <span class="hpill">⚡ Poder de la Firma</span>
+    <span class="hpill">🏆 Iniciativa Clave</span>
+  </div>
+</div>
+
+<!-- ===== 4 DISCIPLINAS ===== -->
+<div class="disciplinas-row">
+  <div class="disc-card d1">
+    <div class="disc-art">🎯</div>
+    <div class="disc-num">Disciplina 1</div>
+    <div class="disc-title">Enfocarse en lo Crucialmente Importante</div>
+    <div class="disc-desc">Elige UNA sola iniciativa que marque la diferencia. Menos es más. El equipo necesita un blanco claro.</div>
+    <div class="disc-page">📖 Págs. 59–84 · Cap. 2 y 12</div>
+  </div>
+  <div class="disc-card d2">
+    <div class="disc-art">📊</div>
+    <div class="disc-num">Disciplina 2</div>
+    <div class="disc-title">Actuar sobre las Medidas de Predicción</div>
+    <div class="disc-desc">Identifica las 1 o 2 acciones que, si las haces bien cada semana, GARANTIZAN que llegarás a la meta.</div>
+    <div class="disc-page">📖 Págs. 85–97 · Cap. 3 y 13</div>
+  </div>
+  <div class="disc-card d3">
+    <div class="disc-art">📋</div>
+    <div class="disc-num">Disciplina 3</div>
+    <div class="disc-title">Llevar un Tablero de Resultados Convincente</div>
+    <div class="disc-desc">El equipo necesita ver si está ganando o perdiendo. Un tablero visible cambia el juego por completo.</div>
+    <div class="disc-page">📖 Págs. 98–120 · Cap. 4 y 14</div>
+  </div>
+  <div class="disc-card d4">
+    <div class="disc-art">🤝</div>
+    <div class="disc-num">Disciplina 4</div>
+    <div class="disc-title">Mantener una Cadencia de Rendición de Cuentas</div>
+    <div class="disc-desc">Reunión semanal donde cada persona se compromete a UNA acción concreta para mover el tablero.</div>
+    <div class="disc-page">📖 Págs. 121–150 · Cap. 5 y 15</div>
+  </div>
+</div>
+
+<!-- ===== MAPA + REGLAS ===== -->
+<div class="g2">
+
+  <!-- MAPA ESTRATÉGICO -->
+  <div class="card">
+    <div class="dot-bg">🗺️</div>
+    <div class="card-title">
+      🗺️ El Mapa Estratégico
+      <span class="cap-tag" style="background:var(--purplelight);color:#7B2FBE;">Cap. 6 · Pág. 154</span>
+    </div>
+    <div class="mapa">
+      <div class="mapa-col mc-firma">
+        <div class="mc-big-icon">⚡</div>
+        <div class="mc-title">Poder de la Firma</div>
+        <div class="mc-items">
+          💰 Invertir dinero<br>
+          👥 Contratar gente<br>
+          🔧 Cambiar procesos<br>
+          📢 Publicidad<br>
+          🏢 Adquirir empresas<br><br>
+          <em>Se ordena<br>y ocurre ✅</em>
+        </div>
+      </div>
+      <div class="mapa-arrow">→</div>
+      <div class="mapa-col mc-cambio">
+        <div class="mc-star">⭐ AQUÍ VIVE LA INICIATIVA</div>
+        <div class="mc-big-icon">🔄</div>
+        <div class="mc-title">Cambio de Comportamiento</div>
+        <div class="mc-items">
+          <strong>La gente debe<br>hacer algo<br>DIFERENTE 🚀</strong><br><br>
+          No se ordena.<br>Se construye<br>con el equipo. 🤝<br><br>
+          <em>Aquí viven<br>las 4DX</em>
+        </div>
+      </div>
+      <div class="mapa-arrow">←</div>
+      <div class="mapa-col mc-torb">
+        <div class="mc-big-icon">🌪️</div>
+        <div class="mc-title">El Torbellino</div>
+        <div class="mc-items">
+          🔥 Siempre urgente<br>
+          ⏰ Consume el 80%<br>
+          😵 Te impone cosas<br>
+          ⚠️ Atrapa el avance<br><br>
+          <em>¡No es malo,<br>pero no<br>avanza solo!</em>
+        </div>
+      </div>
+    </div>
+    <div class="quote">
+      <div class="quote-e">💬</div>
+      <div class="quote-t">"¿Dónde elegimos invertir energía de forma DESPROPORCIONADA?" — Tim Tassopoulos, Presidente Chick-fil-A <span class="page-ref">Pág. 153</span></div>
+    </div>
+  </div>
+
+  <!-- 4 REGLAS -->
+  <div class="card">
+    <div class="dot-bg">📏</div>
+    <div class="card-title">
+      📏 Las 4 Reglas del Líder de Líderes
+      <span class="cap-tag" style="background:var(--skylight);color:#4A90D9;">Cap. 7 · Págs. 169–187</span>
+    </div>
+    <div class="regla">
+      <div class="regla-num">1</div>
+      <div class="regla-body">
+        <strong>🧠 Nadie en más de 2 iniciativas a la vez</strong>
+        <span>El torbellino consume el 80% de la energía. Más iniciativas = equipo disperso y sin resultados. <span class="page-ref">Pág. 75</span></span>
+      </div>
+    </div>
+    <div class="regla g">
+      <div class="regla-num">2</div>
+      <div class="regla-body">
+        <strong>⚔️ Las batallas deben ganar la guerra</strong>
+        <span>La iniciativa del equipo debe GARANTIZAR el éxito de la iniciativa primaria. Pregunta clave: ¿cuál es la menor cantidad de batallas necesarias? <span class="page-ref">Págs. 75–76</span></span>
+      </div>
+    </div>
+    <div class="regla o">
+      <div class="regla-num">3</div>
+      <div class="regla-body">
+        <strong>🤝 El jefe veta, pero NO impone</strong>
+        <span>Los líderes de primera línea eligen su iniciativa. El jefe puede decir NO si no contribuye, pero jamás imponer. <em>Dirección desde arriba → Compromiso desde abajo.</em> <span class="page-ref">Pág. 76</span></span>
+      </div>
+    </div>
+    <div class="regla p">
+      <div class="regla-num">4</div>
+      <div class="regla-body">
+        <strong>📐 Toda iniciativa: de X a Y en tal plazo</strong>
+        <span>Sin esta fórmula no hay línea de llegada, nadie sabe si está ganando y el compromiso desaparece. <span class="page-ref">Págs. 77–79</span></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== PASOS + TRAMPAS + TIPOS ===== -->
+<div class="g3">
+
+  <!-- 4 PASOS + FÓRMULA -->
+  <div class="card">
+    <div class="dot-bg">🪜</div>
+    <div class="card-title">
+      🪜 4 Pasos para Definir la Iniciativa
+      <span class="cap-tag" style="background:var(--teallight);color:#1A8C8C;">Cap. 12 · Págs. 250–262</span>
+    </div>
+    <div class="paso">
+      <div class="paso-icon">💡</div>
+      <div class="paso-body">
+        <strong>Paso 1 — Lluvia de Ideas 🌧️ <span class="page-ref">Pág. 250</span></strong>
+        <span>Genera MUCHAS opciones. Involucra al equipo. Piensa en el QUÉ, no en el CÓMO. Más ideas = mejor decisión.</span>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-icon">⚖️</div>
+      <div class="paso-body">
+        <strong>Paso 2 — Calificar por Impacto 🎯 <span class="page-ref">Pág. 254</span></strong>
+        <span>¿Cuál genera mayor impacto en la iniciativa de TODA la organización? No solo en tu equipo.</span>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-icon">🔍</div>
+      <div class="paso-body">
+        <strong>Paso 3 — Probar con 4 Criterios ✅ <span class="page-ref">Pág. 256</span></strong>
+        <span>✅ ¿Compatible con la meta general?<br>✅ ¿Medible desde el día 1?<br>✅ ¿El 80% le pertenece al equipo?<br>✅ ¿Es juego de equipo, no solo del jefe?</span>
+      </div>
+    </div>
+    <div class="paso" style="margin-bottom:0;">
+      <div class="paso-icon">✍️</div>
+      <div class="paso-body">
+        <strong>Paso 4 — Redactar la Fórmula 📐 <span class="page-ref">Pág. 257</span></strong>
+        <span>Verbo + punto de partida (X) + resultado deseado (Y) + fecha límite. Simple, claro, medible.</span>
+      </div>
+    </div>
+    <div class="formula-box">
+      <div class="formula-label">⭐ La Fórmula de Toda Iniciativa · Pág. 77</div>
+      <div class="formula-row">
+        <div class="f-box"><div class="fl">Hoy estamos en</div><div class="fv">X 📍</div></div>
+        <div class="f-arrow">➜</div>
+        <div class="f-box"><div class="fl">Queremos llegar a</div><div class="fv">Y 🏆</div></div>
+        <div class="f-arrow">📅</div>
+        <div class="f-date"><div class="fl">Antes del</div><div class="fv">Fecha</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 TRAMPAS -->
+  <div class="card">
+    <div class="dot-bg">🚨</div>
+    <div class="card-title">
+      🚨 Las 4 Trampas que Debes Evitar
+      <span class="cap-tag" style="background:#FFE9E9;color:#C0392B;">Cap. 6 · Págs. 163–167</span>
+    </div>
+    <div class="trampa">
+      <div class="trampa-icon">🕳️</div>
+      <div class="trampa-body">
+        <strong>Trampa 1 — Demasiadas iniciativas <span class="page-ref">Pág. 163</span></strong>
+        <span>"Convertir todo en iniciativa" destruye el enfoque. Ningún equipo exitoso dice "¡ojalá tuviéramos más metas!"</span>
+      </div>
+    </div>
+    <div class="trampa">
+      <div class="trampa-icon">🌊</div>
+      <div class="trampa-body">
+        <strong>Trampa 2 — Iniciativa demasiado amplia <span class="page-ref">Pág. 163</span></strong>
+        <span>"Aumentar ingresos totales" no es una iniciativa: es el torbellino entero con ropa nueva 👗.</span>
+      </div>
+    </div>
+    <div class="trampa">
+      <div class="trampa-icon">💭</div>
+      <div class="trampa-body">
+        <strong>Trampa 3 — Bonita pero sin métrica <span class="page-ref">Pág. 164</span></strong>
+        <span>"Ser líderes en innovación" suena increíble 🎤 pero sin número concreto nadie sabe cuándo celebrar.</span>
+      </div>
+    </div>
+    <div class="trampa" style="margin-bottom:12px;">
+      <div class="trampa-icon">🧭</div>
+      <div class="trampa-body">
+        <strong>Trampa 4 — Sin conexión con la misión <span class="page-ref">Pág. 166</span></strong>
+        <span>Si cumples las metas pero pierdes el propósito, habrás ganado la batalla pero perdido la guerra ⚔️.</span>
+      </div>
+    </div>
+    <div class="quote">
+      <div class="quote-e">⚠️</div>
+      <div class="quote-t">"Siempre habrá más buenas iniciativas que capacidad para ejecutarlas." Decir NO también es liderazgo. 💪 <span class="page-ref">Pág. 66</span></div>
+    </div>
+  </div>
+
+  <!-- 3 TIPOS ESTRUCTURA -->
+  <div class="card">
+    <div class="dot-bg">🏗️</div>
+    <div class="card-title">
+      🏗️ 3 Formas de Estructurar las Iniciativas
+      <span class="cap-tag" style="background:var(--purplelight);color:#7B2FBE;">Cap. 6 · Págs. 159–162</span>
+    </div>
+    <div class="tipo a">
+      <div class="tipo-icon">🎯</div>
+      <div class="tipo-title">A — Una Sola Iniciativa Primaria <span class="page-ref">Pág. 159</span></div>
+      <div class="tipo-desc">Toda la organización apunta al mismo blanco. Los equipos crean sus propias batallas para contribuir.</div>
+      <div class="tipo-ej">🚛 Covenant Transport → rotación choferes: de 106% a 86%. ¡Récord histórico y mejor resultado financiero en 12 años!</div>
+    </div>
+    <div class="tipo b">
+      <div class="tipo-icon">⚔️</div>
+      <div class="tipo-title">B — Varias Iniciativas Críticas <span class="page-ref">Pág. 160</span></div>
+      <div class="tipo-desc">Cuando la estrategia necesita cambios simultáneos en áreas distintas. Cada equipo elige dónde impactar más.</div>
+      <div class="tipo-ej">💊 Farmacéutica → "De molécula al mercado" + "Acceso a fármacos" al mismo tiempo.</div>
+    </div>
+    <div class="tipo c" style="margin-bottom:0;">
+      <div class="tipo-icon">🧩</div>
+      <div class="tipo-title">C — Autonomía por Equipo <span class="page-ref">Pág. 161</span></div>
+      <div class="tipo-desc">Cada equipo elige su iniciativa siempre que se alinee con las estrategias corporativas definidas.</div>
+      <div class="tipo-ej">📞 TELUS International → 400+ equipos, cada uno con su propia iniciativa alineada a 4 estrategias.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CASOS REALES ===== -->
+<div class="stitle">🏆 Casos Reales — Iniciativas que Cambiaron Resultados</div>
+<div class="g4">
+  <div class="caso">
+    <div class="caso-head">
+      <div class="caso-emoji">🏨</div>
+      <div class="caso-name">Hotel Opryland</div>
+      <div class="caso-page">Pág. 170</div>
+    </div>
+    <div class="caso-body">
+      <strong>Iniciativa:</strong> Satisfacción de huéspedes<br>
+      📍 De <strong>42%</strong> → 🏆 Meta: <strong>55%</strong><br><br>
+      <strong>🗡️ 3 Batallas clave:</strong><br>
+      ✈️ Experiencia de llegada<br>
+      🔧 Resolución de problemas<br>
+      🍽️ Calidad de alimentos y bebidas
+    </div>
+    <span class="caso-win">🏆 ¡Llegaron al 61%! Récord histórico del hotel</span>
+  </div>
+  <div class="caso o">
+    <div class="caso-head">
+      <div class="caso-emoji">🛒</div>
+      <div class="caso-name">Gran Minorista</div>
+      <div class="caso-page">Pág. 180</div>
+    </div>
+    <div class="caso-body">
+      <strong>Iniciativa:</strong> Probabilidad de recomendación<br>
+      📍 De <strong>74%</strong> → 🏆 Meta: <strong>78%</strong><br><br>
+      <strong>🗡️ 3 Batallas clave:</strong><br>
+      👋 Interacción con clientes<br>
+      📦 Menos productos agotados<br>
+      💳 Velocidad de pago en caja
+    </div>
+    <span class="caso-win">✅ Cada tienda personalizó su meta X→Y</span>
+  </div>
+  <div class="caso p">
+    <div class="caso-head">
+      <div class="caso-emoji">🏦</div>
+      <div class="caso-name">Despacho Fiscal</div>
+      <div class="caso-page">Pág. 184</div>
+    </div>
+    <div class="caso-body">
+      <strong>Iniciativa:</strong> Ingresos por servicios de consultoría (no ingresos totales)<br><br>
+      <strong>💡 Lección clave:</strong><br>
+      A veces la iniciativa más estratégica es una más pequeña y específica, no la más grande 🎯
+    </div>
+    <span class="caso-win">✅ Cerraron el 15% de brecha que faltaba</span>
+  </div>
+  <div class="caso r">
+    <div class="caso-head">
+      <div class="caso-emoji">🏪</div>
+      <div class="caso-name">Tienda 334</div>
+      <div class="caso-page">Pág. 236</div>
+    </div>
+    <div class="caso-body">
+      <strong>Iniciativa:</strong> Mejorar condiciones de la tienda para superar ventas del año anterior<br><br>
+      <strong>🔑 La clave (Cap. 11):</strong><br>
+      Sesiones semanales donde cada jefe elegía <strong>1 sola acción</strong> concreta para mover el tablero 💪
+    </div>
+    <span class="caso-win">🏆 De la PEOR a la MEJOR en 10 semanas</span>
+  </div>
+</div>
+
+<!-- ===== 5 FASES + 3 PERSONAS ===== -->
+<div class="g2">
+
+  <!-- 5 FASES -->
+  <div class="card">
+    <div class="dot-bg">📈</div>
+    <div class="card-title">
+      📈 Las 5 Fases del Cambio de Comportamiento
+      <span class="cap-tag" style="background:var(--skylight);color:#4A90D9;">Cap. 11 · Págs. 240–248</span>
+    </div>
+    <div class="g5" style="margin-bottom:0;">
+      <div class="fase">
+        <div class="fase-art">🗺️</div>
+        <div class="fase-badge f1b">1</div>
+        <div class="fase-name">Claridad</div>
+        <div class="fase-desc">El equipo se compromete. Definen la iniciativa, medidas y tablero.</div>
+        <div class="fase-page">Pág. 240</div>
+      </div>
+      <div class="fase">
+        <div class="fase-art">🚀</div>
+        <div class="fase-badge f2b">2</div>
+        <div class="fase-name">Lanzamiento</div>
+        <div class="fase-desc">¡Arranca! Aparece confusión y resistencia. El torbellino ataca fuerte.</div>
+        <div class="fase-page">Pág. 242</div>
+      </div>
+      <div class="fase">
+        <div class="fase-art">🌱</div>
+        <div class="fase-badge f3b">3</div>
+        <div class="fase-name">Adopción</div>
+        <div class="fase-desc">El equipo adopta los nuevos comportamientos. La resistencia cede.</div>
+        <div class="fase-page">Pág. 243</div>
+      </div>
+      <div class="fase">
+        <div class="fase-art">⚙️</div>
+        <div class="fase-badge f4b">4</div>
+        <div class="fase-name">Optimización</div>
+        <div class="fase-desc">El equipo propone mejoras solo. ¡La apropiación es real!</div>
+        <div class="fase-page">Pág. 244</div>
+      </div>
+      <div class="fase">
+        <div class="fase-art">🏅</div>
+        <div class="fase-badge f5b">5</div>
+        <div class="fase-name">Hábitos</div>
+        <div class="fase-desc">Los nuevos comportamientos son el nuevo estándar de operación.</div>
+        <div class="fase-page">Pág. 246</div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      <div class="quote-e">🏥</div>
+      <div class="quote-t">Centro Médico Erasmus (Países Bajos): erradicaron casi el 100% de infecciones intrahospitalarias en 5 años aplicando las 5 fases. <span class="page-ref">Pág. 247</span></div>
+    </div>
+  </div>
+
+  <!-- 3 TIPOS PERSONAS + CHECKLIST -->
+  <div class="card">
+    <div class="dot-bg">👥</div>
+    <div class="card-title">
+      👥 3 Tipos de Personas ante el Cambio
+      <span class="cap-tag" style="background:var(--skylight);color:#4A90D9;">Cap. 11 · Págs. 44–46</span>
+    </div>
+    <div class="personas-row" style="margin-bottom:16px;">
+      <div class="persona ps">
+        <div class="persona-art">⭐🙋</div>
+        <div class="persona-name">Los Modelos</div>
+        <div class="persona-desc">Adoptan el cambio desde el día 1 con entusiasmo. Son la prueba de que sí se puede. ¡Úsalos como ejemplo!</div>
+      </div>
+      <div class="persona pw">
+        <div class="persona-art">⏳🤔</div>
+        <div class="persona-name">Todavía No</div>
+        <div class="persona-desc">Aceptan a medias. Hacen lo mínimo. Con coaching y tiempo pueden volverse modelos. Son la mayoría del equipo.</div>
+      </div>
+      <div class="persona pn">
+        <div class="persona-art">🚫😤</div>
+        <div class="persona-name">Los Nuncas</div>
+        <div class="persona-desc">Se resisten al cambio. No salen de su zona de confort sin una conversación honesta y directa del líder.</div>
+      </div>
+    </div>
+
+    <div style="font-family:'Fredoka One',sans-serif; font-size:16px; color:var(--dark); margin-bottom:10px;">🔑 Lo que el Líder Debe Hacer Diferente</div>
+    <div class="chk"><span>🎯</span><span>Elegir UNA sola iniciativa que exija un cambio de comportamiento real, no tareas del torbellino.</span></div>
+    <div class="chk"><span>📅</span><span>Agendar sesiones semanales de rendición de cuentas y NO cancelarlas. Sin estas, la iniciativa muere lentamente.</span></div>
+    <div class="chk"><span>🙋</span><span>Pedir a cada persona UN solo compromiso concreto por semana para mover el tablero.</span></div>
+    <div class="chk"><span>🏆</span><span>Celebrar cada avance por pequeño que sea. La moral sube cuando el equipo siente que está ganando.</span></div>
+    <div class="chk"><span>🚫</span><span>Dejar de imponer. Invitar al equipo a decidir CÓMO va a contribuir a la iniciativa.</span></div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div class="footer-l">
+    <strong>Las 4 Disciplinas de la Ejecución</strong> · McChesney, Covey & Huling · 2ª Edición<br>
+    Fichas de referencia · Caps. 6, 7, 11 y 12 · Material interno para líderes y jefaturas
+  </div>
+  <div class="footer-pills">
+    <span class="fp">🎯 Disciplina 1</span>
+    <span class="fp">🌪️ Torbellino</span>
+    <span class="fp">🔄 Cambio de Conducta</span>
+    <span class="fp">📏 X → Y</span>
+    <span class="fp">🏆 Ejecución</span>
+  </div>
+</div>
+
+</body>
+</html>
