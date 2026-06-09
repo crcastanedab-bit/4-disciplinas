@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4DX — Disciplina 4 y Capítulo 6</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap');
+:root {
+  --bg: #F0FFF4;
+  --dark: #2C3E50;
+  --green: #27AE60;
+  --greenlight: #E8F8EF;
+  --teal: #1ABC9C;
+  --teallight: #E0FAF5;
+  --yellow: #F9CA24;
+  --orange: #F0932B;
+  --orangelight: #FFF3E0;
+  --red: #EB4D4B;
+  --redlight: #FFE9E9;
+  --purple: #9B59B6;
+  --purplelight: #F5EEFF;
+  --sky: #74B9FF;
+  --skylight: #EAF4FF;
+  --pink: #FD79A8;
+  --pinklight: #FFF0F5;
+  --white: #FFFFFF;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  font-family: 'Nunito', sans-serif;
+  color: var(--dark);
+  padding: 22px;
+  background-image:
+    radial-gradient(circle at 8% 10%, rgba(39,174,96,0.1) 0%, transparent 40%),
+    radial-gradient(circle at 92% 88%, rgba(26,188,156,0.1) 0%, transparent 40%);
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #1E3A2F 0%, #27AE60 100%);
+  border-radius: 28px; padding: 26px 32px;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 20px;
+  box-shadow: 0 8px 28px rgba(27,90,50,0.3);
+  position: relative; overflow: hidden;
+}
+.header::after { content:'🤝'; position:absolute; right:32px; top:50%; transform:translateY(-50%); font-size:90px; opacity:0.1; }
+.header-emoji { font-size:68px; }
+.header-text h1 { font-family:'Fredoka One',sans-serif; font-size:34px; color:var(--yellow); line-height:1.1; }
+.header-sub { font-size:17px; color:var(--yellow); font-weight:900; margin-top:4px; }
+.header-text p { font-size:13px; color:rgba(255,255,255,0.72); margin-top:4px; font-weight:700; }
+.header-pills { margin-left:auto; display:flex; flex-wrap:wrap; gap:8px; max-width:290px; justify-content:flex-end; }
+.hpill { background:rgba(255,255,255,0.15); color:#fff; font-size:12px; font-weight:800; padding:6px 13px; border-radius:22px; }
+
+/* ===== DISCIPLINAS BANNER ===== */
+.disc-banner { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+.disc-card { border-radius:22px; padding:20px; display:flex; align-items:center; gap:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+.d4-card { background:linear-gradient(135deg,#E8F8EF 0%,#B8EFC8 100%); border:3px solid var(--green); }
+.d6-card { background:linear-gradient(135deg,#EAF4FF 0%,#B3D4FF 100%); border:3px solid var(--sky); }
+.disc-art { font-size:58px; flex-shrink:0; }
+.disc-num { font-family:'Fredoka One',sans-serif; font-size:13px; padding:3px 12px; border-radius:12px; display:inline-block; margin-bottom:6px; color:#fff; }
+.d4-card .disc-num { background:var(--green); }
+.d6-card .disc-num { background:var(--sky); color:var(--dark); }
+.disc-title { font-family:'Fredoka One',sans-serif; font-size:20px; margin-bottom:5px; }
+.d4-card .disc-title { color:#1A8C5B; }
+.d6-card .disc-title { color:#2980B9; }
+.disc-desc { font-size:13px; color:#555; line-height:1.5; }
+.disc-page { font-size:11px; color:#999; font-weight:800; margin-top:5px; }
+
+/* ===== GRIDS ===== */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:18px; }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px; }
+
+/* ===== CARD ===== */
+.card { background:var(--white); border-radius:24px; padding:20px; box-shadow:0 4px 18px rgba(0,0,0,0.07); position:relative; overflow:hidden; }
+.card-title { font-family:'Fredoka One',sans-serif; font-size:18px; margin-bottom:16px; display:flex; align-items:center; gap:8px; color:var(--dark); }
+.cap-tag { margin-left:auto; font-size:11px; font-weight:900; padding:4px 11px; border-radius:12px; white-space:nowrap; }
+.dot-bg { position:absolute; top:8px; right:14px; font-size:34px; opacity:0.07; }
+
+/* ===== SESION FLOW ===== */
+.sesion-flow { display:flex; flex-direction:column; gap:10px; }
+.sf-item { display:flex; gap:12px; align-items:flex-start; background:var(--greenlight); border-radius:16px; padding:13px; border-left:5px solid var(--green); }
+.sf-item:nth-child(2) { background:var(--teallight); border-left-color:var(--teal); }
+.sf-item:nth-child(3) { background:var(--skylight); border-left-color:var(--sky); }
+.sf-item:nth-child(4) { background:var(--orangelight); border-left-color:var(--orange); }
+.sf-icon { font-size:34px; flex-shrink:0; }
+.sf-body strong { font-size:14px; color:var(--dark); display:block; margin-bottom:3px; }
+.sf-body span { font-size:12.5px; color:#555; line-height:1.5; }
+
+/* ===== SESION ESTRUCTURA ===== */
+.sesion-box { background:linear-gradient(135deg,#1E3A2F 0%,#27AE60 100%); border-radius:22px; padding:18px 22px; margin-bottom:14px; box-shadow:0 4px 14px rgba(27,90,50,0.25); }
+.sesion-title { font-family:'Fredoka One',sans-serif; font-size:17px; color:var(--yellow); margin-bottom:12px; }
+.sesion-steps { display:flex; gap:8px; }
+.ss-step { flex:1; background:rgba(255,255,255,0.12); border-radius:14px; padding:12px 8px; text-align:center; }
+.ss-icon { font-size:28px; margin-bottom:5px; }
+.ss-num { font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow); margin-bottom:3px; }
+.ss-text { font-size:11px; color:rgba(255,255,255,0.9); line-height:1.4; }
+
+/* ===== TRES SIGNOS ===== */
+.signos-row { display:flex; gap:10px; margin-bottom:14px; }
+.signo-box { flex:1; border-radius:16px; padding:14px; text-align:center; }
+.sig1 { background:var(--redlight); border:2px solid var(--red); }
+.sig2 { background:var(--orangelight); border:2px solid var(--orange); }
+.sig3 { background:var(--purplelight); border:2px solid var(--purple); }
+.signo-icon { font-size:38px; margin-bottom:7px; }
+.signo-title { font-family:'Fredoka One',sans-serif; font-size:14px; margin-bottom:5px; }
+.sig1 .signo-title { color:#C0392B; }
+.sig2 .signo-title { color:#D35400; }
+.sig3 .signo-title { color:#7B2FBE; }
+.signo-prob { font-size:11px; color:#555; line-height:1.4; margin-bottom:6px; }
+.signo-sol { font-size:11px; color:#1A8C5B; font-weight:800; }
+
+/* ===== RENDICIÓN COMPARATIVA ===== */
+.rend-compare { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+.rc-box { border-radius:16px; padding:14px; text-align:center; }
+.rc-mala { background:#F8F8F8; border:2px dashed #ccc; }
+.rc-buena { background:var(--greenlight); border:3px solid var(--green); }
+.rc-icon { font-size:38px; margin-bottom:7px; }
+.rc-title { font-family:'Fredoka One',sans-serif; font-size:15px; margin-bottom:7px; }
+.rc-mala .rc-title { color:#888; }
+.rc-buena .rc-title { color:#1A8C5B; }
+.rc-list { font-size:11.5px; line-height:1.8; text-align:left; color:#555; }
+.rc-badge { display:inline-block; font-size:10px; font-weight:900; padding:3px 10px; border-radius:10px; margin-top:6px; }
+.rc-mala .rc-badge { background:#ccc; color:#666; }
+.rc-buena .rc-badge { background:var(--green); color:#fff; }
+
+/* ===== CASOS ===== */
+.caso { border-radius:18px; padding:15px; box-shadow:0 3px 12px rgba(0,0,0,0.07); margin-bottom:10px; }
+.ca { background:var(--greenlight); border-left:5px solid var(--green); }
+.cb { background:var(--teallight); border-left:5px solid var(--teal); }
+.cc { background:var(--skylight); border-left:5px solid var(--sky); }
+.cd { background:var(--orangelight); border-left:5px solid var(--orange); }
+.caso-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.caso-emoji { font-size:30px; }
+.caso-name { font-family:'Fredoka One',sans-serif; font-size:15px; color:var(--dark); }
+.caso-page { font-size:11px; color:#aaa; font-weight:800; margin-left:auto; }
+.caso-body { font-size:12.5px; color:#444; line-height:1.6; }
+.caso-win { display:inline-block; background:var(--greenlight); color:#1A8C5B; font-size:11px; font-weight:900; padding:4px 12px; border-radius:12px; margin-top:8px; border:1px solid var(--green); }
+
+/* ===== MAPA ESTRATÉGICO ===== */
+.mapa { display:flex; gap:8px; align-items:stretch; }
+.mc { flex:1; border-radius:18px; padding:16px 12px; text-align:center; display:flex; flex-direction:column; align-items:center; }
+.mc-firma { background:#F5EEFF; border:2px dashed var(--purple); }
+.mc-cambio { background:#FFFDE7; border:3px solid var(--yellow); }
+.mc-torb { background:var(--redlight); border:2px dashed var(--red); }
+.mc-big { font-size:48px; margin-bottom:8px; }
+.mc-t { font-family:'Fredoka One',sans-serif; font-size:14px; margin-bottom:8px; }
+.mc-firma .mc-t { color:#7B2FBE; }
+.mc-cambio .mc-t { color:#E67E00; font-size:16px; }
+.mc-torb .mc-t { color:#C0392B; }
+.mc-items { font-size:11.5px; line-height:1.8; color:#555; }
+.mc-star { background:var(--yellow); color:var(--dark); font-size:10px; font-weight:900; padding:4px 10px; border-radius:12px; display:inline-block; margin-bottom:8px; }
+.mapa-arr { display:flex; align-items:center; font-size:24px; flex-shrink:0; }
+
+/* ===== 4 REGLAS ===== */
+.regla { display:flex; gap:12px; align-items:flex-start; background:var(--skylight); border-radius:16px; padding:13px; margin-bottom:10px; border-left:5px solid var(--sky); }
+.regla.g { border-left-color:var(--green); background:var(--greenlight); }
+.regla.o { border-left-color:var(--orange); background:var(--orangelight); }
+.regla.p { border-left-color:var(--purple); background:var(--purplelight); }
+.regla-num { width:40px; height:40px; border-radius:50%; background:var(--sky); color:var(--dark); font-family:'Fredoka One',sans-serif; font-size:22px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.regla.g .regla-num { background:var(--green); color:#fff; }
+.regla.o .regla-num { background:var(--orange); color:#fff; }
+.regla.p .regla-num { background:var(--purple); color:#fff; }
+.regla-body strong { font-size:14px; color:var(--dark); display:block; margin-bottom:3px; }
+.regla-body span { font-size:12.5px; color:#555; line-height:1.5; }
+
+/* ===== TRAMPAS ===== */
+.trampa { display:flex; gap:12px; align-items:flex-start; background:var(--redlight); border:2px dashed var(--red); border-radius:16px; padding:13px; margin-bottom:10px; }
+.trampa-icon { font-size:36px; flex-shrink:0; }
+.trampa-body strong { font-size:14px; color:#C0392B; display:block; margin-bottom:3px; }
+.trampa-body span { font-size:12px; color:#555; line-height:1.5; }
+
+/* ===== TIPOS ESTRUCTURA ===== */
+.tipo { border-radius:18px; padding:14px; margin-bottom:10px; }
+.tipo.a { background:#FFFDE7; border:2px solid var(--yellow); }
+.tipo.b { background:var(--teallight); border:2px solid var(--teal); }
+.tipo.c { background:var(--purplelight); border:2px solid var(--purple); }
+.tipo-icon { font-size:40px; margin-bottom:7px; text-align:center; }
+.tipo-title { font-family:'Fredoka One',sans-serif; font-size:14px; margin-bottom:5px; }
+.tipo.a .tipo-title { color:#E67E00; }
+.tipo.b .tipo-title { color:#0099CC; }
+.tipo.c .tipo-title { color:#7B2FBE; }
+.tipo-desc { font-size:12px; color:#555; line-height:1.5; }
+.tipo-ej { font-size:11px; color:#888; margin-top:5px; font-style:italic; }
+
+/* ===== QUOTE ===== */
+.quote { background:var(--skylight); border-left:5px solid var(--sky); border-radius:0 16px 16px 0; padding:12px 16px; margin-top:12px; display:flex; gap:10px; align-items:flex-start; }
+.quote.green { background:var(--greenlight); border-left-color:var(--green); }
+.quote.orange { background:var(--orangelight); border-left-color:var(--orange); }
+.quote.yellow { background:#FFFDE7; border-left-color:var(--yellow); }
+.quote-e { font-size:26px; flex-shrink:0; }
+.quote-t { font-size:13px; color:var(--dark); line-height:1.55; font-style:italic; font-weight:700; }
+
+/* ===== PAGE REF ===== */
+.pref { display:inline-block; background:#F0F0F0; color:#888; font-size:10px; font-weight:900; padding:2px 8px; border-radius:8px; margin-left:5px; }
+
+/* ===== STAT BOXES ===== */
+.stats-row { display:flex; gap:10px; margin-top:10px; }
+.stat-box { flex:1; background:var(--greenlight); border:2px solid var(--green); border-radius:16px; padding:13px; text-align:center; }
+.stat-num { font-family:'Fredoka One',sans-serif; font-size:26px; color:#1A8C5B; line-height:1; margin-bottom:4px; }
+.stat-label { font-size:11px; color:#555; line-height:1.4; }
+
+/* ===== MURO BOX ===== */
+.muro-box { background:linear-gradient(135deg,#1E3A2F 0%,#27AE60 100%); border-radius:20px; padding:17px 20px; display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; box-shadow:0 4px 14px rgba(27,90,50,0.25); }
+.muro-icon { font-size:52px; flex-shrink:0; }
+.muro-title { font-family:'Fredoka One',sans-serif; font-size:17px; color:var(--yellow); margin-bottom:6px; }
+.muro-desc { font-size:13px; color:rgba(255,255,255,0.88); line-height:1.55; }
+
+/* ===== CHKLIST ===== */
+.chk { display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:13px; color:#444; line-height:1.5; }
+.chk span:first-child { font-size:22px; flex-shrink:0; }
+
+/* ===== STITLE ===== */
+.stitle { font-family:'Fredoka One',sans-serif; font-size:22px; color:var(--dark); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+
+/* ===== FOOTER ===== */
+.footer { background:linear-gradient(135deg,#1E3A2F 0%,#27AE60 100%); border-radius:24px; padding:16px 26px; display:flex; align-items:center; justify-content:space-between; margin-top:4px; box-shadow:0 4px 16px rgba(27,90,50,0.25); }
+.footer-l { font-size:13px; color:rgba(255,255,255,0.65); }
+.footer-l strong { color:var(--yellow); }
+.footer-pills { display:flex; gap:8px; flex-wrap:wrap; }
+.fp { background:rgba(255,255,255,0.15); color:#fff; font-size:12px; font-weight:800; padding:5px 13px; border-radius:22px; }
+
+/* ===== RESPONSIVE — MOBILE (≤ 640px) ===== */
+@media (max-width: 640px) {
+  body { padding: 12px; }
+
+  /* Header */
+  .header { flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px 16px; border-radius: 20px; }
+  .header::after { font-size: 50px; right: 14px; top: 14px; transform: none; }
+  .header-emoji { font-size: 44px; }
+  .header-text h1 { font-size: 22px; }
+  .header-sub { font-size: 13px; }
+  .header-text p { font-size: 11px; }
+  .header-pills { margin-left: 0; max-width: 100%; justify-content: flex-start; }
+  .hpill { font-size: 10px; padding: 4px 10px; }
+
+  /* Disc banner */
+  .disc-banner { grid-template-columns: 1fr; gap: 10px; }
+  .disc-art { font-size: 40px; }
+  .disc-title { font-size: 16px; }
+  .disc-desc { font-size: 12px; }
+
+  /* Grids */
+  .g2 { grid-template-columns: 1fr; gap: 12px; }
+  .g3 { grid-template-columns: 1fr; gap: 12px; }
+  .g4 { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Cards */
+  .card { padding: 14px; border-radius: 18px; }
+  .card-title { font-size: 15px; flex-wrap: wrap; gap: 6px; }
+  .cap-tag { font-size: 10px; }
+
+  /* Sesión steps → columna */
+  .sesion-steps { flex-direction: column; gap: 6px; }
+  .ss-step { padding: 10px; }
+  .ss-icon { font-size: 22px; }
+  .ss-num { font-size: 12px; }
+  .ss-text { font-size: 10px; }
+
+  /* Sesion flow */
+  .sf-icon { font-size: 26px; }
+  .sf-body strong { font-size: 12px; }
+  .sf-body span { font-size: 11px; }
+
+  /* Rend compare */
+  .rend-compare { grid-template-columns: 1fr; gap: 10px; }
+  .rc-icon { font-size: 28px; }
+  .rc-title { font-size: 13px; }
+  .rc-list { font-size: 10.5px; }
+
+  /* Signos */
+  .signos-row { flex-direction: column; gap: 8px; }
+  .signo-icon { font-size: 28px; }
+  .signo-title { font-size: 13px; }
+  .signo-prob { font-size: 10px; }
+  .signo-sol { font-size: 10px; }
+
+  /* Mapa */
+  .mapa { flex-direction: column; gap: 6px; }
+  .mapa-arr { display: none; }
+  .mc { padding: 12px 10px; }
+  .mc-big { font-size: 36px; }
+  .mc-t { font-size: 13px; }
+  .mc-items { font-size: 10.5px; }
+
+  /* Reglas */
+  .regla { padding: 10px; gap: 10px; }
+  .regla-num { width: 34px; height: 34px; font-size: 18px; }
+  .regla-body strong { font-size: 12px; }
+  .regla-body span { font-size: 11px; }
+
+  /* Trampas */
+  .trampa { padding: 10px; gap: 10px; }
+  .trampa-icon { font-size: 26px; }
+  .trampa-body strong { font-size: 12px; }
+  .trampa-body span { font-size: 11px; }
+
+  /* Tipos */
+  .tipo { padding: 12px; }
+  .tipo-icon { font-size: 32px; }
+  .tipo-title { font-size: 13px; }
+  .tipo-desc { font-size: 11px; }
+  .tipo-ej { font-size: 10px; }
+
+  /* Quote */
+  .quote { padding: 10px 12px; }
+  .quote-e { font-size: 20px; }
+  .quote-t { font-size: 11.5px; }
+
+  /* Stats */
+  .stats-row { flex-direction: column; gap: 8px; }
+  .stat-num { font-size: 22px; }
+  .stat-label { font-size: 10px; }
+
+  /* Muro */
+  .muro-box { flex-direction: column; gap: 10px; padding: 14px; }
+  .muro-icon { font-size: 38px; }
+  .muro-title { font-size: 14px; }
+  .muro-desc { font-size: 11.5px; }
+
+  /* Stitle */
+  .stitle { font-size: 16px; }
+
+  /* Footer */
+  .footer { flex-direction: column; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 18px; }
+  .footer-l { font-size: 11px; }
+  .fp { font-size: 10px; padding: 4px 10px; }
+
+  /* Inline grids with repeat(4,1fr) → 2 cols on mobile */
+  [style*="grid-template-columns:repeat(4,1fr)"],
+  [style*="grid-template-columns: repeat(4,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Inline grids with repeat(3,1fr) → 1 col */
+  [style*="grid-template-columns:repeat(3,1fr)"],
+  [style*="grid-template-columns: repeat(3,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Inline grids 1fr 1fr → 1 col */
+  [style*="grid-template-columns:1fr 1fr"]:not([style*="80px"]) {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 3-col layouts in inline */
+  [style*="grid-template-columns:1fr 2fr 1fr"],
+  [style*="grid-template-columns:1fr 2.4fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Calendar table: hide on mobile, show scroll hint */
+  [style*="grid-template-columns:80px repeat(5,1fr)"] {
+    display: grid !important;
+    grid-template-columns: 60px repeat(5,1fr) !important;
+    font-size: 9px !important;
+  }
+
+  /* Sesion box steps on mobile */
+  .sesion-box { padding: 14px 12px; }
+  .sesion-title { font-size: 14px; }
+}
+
+/* ===== RESPONSIVE — TABLET (641px – 1024px) ===== */
+@media (min-width: 641px) and (max-width: 1024px) {
+  body { padding: 16px; }
+
+  .header-text h1 { font-size: 28px; }
+  .header-pills { max-width: 220px; }
+
+  .g3 { grid-template-columns: 1fr 1fr; }
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+
+  .sesion-steps { flex-wrap: wrap; }
+  .ss-step { flex: 1 1 calc(50% - 8px); }
+
+  .signos-row { gap: 8px; }
+  .signo-icon { font-size: 32px; }
+
+  [style*="grid-template-columns:repeat(4,1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  [style*="grid-template-columns:1fr 2fr 1fr"],
+  [style*="grid-template-columns:1fr 2.4fr 1fr"] {
+    grid-template-columns: 1fr 2fr 1fr !important;
+  }
+}
+
+/* ===== RESPONSIVE — LAPTOP (1025px – 1599px) ===== */
+@media (min-width: 1025px) and (max-width: 1599px) {
+  body {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 32px;
+  }
+
+  .header-text h1 { font-size: 32px; }
+
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ===== RESPONSIVE — DESKTOP / 4K (≥ 1600px) ===== */
+@media (min-width: 1600px) {
+  body {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 32px 48px;
+    font-size: 15px;
+  }
+
+  /* Header */
+  .header { padding: 32px 40px; border-radius: 32px; gap: 28px; }
+  .header-emoji { font-size: 84px; }
+  .header-text h1 { font-size: 42px; }
+  .header-sub { font-size: 20px; }
+  .header-text p { font-size: 15px; }
+  .header-pills { max-width: 380px; }
+  .hpill { font-size: 14px; padding: 8px 16px; }
+  .header::after { font-size: 120px; }
+
+  /* Disc banner */
+  .disc-art { font-size: 72px; }
+  .disc-title { font-size: 24px; }
+  .disc-desc { font-size: 15px; }
+
+  /* Cards */
+  .card { padding: 28px; border-radius: 28px; }
+  .card-title { font-size: 22px; margin-bottom: 20px; }
+  .cap-tag { font-size: 13px; }
+
+  /* Sesión */
+  .sesion-box { padding: 22px 28px; margin-bottom: 18px; }
+  .sesion-title { font-size: 20px; }
+  .ss-icon { font-size: 36px; }
+  .ss-num { font-size: 15px; }
+  .ss-text { font-size: 13px; }
+
+  .sf-icon { font-size: 42px; }
+  .sf-body strong { font-size: 16px; }
+  .sf-body span { font-size: 14px; }
+
+  /* Rend compare */
+  .rc-icon { font-size: 48px; }
+  .rc-title { font-size: 18px; }
+  .rc-list { font-size: 13.5px; }
+
+  /* Signos */
+  .signo-icon { font-size: 48px; }
+  .signo-title { font-size: 17px; }
+  .signo-prob { font-size: 13px; }
+  .signo-sol { font-size: 13px; }
+
+  /* Mapa */
+  .mc-big { font-size: 60px; }
+  .mc-t { font-size: 17px; }
+  .mc-items { font-size: 13.5px; }
+  .mapa-arr { font-size: 32px; }
+
+  /* Reglas */
+  .regla-num { width: 50px; height: 50px; font-size: 26px; }
+  .regla-body strong { font-size: 16px; }
+  .regla-body span { font-size: 14px; }
+
+  /* Trampas */
+  .trampa-icon { font-size: 44px; }
+  .trampa-body strong { font-size: 16px; }
+  .trampa-body span { font-size: 14px; }
+
+  /* Tipos */
+  .tipo-icon { font-size: 52px; }
+  .tipo-title { font-size: 17px; }
+  .tipo-desc { font-size: 14px; }
+  .tipo-ej { font-size: 13px; }
+
+  /* Quote */
+  .quote-e { font-size: 32px; }
+  .quote-t { font-size: 15px; }
+
+  /* Stats */
+  .stat-num { font-size: 32px; }
+  .stat-label { font-size: 13px; }
+
+  /* Muro */
+  .muro-icon { font-size: 64px; }
+  .muro-title { font-size: 20px; }
+  .muro-desc { font-size: 15px; }
+
+  /* Stitle */
+  .stitle { font-size: 26px; margin-bottom: 18px; }
+
+  /* Grids */
+  .g2 { gap: 22px; margin-bottom: 22px; }
+  .g3 { gap: 22px; margin-bottom: 22px; }
+  .g4 { gap: 18px; margin-bottom: 22px; }
+
+  /* Footer */
+  .footer { padding: 20px 32px; border-radius: 28px; }
+  .footer-l { font-size: 15px; }
+  .fp { font-size: 14px; padding: 7px 16px; }
+
+  /* Disc banner */
+  .disc-banner { gap: 18px; margin-bottom: 24px; }
+}
+
+/* ===== WRAP calendat on very narrow ===== */
+@media (max-width: 480px) {
+  .card { padding: 12px; }
+  /* Calendar wrapper: allow horizontal scroll */
+  .card > div[style*="border-radius:14px; overflow:hidden"] {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-emoji">🤝</div>
+  <div class="header-text">
+    <h1>4DX — Disciplina 4 y Capítulo 6</h1>
+    <div class="header-sub">➜ Rendición de Cuentas & Elegir en qué Enfocarse</div>
+    <p>📘 Caps. 5 y 6 · Págs. 121–168 · Resumen Visual para Líderes y Jefaturas</p>
+  </div>
+  <div class="header-pills">
+    <span class="hpill">📅 Sesión Semanal</span>
+    <span class="hpill">🤝 Compromisos entre Colegas</span>
+    <span class="hpill">🎯 Iniciativa Primaria</span>
+    <span class="hpill">🗺️ Mapa Estratégico</span>
+  </div>
+</div>
+
+<!-- BANNER DISCIPLINAS -->
+<div class="disc-banner">
+  <div class="disc-card d4-card">
+    <div class="disc-art">🤝</div>
+    <div class="disc-info">
+      <span class="disc-num">Disciplina 4</span>
+      <div class="disc-title">Cadencia de Rendición de Cuentas</div>
+      <div class="disc-desc">Sesión semanal donde cada persona reporta lo que hizo para mover el tablero y se compromete a UNA acción concreta para la próxima semana.</div>
+      <div class="disc-page">📖 Cap. 5 · Págs. 121–148</div>
+    </div>
+  </div>
+  <div class="disc-card d6-card">
+    <div class="disc-art">🎯</div>
+    <div class="disc-info">
+      <span class="disc-num">Capítulo 6</span>
+      <div class="disc-title">Elegir en qué Enfocarse</div>
+      <div class="disc-desc">Cómo los líderes de líderes identifican la Iniciativa Crucialmente Importante primaria usando el Mapa Estratégico y los dos ejes de evaluación.</div>
+      <div class="disc-page">📖 Cap. 6 · Págs. 151–168</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILA 1: SESIÓN SEMANAL + RENDICIÓN COMPARATIVA -->
+<div class="g2">
+
+  <!-- ESTRUCTURA SESIÓN -->
+  <div class="card">
+    <div class="dot-bg">📅</div>
+    <div class="card-title">
+      📅 La Sesión Semanal — ¿Cómo se hace?
+      <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 130–136</span>
+    </div>
+    <div class="sesion-box">
+      <div class="sesion-title">⏱️ Estructura de la Sesión · 20–30 minutos máximo</div>
+      <div class="sesion-steps">
+        <div class="ss-step"><div class="ss-icon">📊</div><div class="ss-num">Paso 1</div><div class="ss-text">Actualizar el tablero. ¿Dónde estamos HOY?</div></div>
+        <div class="ss-step"><div class="ss-icon">🤝</div><div class="ss-num">Paso 2</div><div class="ss-text">Reportar compromisos de la semana pasada. ¿Lo cumpliste?</div></div>
+        <div class="ss-step"><div class="ss-icon">💡</div><div class="ss-num">Paso 3</div><div class="ss-text">Compartir aprendizajes. ¿Qué funcionó? ¿Qué no?</div></div>
+        <div class="ss-step"><div class="ss-icon">✍️</div><div class="ss-num">Paso 4</div><div class="ss-text">Hacer UN nuevo compromiso concreto para la próxima semana.</div></div>
+      </div>
+    </div>
+    <div class="sesion-flow">
+      <div class="sf-item">
+        <div class="sf-icon">🎯</div>
+        <div class="sf-body">
+          <strong>El compromiso debe mover el tablero <span class="pref">Pág. 132</span></strong>
+          <span>No vale comprometerse a "seguir trabajando duro". El compromiso debe ser una acción específica y medible que impacte directamente en las medidas de predicción esta semana.</span>
+        </div>
+      </div>
+      <div class="sf-item">
+        <div class="sf-icon">👥</div>
+        <div class="sf-body">
+          <strong>Es ante el equipo, no solo ante el jefe <span class="pref">Pág. 139</span></strong>
+          <span>Las personas trabajarán duro para no decepcionar a su jefe, pero harán casi cualquier cosa para no fallarle a sus compañeros. Este es el tipo de rendición de cuentas que genera resultados extraordinarios.</span>
+        </div>
+      </div>
+      <div class="sf-item">
+        <div class="sf-icon">⏰</div>
+        <div class="sf-body">
+          <strong>Tomará 3–4 semanas encontrar el ritmo <span class="pref">Pág. 138</span></strong>
+          <span>Es normal que las primeras sesiones sean torpes o se desvíen hacia el torbellino. Con constancia, el equipo aprende a enfocarse y las sesiones se vuelven cada vez más productivas y motivadoras.</span>
+        </div>
+      </div>
+      <div class="sf-item">
+        <div class="sf-icon">🚀</div>
+        <div class="sf-body">
+          <strong>Las sesiones son el sistema operativo de las 4DX <span class="pref">Pág. 147</span></strong>
+          <span>Así como una computadora necesita un sistema operativo para correr cualquier programa, una organización necesita las sesiones semanales para ejecutar cualquier iniciativa estratégica de forma real y sostenida.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRÁFICO COMPROMISOS SEMANALES -->
+    <div style="background:#FFFDE7; border:3px solid var(--yellow); border-radius:20px; padding:18px; margin-top:14px;">
+      <div style="font-family:'Fredoka One',sans-serif; font-size:16px; color:#E67E00; margin-bottom:6px;">📅 Compromisos Semanales — Cómo programarlos en tu agenda <span class="pref">Pág. 132</span></div>
+      <div style="font-size:12px; color:#555; margin-bottom:14px; line-height:1.5;">Los <strong style="color:#2C3E50;">bloques grises</strong> = torbellino diario (trabajo urgente). Los <strong style="color:#1A8C5B;">bloques verdes</strong> = tus compromisos para mover la iniciativa. Si los agendas explícitamente, el torbellino no los absorberá.</div>
+
+      <!-- CALENDARIO -->
+      <div style="border-radius:14px; overflow:hidden; border:2px solid #ddd; overflow-x:auto; -webkit-overflow-scrolling:touch;">
+        <div style="min-width:480px;">
+
+        <!-- LEYENDA COLUMNAS -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); background:#2C3E50;">
+          <div style="padding:10px 6px; text-align:center; font-family:'Fredoka One',sans-serif; font-size:12px; color:rgba(255,255,255,0.5);">Hora</div>
+          <div style="padding:10px 6px; text-align:center; font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow);">LUNES</div>
+          <div style="padding:10px 6px; text-align:center; font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow);">MARTES</div>
+          <div style="padding:10px 6px; text-align:center; font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow);">MIÉRCOLES</div>
+          <div style="padding:10px 6px; text-align:center; font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow);">JUEVES</div>
+          <div style="padding:10px 6px; text-align:center; font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow);">VIERNES</div>
+        </div>
+
+        <!-- FILAS HORARIO -->
+        <!-- 8:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">8:00</div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+        </div>
+        <!-- 9:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">9:00</div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#1A8C5B; border-radius:8px; margin:3px; display:flex; align-items:center; justify-content:center;">
+            <div style="font-size:10px; font-weight:900; color:#fff; text-align:center; line-height:1.3; padding:4px;">✅ Compromiso 1<br><span style="font-size:9px; opacity:0.85;">Revisar % pedidos atrasados</span></div>
+          </div>
+          <div style="padding:4px; background:#1A8C5B; border-radius:8px; margin:3px; display:flex; align-items:center; justify-content:center;">
+            <div style="font-size:10px; font-weight:900; color:#fff; text-align:center; line-height:1.3; padding:4px;">✅ Compromiso 1<br><span style="font-size:9px; opacity:0.85;">Follow-up con línea Corte</span></div>
+          </div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+        </div>
+        <!-- 10:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">10:00</div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+        </div>
+        <!-- 11:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">11:00</div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+        </div>
+        <!-- 12:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">12:00</div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+        </div>
+        <!-- 1:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">1:00</div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#1A8C5B; border-radius:8px; margin:3px; display:flex; align-items:center; justify-content:center;">
+            <div style="font-size:10px; font-weight:900; color:#fff; text-align:center; line-height:1.3; padding:4px;">✅ Compromiso 2<br><span style="font-size:9px; opacity:0.85;">Medir desperdicio tela</span></div>
+          </div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+        </div>
+        <!-- 2:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">2:00</div>
+          <div style="padding:4px; background:#1A8C5B; border-radius:8px; margin:3px; display:flex; align-items:center; justify-content:center;">
+            <div style="font-size:10px; font-weight:900; color:#fff; text-align:center; line-height:1.3; padding:4px;">✅ Compromiso 3<br><span style="font-size:9px; opacity:0.85;">Sesión MCI equipo</span></div>
+          </div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+        </div>
+        <!-- 3:00 -->
+        <div style="display:grid; grid-template-columns:80px repeat(5,1fr); border-top:1px solid #eee;">
+          <div style="padding:8px 6px; text-align:center; font-size:12px; color:#888; font-weight:800; background:#f9f9f9; border-right:1px solid #eee;">3:00</div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#fff;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+          <div style="padding:4px; background:#E5E5E5; border-radius:6px; margin:3px;"></div>
+        </div>
+
+      </div><!-- /min-width wrapper -->
+      </div><!-- /calendar scroll container -->
+
+      <!-- LEYENDA -->
+      <div style="display:flex; gap:16px; margin-top:10px; align-items:center; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:7px;">
+          <div style="width:22px; height:16px; background:#E5E5E5; border-radius:4px;"></div>
+          <span style="font-size:12px; color:#666; font-weight:700;">Torbellino — trabajo urgente del día a día</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:7px;">
+          <div style="width:22px; height:16px; background:#1A8C5B; border-radius:4px;"></div>
+          <span style="font-size:12px; color:#1A8C5B; font-weight:800;">Compromisos agendados para mover la iniciativa ✅</span>
+        </div>
+      </div>
+      <div style="background:rgba(230,126,0,0.1); border-left:4px solid #E67E00; border-radius:0 10px 10px 0; padding:10px 13px; margin-top:10px;">
+        <div style="font-size:12.5px; color:#333; font-weight:700; line-height:1.5;">💡 Si emprendes la labor activa de programar tus compromisos en la agenda de cada semana, será menos probable que el torbellino absorba tu atención y te desvíe de la iniciativa.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RENDICIÓN COMPARATIVA + 3 SIGNOS -->
+  <div class="card">
+    <div class="dot-bg">🔄</div>
+    <div class="card-title">
+      🔄 Rendición de Cuentas Organizacional vs. Personal
+      <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 138–141</span>
+    </div>
+    <div class="rend-compare">
+      <div class="rc-box rc-mala">
+        <div class="rc-icon">😰</div>
+        <div class="rc-title">Rendición Organizacional</div>
+        <div class="rc-list">
+          ❌ El jefe te llama<br>
+          ❌ Te responsabilizan de resultados que no puedes controlar<br>
+          ❌ Genera miedo y resistencia<br>
+          ❌ "¿Por qué los números están bajos?"<br>
+          ❌ Solo ante el jefe
+        </div>
+        <span class="rc-badge">😨 Genera miedo</span>
+      </div>
+      <div class="rc-box rc-buena">
+        <div class="rc-icon">💪</div>
+        <div class="rc-title">Rendición Personal 4DX</div>
+        <div class="rc-list">
+          ✅ Compromisos que TÚ elegiste<br>
+          ✅ Acciones que SÍ puedes cumplir<br>
+          ✅ Ante tus compañeros de equipo<br>
+          ✅ "¿Cumpliste lo que prometiste?"<br>
+          ✅ Genera confianza y respeto
+        </div>
+        <span class="rc-badge">💪 Genera compromiso real</span>
+      </div>
+    </div>
+
+    <div style="font-family:'Fredoka One',sans-serif; font-size:16px; color:var(--dark); margin-bottom:10px;">😔 Los 3 Signos de Trabajo Miserable — Patrick Lencioni <span class="pref">Pág. 137</span></div>
+    <div class="signos-row">
+      <div class="signo-box sig1">
+        <div class="signo-icon">👻</div>
+        <div class="signo-title">Anonimato</div>
+        <div class="signo-prob">El líder no parece importarle lo que hago.</div>
+        <div class="signo-sol">✅ Con 4DX: cada persona está bajo los reflectores al menos 1 vez por semana.</div>
+      </div>
+      <div class="signo-box sig2">
+        <div class="signo-icon">❓</div>
+        <div class="signo-title">Irrelevancia</div>
+        <div class="signo-prob">No sé si lo que hago marca alguna diferencia.</div>
+        <div class="signo-sol">✅ Con 4DX: cada persona ve el impacto exacto de sus acciones en el tablero.</div>
+      </div>
+      <div class="signo-box sig3">
+        <div class="signo-icon">📏</div>
+        <div class="signo-title">Sin Medidas</div>
+        <div class="signo-prob">No puedo medir ni calcular mi contribución.</div>
+        <div class="signo-sol">✅ Con 4DX: el tablero semanal refleja el desempeño de cada persona.</div>
+      </div>
+    </div>
+
+    <div class="quote green">
+      <div class="quote-e">💬</div>
+      <div class="quote-t">"Las 4DX son básicamente una herramienta que garantiza el éxito de cualquier iniciativa en la que una organización decida embarcarse." — Gerente Planta Tarboro, Nomaco <span class="pref">Pág. 140</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FILA 2: CASOS DISCIPLINA 4 + INNOVACIÓN -->
+<div class="g2">
+
+  <!-- CASOS NOMACO + TOWNE PARK -->
+  <div class="card">
+    <div class="dot-bg">🏆</div>
+    <div class="card-title">
+      🏆 Casos Reales — Disciplina 4
+      <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 139–145</span>
+    </div>
+
+    <div class="caso ca">
+      <div class="caso-head">
+        <div class="caso-emoji">🏭</div>
+        <div class="caso-name">Nomaco — Planta Tarboro</div>
+        <div class="caso-page">Pág. 139</div>
+      </div>
+      <div class="caso-body">
+        <strong>Contexto:</strong> Planta que dentro del presupuesto pero nunca llegaba a ser excelente. Los empleados dependían del gerente para todo.<br><br>
+        <strong>🔑 Cambio con 4DX:</strong> Sesiones semanales en todos los equipos donde cada empleado reportaba lo que hacía para "mover las manecillas", compartía ideas y celebraba triunfos.
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-num">−$1M</div><div class="stat-label">Reducción en costos de línea de producción</div></div>
+        <div class="stat-box"><div class="stat-num">30%</div><div class="stat-label">Por debajo del presupuesto al cierre del año fiscal</div></div>
+        <div class="stat-box"><div class="stat-num">0</div><div class="stat-label">Accidentes con incapacidad en todo el año</div></div>
+      </div>
+      <span class="caso-win">🏆 De "buena" a "excelente" en 18 meses</span>
+    </div>
+
+    <div class="caso cb" style="margin-top:12px;">
+      <div class="caso-head">
+        <div class="caso-emoji">🚗</div>
+        <div class="caso-name">Towne Park — Valet Parking</div>
+        <div class="caso-page">Págs. 142–145</div>
+      </div>
+      <div class="caso-body">
+        <strong>Iniciativa:</strong> Aumentar satisfacción de clientes<br>
+        <strong>🎯 Medida de Predicción descubierta:</strong> Tiempo de espera para recibir el auto (nunca lo habían medido aunque sabían que importaba)<br>
+        <strong>💡 Innovaciones surgidas en sesiones:</strong> Llamadas anticipadas al hacer check-out · Preguntar cuándo necesitan el auto · Acercar el auto el día de salida
+      </div>
+      <span class="caso-win">✅ Redujeron el tiempo de espera y subió la satisfacción de clientes</span>
+    </div>
+  </div>
+
+  <!-- EL MURO + CREATIVIDAD -->
+  <div class="card">
+    <div class="dot-bg">💡</div>
+    <div class="card-title">
+      💡 Las Sesiones Generan Innovación
+      <span class="cap-tag" style="background:var(--teallight);color:#0099CC;">Págs. 141–145</span>
+    </div>
+
+    <div class="muro-box">
+      <div class="muro-icon">🧱</div>
+      <div>
+        <div class="muro-title">El Muro de Concreto de Miami <span style="font-size:12px;color:rgba(255,255,255,0.5);">Pág. 144</span></div>
+        <div class="muro-desc">En el estacionamiento del hotel había un muro de 1.2m que obligaba a dar rodeos y retrasaba los tiempos. Tras meses de proponer soluciones en sesiones, James McNeil <strong style="color:var(--yellow);">se comprometió ante su equipo</strong> a derribarlo. Consiguió una sierra, reclutó supervisores y ese sábado rompieron toneladas de concreto.<br><br>
+        "Si la idea hubiera venido del jefe, no lo habrían hecho ni aunque les apuntaran con una pistola." — Ejecutivo Towne Park</div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN LÚDICA: ¿POR QUÉ LAS SESIONES GENERAN INNOVACIÓN? -->
+    <div style="background:#FFFDE7; border:3px solid var(--yellow); border-radius:20px; padding:20px; margin-top:4px;">
+
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+        <div style="font-size:28px;">🔬</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:18px; color:#E67E00;">¿Por qué las sesiones generan innovación?</div>
+        <span style="background:#E67E00; color:#fff; font-size:10px; font-weight:900; padding:3px 9px; border-radius:10px; margin-left:4px;">Pág. 141</span>
+      </div>
+      <div style="font-size:12px; color:#888; margin-bottom:14px; font-weight:700;">👆 Toca cada tarjeta para descubrir la razón</div>
+
+      <!-- 4 TARJETAS INTERACTIVAS -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+
+        <!-- TARJETA 1 -->
+        <div id="inn1" onclick="toggleInn('inn1')" style="background:#fff; border:2px solid #9B59B6; border-radius:16px; padding:14px; cursor:pointer; transition:all 0.3s;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <div style="width:32px; height:32px; background:#F5EEFF; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">🧠</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#7B2FBE;">Estructura + Estimulación</div>
+            <div style="margin-left:auto; font-size:11px; color:#9B59B6; font-weight:900; background:#F5EEFF; padding:2px 8px; border-radius:8px;">Neurociencia</div>
+          </div>
+          <div id="inn1-hint" style="font-size:12px; color:#aaa; font-weight:700;">👆 Toca para ver</div>
+          <div id="inn1-body" style="display:none; font-size:12.5px; color:#555; line-height:1.6; margin-top:4px;">El Dr. Edward Hallowell (neurocientífico) descubrió que las situaciones más motivadoras son las que están <strong style="color:#7B2FBE;">"muy estructuradas y cargadas de innovación y estímulos"</strong>. Las sesiones combinan exactamente ambas cosas.</div>
+          <div id="inn1-bar" style="height:5px; background:#F5EEFF; border-radius:10px; margin-top:10px; overflow:hidden;"><div style="height:100%; width:0%; background:#9B59B6; border-radius:10px; transition:width 0.8s;"></div></div>
+        </div>
+
+        <!-- TARJETA 2 -->
+        <div id="inn2" onclick="toggleInn('inn2')" style="background:#fff; border:2px solid var(--orange); border-radius:16px; padding:14px; cursor:pointer; transition:all 0.3s;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <div style="width:32px; height:32px; background:#FFF3E0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">🏆</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#E67E00;">El juego libera ideas</div>
+            <div style="margin-left:auto; font-size:11px; color:#E67E00; font-weight:900; background:#FFF3E0; padding:2px 8px; border-radius:8px;">Motivación</div>
+          </div>
+          <div id="inn2-hint" style="font-size:12px; color:#aaa; font-weight:700;">👆 Toca para ver</div>
+          <div id="inn2-body" style="display:none; font-size:12.5px; color:#555; line-height:1.6; margin-top:4px;">Cuando la medida de predicción se convierte en un juego, los jugadores encuentran formas creativas de ganar que <strong style="color:#E67E00;">ningún líder podría haber planificado de antemano</strong>. La necesidad se vuelve madre de la invención.</div>
+          <div id="inn2-bar" style="height:5px; background:#FFF3E0; border-radius:10px; margin-top:10px; overflow:hidden;"><div style="height:100%; width:0%; background:#E67E00; border-radius:10px; transition:width 0.8s;"></div></div>
+        </div>
+
+        <!-- TARJETA 3 -->
+        <div id="inn3" onclick="toggleInn('inn3')" style="background:#fff; border:2px solid var(--teal); border-radius:16px; padding:14px; cursor:pointer; transition:all 0.3s;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <div style="width:32px; height:32px; background:var(--teallight); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">🤝</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--teal);">Colegas, no jefe</div>
+            <div style="margin-left:auto; font-size:11px; color:var(--teal); font-weight:900; background:var(--teallight); padding:2px 8px; border-radius:8px;">Compromiso</div>
+          </div>
+          <div id="inn3-hint" style="font-size:12px; color:#aaa; font-weight:700;">👆 Toca para ver</div>
+          <div id="inn3-body" style="display:none; font-size:12.5px; color:#555; line-height:1.6; margin-top:4px;">El compromiso ante colegas genera motivación que <strong style="color:var(--teal);">ningún sistema de órdenes y control puede replicar</strong>. La gente trabajará duro para no decepcionar a su jefe, pero hará casi cualquier cosa por no fallarle a su equipo.</div>
+          <div id="inn3-bar" style="height:5px; background:var(--teallight); border-radius:10px; margin-top:10px; overflow:hidden;"><div style="height:100%; width:0%; background:var(--teal); border-radius:10px; transition:width 0.8s;"></div></div>
+        </div>
+
+        <!-- TARJETA 4 -->
+        <div id="inn4" onclick="toggleInn('inn4')" style="background:#fff; border:2px solid var(--green); border-radius:16px; padding:14px; cursor:pointer; transition:all 0.3s;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <div style="width:32px; height:32px; background:var(--greenlight); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">💡</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--green);">Foro de mejores ideas</div>
+            <div style="margin-left:auto; font-size:11px; color:var(--green); font-weight:900; background:var(--greenlight); padding:2px 8px; border-radius:8px;">Creatividad</div>
+          </div>
+          <div id="inn4-hint" style="font-size:12px; color:#aaa; font-weight:700;">👆 Toca para ver</div>
+          <div id="inn4-body" style="display:none; font-size:12.5px; color:#555; line-height:1.6; margin-top:4px;">Cada sesión es un foro donde el equipo trae sus <strong style="color:var(--green);">mejores ideas porque tienen mucho que ganar</strong>. La creatividad y la ejecución coexisten perfectamente en la misma reunión de 20 minutos.</div>
+          <div id="inn4-bar" style="height:5px; background:var(--greenlight); border-radius:10px; margin-top:10px; overflow:hidden;"><div style="height:100%; width:0%; background:var(--green); border-radius:10px; transition:width 0.8s;"></div></div>
+        </div>
+
+      </div>
+
+      <!-- BARRA DE PROGRESO GENERAL -->
+      <div style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; color:#888; margin-bottom:6px;">
+          <span>⚡ Poder de innovación desbloqueado</span>
+          <span id="inn-pct">0 / 4 razones</span>
+        </div>
+        <div style="height:10px; background:#F0F0F0; border-radius:10px; overflow:hidden;">
+          <div id="inn-progress" style="height:100%; width:0%; background:linear-gradient(90deg,#9B59B6,#1ABC9C); border-radius:10px; transition:width 0.6s;"></div>
+        </div>
+        <div id="inn-nivel" style="font-size:12px; color:#aaa; font-weight:700; margin-top:5px; text-align:center;">👆 Descubre las 4 razones</div>
+      </div>
+
+      <!-- CITA — aparece al desbloquear las 4 -->
+      <div id="inn-quote" style="display:none; background:rgba(230,126,0,0.1); border-left:4px solid #E67E00; border-radius:0 14px 14px 0; padding:13px 16px;">
+        <div style="font-size:13px; color:var(--dark); line-height:1.6; font-style:italic; font-weight:700; margin-bottom:6px;">"El tipo de compromiso que produce resultados extraordinarios no nace de la autoridad, sino del deseo de cada persona de sentirse relevante, trabajar en algo que importa y, sobre todo, ganar."</div>
+        <div style="font-size:11px; color:#E67E00; font-weight:900;">📖 Las 4 Disciplinas de la Ejecución · Pág. 145 🎉 ¡Desbloqueaste las 4 razones!</div>
+      </div>
+
+    </div>
+
+    <script>
+    var innState = {inn1:false, inn2:false, inn3:false, inn4:false};
+    var innLevels = ['👆 Descubre las 4 razones','🌱 Explorando... sigue adelante','⚡ Ya casi lo tienes!','🔥 Una más y lo logras!','🏆 ¡Experto 4DX desbloqueado!'];
+    function toggleInn(id) {
+      innState[id] = !innState[id];
+      var card = document.getElementById(id);
+      var body = document.getElementById(id+'-body');
+      var hint = document.getElementById(id+'-hint');
+      var bar  = document.getElementById(id+'-bar').firstElementChild;
+      if (innState[id]) {
+        body.style.display = 'block';
+        hint.style.display = 'none';
+        bar.style.width = '100%';
+        card.style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)';
+        card.style.transform = 'translateY(-2px)';
+      } else {
+        body.style.display = 'none';
+        hint.style.display = 'block';
+        bar.style.width = '0%';
+        card.style.boxShadow = 'none';
+        card.style.transform = 'none';
+      }
+      var count = Object.values(innState).filter(Boolean).length;
+      var pct = count * 25;
+      document.getElementById('inn-progress').style.width = pct + '%';
+      document.getElementById('inn-pct').textContent = count + ' / 4 razones';
+      document.getElementById('inn-nivel').textContent = innLevels[count];
+      document.getElementById('inn-quote').style.display = count === 4 ? 'block' : 'none';
+    }
+    </script>
+
+  </div>
+
+</div>
+
+<!-- SECCIÓN CAPÍTULO 6 -->
+<div class="stitle">🎯 Capítulo 6 — Elegir en qué Enfocarse (Págs. 151–168)</div>
+
+<!-- FILA 3: MAPA ESTRATÉGICO + 4 TRAMPAS -->
+<div class="g2">
+
+  <!-- MAPA ESTRATÉGICO + 2 EJES -->
+  <div class="card">
+    <div class="dot-bg">🗺️</div>
+    <div class="card-title">
+      🗺️ El Mapa Estratégico Completo
+      <span class="cap-tag" style="background:#FFFDE7;color:#E67E00;">Pág. 154 y 167</span>
+    </div>
+    <div class="mapa" style="margin-bottom:14px;">
+      <div class="mc mc-firma">
+        <div class="mc-big">⚡</div>
+        <div class="mc-t">Poder de la Firma</div>
+        <div class="mc-items">💰 Inversión de capital<br>👥 Expansión de personal<br>🔧 Cambio de procesos<br>🏢 Adquisición estratégica<br>📢 Publicidad en medios<br><br><em>Se ordena y ocurre ✅</em></div>
+      </div>
+      <div class="mapa-arr">→</div>
+      <div class="mc mc-cambio">
+        <div class="mc-star">⭐ AQUÍ VIVE LA INICIATIVA</div>
+        <div class="mc-big">🔄</div>
+        <div class="mc-t">Cambio de Comportamiento</div>
+        <div class="mc-items"><strong>La Iniciativa Crucialmente Importante vive aquí 🚀</strong><br><br>No se ordena.<br>Se construye con el equipo 🤝<br><br><em>Aquí viven las 4DX</em></div>
+      </div>
+      <div class="mapa-arr">←</div>
+      <div class="mc mc-torb">
+        <div class="mc-big">🌪️</div>
+        <div class="mc-t">El Torbellino</div>
+        <div class="mc-items">🔥 Siempre urgente<br>⏰ Consume el 80%<br>😵 Te impone cosas<br>⚠️ Soporte vital<br><br><em>¡No es malo, pero no avanza solo!</em></div>
+      </div>
+    </div>
+
+    <div style="font-family:'Fredoka One',sans-serif; font-size:16px; color:var(--dark); margin-bottom:10px;">📊 Los 2 Ejes para Evaluar la Iniciativa <span class="pref">Págs. 156–158</span></div>
+    <div class="g2" style="gap:10px; margin-bottom:12px;">
+      <div style="background:#FFF3E0; border:2px solid var(--orange); border-radius:14px; padding:13px; text-align:center;">
+        <div style="font-size:34px; margin-bottom:6px;">💥</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:14px; color:#D35400; margin-bottom:5px;">Eje 1 — Impacto del Fracaso</div>
+        <div style="font-size:12px; color:#555; line-height:1.5;">¿Qué tan esencial es esta iniciativa para la misión? Si fracasamos aquí, ¿qué tan grave sería para la organización?</div>
+      </div>
+      <div style="background:var(--redlight); border:2px solid var(--red); border-radius:14px; padding:13px; text-align:center;">
+        <div style="font-size:34px; margin-bottom:6px;">⚠️</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:14px; color:#C0392B; margin-bottom:5px;">Eje 2 — Riesgo de Fracaso</div>
+        <div style="font-size:12px; color:#555; line-height:1.5;">¿Qué probabilidades hay de fallar si no cambiamos de comportamiento? Sin las 4DX, ¿seguirá igual o peor?</div>
+      </div>
+    </div>
+
+    <div class="quote green">
+      <div class="quote-e">💬</div>
+      <div class="quote-t">"¿Dónde elegimos invertir energía de forma DESPROPORCIONADA?" — Tim Tassopoulos, Presidente Chick-fil-A <span class="pref">Pág. 153</span></div>
+    </div>
+  </div>
+
+  <!-- 4 TRAMPAS -->
+  <div class="card">
+    <div class="dot-bg">🚨</div>
+    <div class="card-title">
+      🚨 Las 4 Trampas al Crear las Iniciativas
+      <span class="cap-tag" style="background:var(--redlight);color:#C0392B;">Págs. 163–167</span>
+    </div>
+    <div class="trampa">
+      <div class="trampa-icon">🕳️</div>
+      <div class="trampa-body">
+        <strong>Trampa 1 — Demasiadas iniciativas <span class="pref">Pág. 163</span></strong>
+        <span>La trampa más seductora y destructiva. "Convertir todo en una iniciativa" anula el enfoque. Ningún cliente ha dicho jamás "¡ojalá hubiéramos tenido más iniciativas!" Lo que sí dicen es "ojalá nos hubiéramos enfocado más."</span>
+      </div>
+    </div>
+    <div class="trampa">
+      <div class="trampa-icon">🌊</div>
+      <div class="trampa-body">
+        <strong>Trampa 2 — Iniciativa demasiado amplia <span class="pref">Pág. 163</span></strong>
+        <span>"Ingresos totales", "ventas totales" o "participación total en el mercado" no son iniciativas: abarcan todo el trabajo que ya existe. Es como intentar dispararle a una bala con otra bala.</span>
+      </div>
+    </div>
+    <div class="trampa">
+      <div class="trampa-icon">💭</div>
+      <div class="trampa-body">
+        <strong>Trampa 3 — Aspiracional pero no medible <span class="pref">Pág. 164</span></strong>
+        <span>"Ser líderes en innovación" o "ganar la confianza de clientes de clase mundial" son inspiradoras al decirlas, imposibles de ejecutar. Tim Ferriss: "La vida castiga el deseo vago, pero recompensa la petición específica."</span>
+      </div>
+    </div>
+    <div class="trampa" style="margin-bottom:12px;">
+      <div class="trampa-icon">🧭</div>
+      <div class="trampa-body">
+        <strong>Trampa 4 — Sin conexión con la misión <span class="pref">Pág. 166</span></strong>
+        <span>Las iniciativas existen para cumplir la misión. Si las cumples pero pierdes el espíritu de la organización, habrás ganado la batalla pero perdido la guerra. El mapa estratégico siempre pone la misión y visión POR ENCIMA de la iniciativa.</span>
+      </div>
+    </div>
+    <div class="quote yellow">
+      <div class="quote-e">💡</div>
+      <div class="quote-t">Caso Tienda de Segunda Mano: cuando el nuevo presidente preguntó "¿Qué área necesita más cambio para cumplir nuestra MISIÓN?", emergió una iniciativa poderosa: aumentar empleados con discapacidades en empleos sostenibles. <span class="pref">Pág. 157</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FILA 4: 3 ESTRUCTURAS + CASOS OPRYLAND -->
+<div class="g2">
+
+  <!-- 3 ESTRUCTURAS -->
+  <div class="card">
+    <div class="dot-bg">🏗️</div>
+    <div class="card-title">
+      🏗️ 3 Formas de Estructurar las Iniciativas
+      <span class="cap-tag" style="background:var(--skylight);color:#2980B9;">Págs. 159–162</span>
+    </div>
+    <div class="tipo a">
+      <div class="tipo-icon">🎯</div>
+      <div class="tipo-title">A — Una Sola Iniciativa Primaria <span class="pref">Pág. 159</span></div>
+      <div class="tipo-desc">Toda la organización apunta al mismo blanco. Los equipos crean sus propias batallas para contribuir a ella. El efecto dominó: una iniciativa bien elegida mejora múltiples métricas.</div>
+      <div class="tipo-ej">🚛 Covenant Transport → rotación choferes de 106% a 82% (meta: 86%). ¡Récord histórico + mejores resultados financieros en 12 años!</div>
+    </div>
+    <div class="tipo b">
+      <div class="tipo-icon">⚔️</div>
+      <div class="tipo-title">B — Varias Iniciativas Críticas <span class="pref">Pág. 160</span></div>
+      <div class="tipo-desc">Cuando la estrategia necesita cambios simultáneos en áreas distintas. Dos tipos: Iniciativa Transformadora (hacer algo completamente nuevo) + Iniciativa de Desempeño (mejorar métricas existentes).</div>
+      <div class="tipo-ej">💊 Farmacéutica → "De molécula al mercado" (transformar) + "Acceso a fármacos" (desempeñar).</div>
+    </div>
+    <div class="tipo c" style="margin-bottom:0;">
+      <div class="tipo-icon">🧩</div>
+      <div class="tipo-title">C — Autonomía por Equipo <span class="pref">Pág. 161</span></div>
+      <div class="tipo-desc">Cada equipo elige su propia iniciativa siempre que se alinee con una de las estrategias corporativas definidas. Genera fuerte sentido de propiedad y compromiso desde la primera línea.</div>
+      <div class="tipo-ej">📞 TELUS International → 400+ equipos, cada uno con su iniciativa alineada a 4 estrategias corporativas.</div>
+    </div>
+  </div>
+
+  <!-- OPRYLAND CASO COMPLETO -->
+  <div class="card">
+    <div class="dot-bg">🏨</div>
+    <div class="card-title">
+      🏨 Caso Completo: Hotel Opryland
+      <span class="cap-tag" style="background:var(--skylight);color:#2980B9;">Págs. 170–178</span>
+    </div>
+
+    <div class="caso cc" style="margin-bottom:10px;">
+      <div class="caso-head">
+        <div class="caso-emoji">🏨</div>
+        <div class="caso-name">La Sede de Convenciones más Grande de EE.UU.</div>
+        <div class="caso-page">Pág. 170</div>
+      </div>
+      <div class="caso-body">
+        <strong>Iniciativa Primaria:</strong> Mejorar puntuación Top Box de <strong>42 → 55%</strong> antes del 31/12<br>
+        <em>(Nunca antes habían superado el 45%)</em><br><br>
+        <strong>❓ La pregunta clave:</strong> "¿Cuál es la MENOR cantidad de batallas para ganar la guerra?"<br>
+        Empezaron con 17 batallas candidatas → terminaron con solo 3.
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:12px;">
+      <div style="background:#E8F8EF; border:2px solid var(--green); border-radius:14px; padding:12px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:5px;">✈️</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:12px; color:#1A8C5B; margin-bottom:3px;">Batalla 1</div>
+        <div style="font-size:11px; color:#555;">Experiencia de llegada: de 50 a 60 <em>(primeros 15-20 min definen todo)</em></div>
+      </div>
+      <div style="background:var(--teallight); border:2px solid var(--teal); border-radius:14px; padding:12px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:5px;">🔧</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:12px; color:#0099CC; margin-bottom:3px;">Batalla 2</div>
+        <div style="font-size:11px; color:#555;">Resolución de problemas: de 47 a 60 <em>(cómo reacciona el equipo importa)</em></div>
+      </div>
+      <div style="background:var(--orangelight); border:2px solid var(--orange); border-radius:14px; padding:12px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:5px;">🍽️</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:12px; color:#D35400; margin-bottom:3px;">Batalla 3</div>
+        <div style="font-size:11px; color:#555;">Calidad A&B: de 43 a 58 <em>(huéspedes no salen del hotel)</em></div>
+      </div>
+    </div>
+
+    <div class="caso cd">
+      <div class="caso-head">
+        <div class="caso-emoji">🛎️</div>
+        <div class="caso-name">El Equipo de Botones — El Más Impactante</div>
+        <div class="caso-page">Pág. 176</div>
+      </div>
+      <div class="caso-body">
+        <strong>Problema:</strong> Entregaban el equipaje en 106 minutos promedio.<br>
+        <strong>Iniciativa propia:</strong> Reducir tiempo de entrega de 106 a 20 minutos.<br>
+        <em>Nadie se los pidió. Ellos lo eligieron como su juego.</em>
+      </div>
+      <span class="caso-win">🏆 ¡Llegaron a 12 minutos! Superaron su propio objetivo</span>
+    </div>
+
+    <div class="stats-row" style="margin-top:10px;">
+      <div class="stat-box"><div class="stat-num">42→61%</div><div class="stat-label">Top Box de satisfacción en 9 meses. Nunca antes habían pasado de 45%</div></div>
+      <div class="stat-box"><div class="stat-num">75</div><div class="stat-label">Equipos distintos con su propia iniciativa alineada a las 3 batallas</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- DIAGRAMA PÁGINA 162 - TELUS -->
+<div class="stitle">📊 Gráfico Pág. 162 — Aproximación C: Estructura de Iniciativas (TELUS International)</div>
+<div class="card" style="margin-bottom:18px;">
+  <div class="card-title">
+    🧩 Cómo las 4 Estrategias se traducen en Iniciativas de Equipo
+    <span class="cap-tag" style="background:var(--purplelight);color:#7B2FBE;">Pág. 162</span>
+  </div>
+
+  <!-- BLOQUE ESTRATEGIA (header oscuro como en el libro) -->
+  <div style="background:#2C3E50; border-radius:16px; padding:16px 22px; margin-bottom:0; text-align:center;">
+    <div style="font-family:'Fredoka One',sans-serif; font-size:17px; color:var(--yellow); margin-bottom:10px; letter-spacing:1px;">📋 ESTRATEGIA</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 24px; text-align:left; max-width:480px; margin:0 auto;">
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">🚀 <strong>1.</strong> Establecer el liderazgo en industrias incipientes.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">💼 <strong>2.</strong> Proveer excelencia en ventas.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">📈 <strong>3.</strong> Preparar organizaciones para el crecimiento.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">⚙️ <strong>4.</strong> Fomentar la excelencia operativa.</div>
+    </div>
+  </div>
+
+  <!-- FLECHAS HACIA ABAJO -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; text-align:center; margin:0;">
+    <div style="font-size:28px; color:#888; padding:4px 0;">↙</div>
+    <div style="font-size:32px; color:#888; padding:4px 0;">↓</div>
+    <div style="font-size:28px; color:#888; padding:4px 0;">↘</div>
+  </div>
+
+  <!-- TRES COLUMNAS: PODER DE LA FIRMA | CAMBIO DE COMPORTAMIENTO | TORBELLINO -->
+  <div style="display:grid; grid-template-columns:1fr 2fr 1fr; gap:10px; margin-bottom:14px; align-items:start;">
+
+    <!-- PODER DE LA FIRMA -->
+    <div style="background:#F5EEFF; border:2px solid var(--purple); border-radius:16px; padding:14px; text-align:center;">
+      <div style="font-size:36px; margin-bottom:8px;">⚡</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:14px; color:#7B2FBE; margin-bottom:6px;">PODER DE<br>LA FIRMA</div>
+      <div style="font-size:11px; color:#666; line-height:1.6;">
+        💰 Inversión<br>👥 Personal<br>🔧 Procesos<br>📢 Publicidad
+      </div>
+    </div>
+
+    <!-- CAMBIO DE COMPORTAMIENTO — CENTRO PRINCIPAL -->
+    <div style="background:#FFFDE7; border:3px solid var(--yellow); border-radius:16px; padding:16px;">
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="font-size:36px; margin-bottom:6px;">🔄</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:16px; color:#E67E00;">CAMBIO DE<br>COMPORTAMIENTO</div>
+        <div style="background:var(--yellow); color:var(--dark); font-size:10px; font-weight:900; padding:3px 10px; border-radius:10px; display:inline-block; margin-top:6px; text-transform:uppercase;">⭐ Aquí viven las Iniciativas</div>
+      </div>
+
+      <!-- 4 ESTRATEGIAS CON SUS EQUIPOS -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+
+        <!-- Estrategia 1 -->
+        <div>
+          <div style="background:#E8F0FE; border:1px solid #7986CB; border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:16px; margin-bottom:3px;">🚀</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:11px; color:#3949AB;">Estrategia 1</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid #7986CB; border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#555; line-height:1.3;">Iniciativa<br>de equipo</div>
+            <div style="background:#fff; border:1px solid #7986CB; border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#555; line-height:1.3;">Iniciativa<br>de equipo</div>
+          </div>
+        </div>
+
+        <!-- Estrategia 2 -->
+        <div>
+          <div style="background:var(--teallight); border:1px solid var(--teal); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:16px; margin-bottom:3px;">💼</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:11px; color:#0099CC;">Estrategia 2</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--teal); border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#0099CC; font-weight:800; line-height:1.3;">📞 Aumentar llamadas salientes</div>
+            <div style="background:#fff; border:1px solid var(--teal); border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#555; line-height:1.3;">Iniciativa<br>de equipo</div>
+          </div>
+        </div>
+
+        <!-- Estrategia 3 -->
+        <div>
+          <div style="background:var(--greenlight); border:1px solid var(--green); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:16px; margin-bottom:3px;">📈</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:11px; color:#1A8C5B;">Estrategia 3</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--green); border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#555; line-height:1.3;">Iniciativa<br>de equipo</div>
+            <div style="background:#fff; border:1px solid var(--green); border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#555; line-height:1.3;">Iniciativa<br>de equipo</div>
+          </div>
+        </div>
+
+        <!-- Estrategia 4 -->
+        <div>
+          <div style="background:var(--purplelight); border:1px solid var(--purple); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:16px; margin-bottom:3px;">⚙️</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:11px; color:#7B2FBE;">Estrategia 4</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--purple); border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#7B2FBE; font-weight:800; line-height:1.3;">⚙️ Reducir 50% trabajo post-llamada</div>
+            <div style="background:#fff; border:1px solid var(--purple); border-radius:8px; padding:6px; text-align:center; font-size:10px; color:#555; line-height:1.3;">Iniciativa<br>de equipo</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TORBELLINO -->
+    <div style="background:var(--redlight); border:2px solid var(--red); border-radius:16px; padding:14px; text-align:center;">
+      <div style="font-size:36px; margin-bottom:8px;">🌪️</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:14px; color:#C0392B; margin-bottom:6px;">TORBELLINO</div>
+      <div style="font-size:11px; color:#666; line-height:1.6;">
+        🔥 Urgente<br>⏰ 80% energía<br>😵 Te impone<br>⚠️ Soporte vital
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NOTA CLAVE + QUOTE -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+    <div style="background:var(--greenlight); border:2px solid var(--green); border-radius:14px; padding:13px; display:flex; gap:10px; align-items:flex-start;">
+      <div style="font-size:28px; flex-shrink:0;">✅</div>
+      <div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#1A8C5B; margin-bottom:4px;">La elección viene de abajo</div>
+        <div style="font-size:12px; color:#555; line-height:1.5;">Los equipos de primera línea eligen su propia iniciativa. No les fue asignada. Eso garantiza compromiso real y conocimiento del trabajo.</div>
+      </div>
+    </div>
+    <div style="background:var(--teallight); border:2px solid var(--teal); border-radius:14px; padding:13px; display:flex; gap:10px; align-items:flex-start;">
+      <div style="font-size:28px; flex-shrink:0;">🧩</div>
+      <div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#0099CC; margin-bottom:4px;">400+ equipos en acción</div>
+        <div style="font-size:12px; color:#555; line-height:1.5;">TELUS implementó este modelo con más de 400 equipos. Cada uno con su propia iniciativa alineada a una de las 4 estrategias corporativas.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:0;">
+    <div class="quote-e">💬</div>
+    <div class="quote-t">"Quiero que estos cuatro objetivos estratégicos guíen y dirijan a los equipos de primera línea en la elección de sus iniciativas. Es su decisión, siempre y cuando se alinee con una de nuestras cuatro estrategias." — CEO TELUS International <span class="pref">Pág. 161</span></div>
+  </div>
+</div>
+
+
+<!-- PRECOTEX EXAMPLE -->
+<div class="stitle">🏭 Ejemplo Aplicado — PRECOTEX: Manufactura y Textil</div>
+
+<!-- MANUFACTURA -->
+<div class="card" style="margin-bottom:18px;">
+  <div class="card-title">
+    👕 Unidad MANUFACTURA — Estructura de Iniciativas 4DX
+    <span class="cap-tag" style="background:#FFF3E0;color:#E67E00;">PRECOTEX · Manufactura</span>
+    <span style="background:#E67E00; color:#fff; font-size:11px; font-weight:900; padding:4px 12px; border-radius:12px; margin-left:6px;">💡 Ejemplo Sugerido</span>
+  </div>
+
+  <!-- ESTRATEGIA MANUFACTURA -->
+  <div style="background:linear-gradient(135deg,#7F3A00 0%,#E67E00 100%); border-radius:16px; padding:16px 22px; margin-bottom:0; text-align:center; box-shadow:0 4px 14px rgba(230,126,0,0.3);">
+    <div style="font-family:'Fredoka One',sans-serif; font-size:17px; color:#FFD93D; margin-bottom:10px; letter-spacing:1px;">🏭 ESTRATEGIA — MANUFACTURA PRECOTEX</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 24px; text-align:left; max-width:540px; margin:0 auto;">
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">📦 <strong>E1.</strong> Entregar pedidos a tiempo y con calidad.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">⚙️ <strong>E2.</strong> Reducir costos y desperdicios del proceso.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">👷 <strong>E3.</strong> Desarrollar productividad del talento humano.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">🔄 <strong>E4.</strong> Mejorar eficiencia en las líneas de producción.</div>
+    </div>
+  </div>
+
+  <!-- FLECHAS -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; text-align:center; margin:0;">
+    <div style="font-size:28px; color:#E67E00; padding:4px 0; opacity:0.5;">↙</div>
+    <div style="font-size:32px; color:#E67E00; padding:4px 0; opacity:0.7;">↓</div>
+    <div style="font-size:28px; color:#E67E00; padding:4px 0; opacity:0.5;">↘</div>
+  </div>
+
+  <!-- 3 COLUMNAS -->
+  <div style="display:grid; grid-template-columns:1fr 2.4fr 1fr; gap:10px; margin-bottom:14px; align-items:start;">
+
+    <!-- PODER DE LA FIRMA -->
+    <div style="background:#F5EEFF; border:2px solid var(--purple); border-radius:16px; padding:14px; text-align:center;">
+      <div style="font-size:34px; margin-bottom:7px;">⚡</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#7B2FBE; margin-bottom:8px;">PODER DE<br>LA FIRMA</div>
+      <div style="font-size:11px; color:#666; line-height:1.8; text-align:left;">
+        💰 Compra de maquinaria nueva<br>
+        👥 Contratación de operarios<br>
+        🏗️ Ampliación de planta<br>
+        🔧 Mantenimiento correctivo<br>
+        📢 Inversión en capacitación técnica
+      </div>
+    </div>
+
+    <!-- CAMBIO DE COMPORTAMIENTO -->
+    <div style="background:#FFF6E9; border:3px solid #E67E00; border-radius:16px; padding:16px;">
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="font-size:34px; margin-bottom:5px;">🔄</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:15px; color:#E67E00;">CAMBIO DE COMPORTAMIENTO</div>
+        <div style="background:#E67E00; color:#fff; font-size:10px; font-weight:900; padding:3px 10px; border-radius:10px; display:inline-block; margin-top:5px;">⭐ Aquí viven las Iniciativas PRECOTEX</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+
+        <!-- E1 -->
+        <div>
+          <div style="background:#FFF3E0; border:2px solid #E67E00; border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">📦</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#E67E00; line-height:1.3;">E1 Entrega a tiempo</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid #E67E00; border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#E67E00; font-weight:800; line-height:1.5;">📌 Reducir pedidos atrasados<br>de 18% → 5%<br><span style="background:#E67E00; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed #E67E00; border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Corte: programa diario al 95%</div>
+          </div>
+        </div>
+
+        <!-- E2 -->
+        <div>
+          <div style="background:#E8F8EF; border:2px solid var(--green); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">⚙️</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#1A8C5B; line-height:1.3;">E2 Costos y desperdicios</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--green); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#1A8C5B; font-weight:800; line-height:1.5;">📌 Desperdicio de tela<br>de 8% → 4%<br><span style="background:#1A8C5B; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed var(--green); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Confección: reducir reprocesos semanales</div>
+          </div>
+        </div>
+
+        <!-- E3 -->
+        <div>
+          <div style="background:var(--skylight); border:2px solid var(--sky); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">👷</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#2980B9; line-height:1.3;">E3 Talento humano</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--sky); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#2980B9; font-weight:800; line-height:1.5;">📌 Eficiencia por operario<br>de 72% → 85%<br><span style="background:#4A90D9; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed var(--sky); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Acabados: meta diaria de prendas</div>
+          </div>
+        </div>
+
+        <!-- E4 -->
+        <div>
+          <div style="background:var(--purplelight); border:2px solid var(--purple); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">🔄</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#7B2FBE; line-height:1.3;">E4 Eficiencia de líneas</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--purple); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#7B2FBE; font-weight:800; line-height:1.5;">📌 Tiempos muertos<br>de 15% → 6%<br><span style="background:#9B59B6; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed var(--purple); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Planchado: flujo continuo</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TORBELLINO -->
+    <div style="background:var(--redlight); border:2px solid var(--red); border-radius:16px; padding:14px; text-align:center;">
+      <div style="font-size:34px; margin-bottom:7px;">🌪️</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#C0392B; margin-bottom:8px;">TORBELLINO</div>
+      <div style="font-size:11px; color:#666; line-height:1.8; text-align:left;">
+        🔥 Ausentismo diario<br>
+        ⚙️ Fallas de máquinas<br>
+        📋 Cambios de pedido<br>
+        🧵 Falta de insumos<br>
+        😵 Reclamos de calidad<br>
+        📞 Reuniones urgentes
+      </div>
+    </div>
+
+  </div>
+
+  <div class="quote orange" style="margin-top:0;">
+    <div class="quote-e">💡</div>
+    <div class="quote-t">Cada equipo de Manufactura (Corte, Confección, Acabados, Planchado) elige la iniciativa de su línea. El líder puede vetar si no contribuye a la estrategia, pero <strong>NO impone</strong>. La dirección baja de arriba; el compromiso sube de abajo.</div>
+  </div>
+</div>
+
+<!-- TEXTIL -->
+<div class="card" style="margin-bottom:18px;">
+  <div class="card-title">
+    🧵 Unidad TEXTIL — Estructura de Iniciativas 4DX
+    <span class="cap-tag" style="background:var(--teallight);color:#0099CC;">PRECOTEX · Textil</span>
+    <span style="background:#0099CC; color:#fff; font-size:11px; font-weight:900; padding:4px 12px; border-radius:12px; margin-left:6px;">💡 Ejemplo Sugerido</span>
+  </div>
+
+  <!-- ESTRATEGIA TEXTIL -->
+  <div style="background:linear-gradient(135deg,#003D5C 0%,#0099CC 100%); border-radius:16px; padding:16px 22px; margin-bottom:0; text-align:center; box-shadow:0 4px 14px rgba(0,153,204,0.3);">
+    <div style="font-family:'Fredoka One',sans-serif; font-size:17px; color:#FFD93D; margin-bottom:10px; letter-spacing:1px;">🧵 ESTRATEGIA — TEXTIL PRECOTEX</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 24px; text-align:left; max-width:540px; margin:0 auto;">
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">🎯 <strong>E1.</strong> Producir tela con calidad y sin defectos.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">⏱️ <strong>E2.</strong> Cumplir tiempos de entrega internos.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">👩‍🏭 <strong>E3.</strong> Elevar productividad y polivalencia del equipo.</div>
+      <div style="font-size:12.5px; color:#fff; line-height:1.6;">📊 <strong>E4.</strong> Optimizar rendimiento de materia prima.</div>
+    </div>
+  </div>
+
+  <!-- FLECHAS -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; text-align:center; margin:0;">
+    <div style="font-size:28px; color:#0099CC; padding:4px 0; opacity:0.5;">↙</div>
+    <div style="font-size:32px; color:#0099CC; padding:4px 0; opacity:0.7;">↓</div>
+    <div style="font-size:28px; color:#0099CC; padding:4px 0; opacity:0.5;">↘</div>
+  </div>
+
+  <!-- 3 COLUMNAS -->
+  <div style="display:grid; grid-template-columns:1fr 2.4fr 1fr; gap:10px; margin-bottom:14px; align-items:start;">
+
+    <!-- PODER DE LA FIRMA -->
+    <div style="background:#F5EEFF; border:2px solid var(--purple); border-radius:16px; padding:14px; text-align:center;">
+      <div style="font-size:34px; margin-bottom:7px;">⚡</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#7B2FBE; margin-bottom:8px;">PODER DE<br>LA FIRMA</div>
+      <div style="font-size:11px; color:#666; line-height:1.8; text-align:left;">
+        💰 Compra de hilado e insumos<br>
+        🔬 Nuevas tecnologías de tejido<br>
+        🏭 Inversión en telares<br>
+        📋 Contratos con proveedores<br>
+        👥 Incorporación de técnicos
+      </div>
+    </div>
+
+    <!-- CAMBIO DE COMPORTAMIENTO -->
+    <div style="background:#E8F6FF; border:3px solid #0099CC; border-radius:16px; padding:16px;">
+      <div style="text-align:center; margin-bottom:14px;">
+        <div style="font-size:34px; margin-bottom:5px;">🔄</div>
+        <div style="font-family:'Fredoka One',sans-serif; font-size:15px; color:#0099CC;">CAMBIO DE COMPORTAMIENTO</div>
+        <div style="background:#0099CC; color:#fff; font-size:10px; font-weight:900; padding:3px 10px; border-radius:10px; display:inline-block; margin-top:5px;">⭐ Aquí viven las Iniciativas PRECOTEX</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+
+        <!-- E1 -->
+        <div>
+          <div style="background:#E8F6FF; border:2px solid #0099CC; border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">🎯</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#0077A8; line-height:1.3;">E1 Calidad de tela</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid #0099CC; border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#0077A8; font-weight:800; line-height:1.5;">📌 Tela defectuosa<br>de 9% → 3%<br><span style="background:#0099CC; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed #0099CC; border-radius:8px; padding:6px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Tejido: inspección 100% en proceso</div>
+          </div>
+        </div>
+
+        <!-- E2 -->
+        <div>
+          <div style="background:#FFF3E0; border:2px solid var(--orange); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">⏱️</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#E67E00; line-height:1.3;">E2 Tiempos de entrega</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--orange); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#E67E00; font-weight:800; line-height:1.5;">📌 Entregar rollo a tiempo<br>de 70% → 90%<br><span style="background:#E67E00; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed var(--orange); border-radius:8px; padding:6px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Revisión: programa semanal</div>
+          </div>
+        </div>
+
+        <!-- E3 -->
+        <div>
+          <div style="background:var(--greenlight); border:2px solid var(--green); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">👩‍🏭</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#1A8C5B; line-height:1.3;">E3 Productividad</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--green); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#1A8C5B; font-weight:800; line-height:1.5;">📌 Metros por turno<br>de 850 → 1,050<br><span style="background:#1A8C5B; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed var(--green); border-radius:8px; padding:6px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Telares: meta diaria por máquina</div>
+          </div>
+        </div>
+
+        <!-- E4 -->
+        <div>
+          <div style="background:var(--purplelight); border:2px solid var(--purple); border-radius:10px; padding:8px; text-align:center; margin-bottom:6px;">
+            <div style="font-size:24px; margin-bottom:4px;">📊</div>
+            <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#7B2FBE; line-height:1.3;">E4 Rendimiento MP</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div style="background:#fff; border:1px solid var(--purple); border-radius:8px; padding:7px; text-align:center; font-size:12px; color:#7B2FBE; font-weight:800; line-height:1.5;">📌 Rendimiento hilado<br>de 88% → 94%<br><span style="background:#9B59B6; color:#fff; font-size:10px; padding:2px 7px; border-radius:8px; font-weight:900;">📅 al 31 de dic 2026</span></div>
+            <div style="background:#fff; border:1px dashed var(--purple); border-radius:8px; padding:6px; text-align:center; font-size:12px; color:#555; font-weight:700; line-height:1.4;">Equipo Preparación: control de merma</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TORBELLINO -->
+    <div style="background:var(--redlight); border:2px solid var(--red); border-radius:16px; padding:14px; text-align:center;">
+      <div style="font-size:34px; margin-bottom:7px;">🌪️</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:#C0392B; margin-bottom:8px;">TORBELLINO</div>
+      <div style="font-size:11px; color:#666; line-height:1.8; text-align:left;">
+        🧵 Rupturas de hilo<br>
+        🔧 Ajustes de telares<br>
+        📋 Cambios de diseño<br>
+        👤 Rotación de personal<br>
+        ⚡ Cortes de energía<br>
+        📞 Emergencias de clientes
+      </div>
+    </div>
+
+  </div>
+
+  <div class="quote" style="margin-top:0;">
+    <div class="quote-e">💡</div>
+    <div class="quote-t">Cada equipo Textil (Tejido, Revisión, Telares, Preparación) elige la iniciativa de su proceso. Las iniciativas de Textil y Manufactura son <strong>independientes</strong> entre sí — son dos unidades de negocio distintas con sus propias estrategias.</div>
+  </div>
+</div>
+
+<!-- NOTA IMPORTANTE PRECOTEX -->
+<div style="background:linear-gradient(135deg,#1E3A2F 0%,#27AE60 100%); border-radius:22px; padding:18px 24px; margin-bottom:18px; box-shadow:0 4px 16px rgba(27,90,50,0.25);">
+  <div style="font-family:'Fredoka One',sans-serif; font-size:18px; color:var(--yellow); margin-bottom:12px; text-align:center;">
+    🏢 PRECOTEX — Cómo funciona la estructura completa
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;">
+    <div style="background:rgba(255,255,255,0.1); border-radius:14px; padding:13px; text-align:center;">
+      <div style="font-size:32px; margin-bottom:6px;">⬆️</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow); margin-bottom:4px;">La estrategia baja</div>
+      <div style="font-size:11.5px; color:rgba(255,255,255,0.85); line-height:1.5;">Los líderes de cada unidad (Manufactura y Textil) definen la iniciativa primaria y las estrategias que guían a sus equipos.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.1); border-radius:14px; padding:13px; text-align:center;">
+      <div style="font-size:32px; margin-bottom:6px;">⬇️</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow); margin-bottom:4px;">El compromiso sube</div>
+      <div style="font-size:11.5px; color:rgba(255,255,255,0.85); line-height:1.5;">Cada equipo de primera línea elige SU propia iniciativa. El líder puede vetar, nunca imponer. Eso genera apropiación real.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.1); border-radius:14px; padding:13px; text-align:center;">
+      <div style="font-size:32px; margin-bottom:6px;">🔀</div>
+      <div style="font-family:'Fredoka One',sans-serif; font-size:13px; color:var(--yellow); margin-bottom:4px;">Textil ≠ Manufactura</div>
+      <div style="font-size:11.5px; color:rgba(255,255,255,0.85); line-height:1.5;">Cada unidad tiene su propio mapa estratégico, sus propias iniciativas y su propio tablero. Nunca se mezclan ni consolidan.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">
+    <strong>Las 4 Disciplinas de la Ejecución</strong> · McChesney, Covey & Huling · 2ª Edición<br>
+    Fichas Caps. 5 y 6 · Págs. 121–168 · Material interno para líderes y jefaturas
+  </div>
+  <div class="footer-pills">
+    <span class="fp">🤝 Disciplina 4</span>
+    <span class="fp">📅 Sesión Semanal</span>
+    <span class="fp">🗺️ Mapa Estratégico</span>
+    <span class="fp">🎯 Iniciativa Primaria</span>
+    <span class="fp">🏆 Rendición Personal</span>
+  </div>
+</div>
+
+</body>
+</html>
