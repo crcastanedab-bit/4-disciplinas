@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4DX — Disciplina 2: Medidas de Predicción</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap');
+:root {
+  --bg:#F5F9FF;
+  --dark:#1E2A38;
+  --navy:#1B3A6B;
+  --sky:#74B9FF;
+  --skylight:#EAF4FF;
+  --teal:#00B4D8;
+  --teallight:#E0F7FF;
+  --green:#27AE60;
+  --greenlight:#E8F8EF;
+  --yellow:#FFD93D;
+  --orange:#F0932B;
+  --orangelight:#FFF3E0;
+  --red:#EB4D4B;
+  --redlight:#FFE9E9;
+  --purple:#9B59B6;
+  --purplelight:#F5EEFF;
+  --pink:#E84393;
+  --pinklight:#FFF0F8;
+  --white:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg);
+  font-family:'Nunito',sans-serif;
+  color:var(--dark);
+  padding:22px;
+  background-image:
+    radial-gradient(circle at 5% 10%,rgba(0,180,216,0.08) 0%,transparent 40%),
+    radial-gradient(circle at 95% 90%,rgba(39,174,96,0.07) 0%,transparent 40%);
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);
+  border-radius:28px;padding:26px 32px;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:20px;
+  box-shadow:0 8px 28px rgba(10,22,40,0.3);
+  position:relative;overflow:hidden;
+}
+.header::after{content:'🎯';position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:90px;opacity:0.08;}
+.header-emoji{font-size:68px;}
+.header-text h1{font-family:'Fredoka One',sans-serif;font-size:34px;color:var(--yellow);line-height:1.1;}
+.header-sub{font-size:17px;color:var(--yellow);font-weight:900;margin-top:4px;}
+.header-text p{font-size:13px;color:rgba(255,255,255,0.72);margin-top:4px;font-weight:700;}
+.header-pills{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;max-width:290px;justify-content:flex-end;}
+.hpill{background:rgba(255,255,255,0.13);color:#fff;font-size:12px;font-weight:800;padding:6px 13px;border-radius:22px;}
+
+/* CAP BANNERS */
+.cap-banners{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.cap-card{border-radius:22px;padding:18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+.cc13a{background:linear-gradient(135deg,#E8F0FE 0%,#C5D8FF 100%);border:3px solid var(--sky);}
+.cc13b{background:linear-gradient(135deg,#FFF3E0 0%,#FFD6A5 100%);border:3px solid var(--orange);}
+.cc13c{background:linear-gradient(135deg,#F5EEFF 0%,#DDD0FF 100%);border:3px solid var(--purple);}
+.cap-art{font-size:52px;flex-shrink:0;}
+.cap-num{font-family:'Fredoka One',sans-serif;font-size:13px;padding:3px 12px;border-radius:12px;display:inline-block;margin-bottom:6px;color:#fff;}
+.cc13a .cap-num{background:var(--sky);color:var(--dark);}
+.cc13b .cap-num{background:var(--orange);}
+.cc13c .cap-num{background:var(--purple);}
+.cap-title{font-family:'Fredoka One',sans-serif;font-size:18px;margin-bottom:5px;}
+.cc13a .cap-title{color:#1a60cc;}
+.cc13b .cap-title{color:#D35400;}
+.cc13c .cap-title{color:#6C3483;}
+.cap-desc{font-size:13px;color:#555;line-height:1.5;}
+.cap-page{font-size:11px;color:#999;font-weight:800;margin-top:5px;}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;}
+
+/* CARD */
+.card{background:var(--white);border-radius:24px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,0.07);position:relative;overflow:hidden;}
+.card-title{font-family:'Fredoka One',sans-serif;font-size:18px;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--dark);}
+.cap-tag{margin-left:auto;font-size:11px;font-weight:900;padding:4px 11px;border-radius:12px;white-space:nowrap;}
+.dot-bg{position:absolute;top:8px;right:14px;font-size:34px;opacity:0.07;}
+
+/* PREF */
+.pref{display:inline-block;background:#F0F0F0;color:#888;font-size:10px;font-weight:900;padding:2px 8px;border-radius:8px;margin-left:5px;}
+
+/* CONCEPTO BOX */
+.concepto-box{font-size:13px;color:#555;line-height:1.6;margin-bottom:14px;border-radius:12px;padding:11px 14px;}
+
+/* COMPARATIVA */
+.comp-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+.comp-item{border-radius:14px;padding:13px;}
+.ci-hist{background:var(--redlight);border:2px solid var(--red);}
+.ci-pred{background:var(--teallight);border:2px solid var(--teal);}
+.ci-label{font-family:'Fredoka One',sans-serif;font-size:13px;margin-bottom:6px;}
+.ci-hist .ci-label{color:#C0392B;}
+.ci-pred .ci-label{color:#0077A8;}
+.ci-detail{font-size:12px;color:#444;line-height:1.55;}
+.ci-tag{display:inline-block;font-size:10px;font-weight:900;padding:3px 10px;border-radius:10px;margin-top:6px;}
+.ci-hist .ci-tag{background:var(--red);color:#fff;}
+.ci-pred .ci-tag{background:var(--teal);color:#fff;}
+
+/* TIPOS */
+.tipo-row{border-radius:18px;padding:15px;margin-bottom:10px;}
+.tipo-a{background:var(--orangelight);border-left:5px solid var(--orange);}
+.tipo-b{background:var(--purplelight);border-left:5px solid var(--purple);}
+.tipo-head{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+.tipo-icon{font-size:32px;flex-shrink:0;}
+.tipo-name{font-family:'Fredoka One',sans-serif;font-size:15px;}
+.tipo-a .tipo-name{color:#D35400;}
+.tipo-b .tipo-name{color:#6C3483;}
+.tipo-desc{font-size:12.5px;color:#444;line-height:1.6;margin-bottom:7px;}
+.tipo-ej{font-size:11.5px;font-weight:800;}
+.tipo-a .tipo-ej{color:#D35400;}
+.tipo-b .tipo-ej{color:#6C3483;}
+
+/* PASOS */
+.paso{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:13px;margin-bottom:10px;}
+.ps1{background:var(--teallight);border-left:4px solid var(--teal);}
+.ps2{background:var(--orangelight);border-left:4px solid var(--orange);}
+.ps3{background:var(--purplelight);border-left:4px solid var(--purple);}
+.ps4{background:var(--redlight);border-left:4px solid var(--red);}
+.paso-num{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',sans-serif;font-size:20px;color:#fff;flex-shrink:0;}
+.pn1{background:var(--teal);}
+.pn2{background:var(--orange);}
+.pn3{background:var(--purple);}
+.pn4{background:var(--red);}
+.paso-body strong{font-size:14px;color:var(--dark);display:block;margin-bottom:3px;}
+.paso-body span{font-size:12.5px;color:#555;line-height:1.5;}
+
+/* 6 CRITERIOS */
+.crit-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.crit-item{border-radius:16px;padding:14px;display:flex;gap:10px;align-items:flex-start;}
+.cr1{background:var(--redlight);border:2px solid var(--red);}
+.cr2{background:var(--teallight);border:2px solid var(--teal);}
+.cr3{background:var(--orangelight);border:2px solid var(--orange);}
+.cr4{background:var(--greenlight);border:2px solid var(--green);}
+.cr5{background:var(--skylight);border:2px solid var(--sky);}
+.cr6{background:var(--purplelight);border:2px solid var(--purple);}
+.crit-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',sans-serif;font-size:17px;color:#fff;flex-shrink:0;}
+.cn1{background:var(--red);}
+.cn2{background:var(--teal);}
+.cn3{background:var(--orange);}
+.cn4{background:var(--green);}
+.cn5{background:var(--sky);color:var(--dark);}
+.cn6{background:var(--purple);}
+.crit-body strong{font-size:13px;color:var(--dark);display:block;margin-bottom:3px;}
+.crit-body span{font-size:12px;color:#555;line-height:1.5;}
+
+/* FORMULA BANNER */
+.formula-bar{
+  background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);
+  border-radius:16px;padding:16px 22px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  margin-bottom:14px;
+}
+.fb-part{text-align:center;padding:0 10px;}
+.fb-part+.fb-part{border-left:1px solid rgba(255,255,255,0.15);}
+.fb-lbl{font-family:'Fredoka One',sans-serif;font-size:13px;margin-bottom:4px;}
+.fb-sub{font-size:10px;color:rgba(255,255,255,0.6);}
+
+/* DECISION CARDS */
+.dec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.dec-card{border-radius:16px;padding:14px;}
+.dc-teal{background:var(--teallight);border:2px solid var(--teal);}
+.dc-purple{background:var(--purplelight);border:2px solid var(--purple);}
+.dec-title{font-family:'Fredoka One',sans-serif;font-size:14px;margin-bottom:10px;}
+.dc-teal .dec-title{color:#0077A8;}
+.dc-purple .dec-title{color:#6C3483;}
+.dec-opt{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;font-size:12px;color:#444;}
+.dec-opt-ico{font-size:15px;flex-shrink:0;}
+.dec-std{font-size:11px;font-weight:800;margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.07);}
+.dc-teal .dec-std{color:#0077A8;}
+.dc-purple .dec-std{color:#6C3483;}
+
+/* ERRORES */
+.error-card{border-radius:18px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;}
+.ec1{background:var(--redlight);border-left:5px solid var(--red);}
+.ec2{background:var(--orangelight);border-left:5px solid var(--orange);}
+.ec3{background:#FFF9E0;border-left:5px solid var(--yellow);}
+.ec4{background:var(--purplelight);border-left:5px solid var(--purple);}
+.ec5{background:var(--teallight);border-left:5px solid var(--teal);}
+.ec6{background:var(--skylight);border-left:5px solid var(--sky);}
+.error-icon{font-size:34px;flex-shrink:0;}
+.error-body strong{font-size:13.5px;color:var(--dark);display:block;margin-bottom:4px;}
+.error-body span{font-size:12px;color:#555;line-height:1.55;}
+.error-fix{display:inline-block;font-size:11px;font-weight:900;padding:3px 11px;border-radius:10px;margin-top:7px;}
+.ec1 .error-fix{background:var(--red);color:#fff;}
+.ec2 .error-fix{background:var(--orange);color:#fff;}
+.ec3 .error-fix{background:var(--yellow);color:var(--dark);}
+.ec4 .error-fix{background:var(--purple);color:#fff;}
+.ec5 .error-fix{background:var(--teal);color:#fff;}
+.ec6 .error-fix{background:var(--sky);color:var(--dark);}
+
+/* CASCADE */
+.cascade{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.cas-item{border-radius:14px;padding:13px 18px;}
+.cas-1{background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);border-left:5px solid var(--sky);}
+.cas-2{background:linear-gradient(135deg,#0D3D6B 0%,#1565C0 100%);border-left:5px solid #40C4FF;margin-left:20px;}
+.cas-3{background:linear-gradient(135deg,#005845 0%,#00897B 100%);border-left:5px solid var(--teal);margin-left:40px;}
+.cas-4{background:linear-gradient(135deg,#7B3500 0%,#E65100 100%);border-left:5px solid var(--yellow);margin-left:40px;}
+.cas-lbl{font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:3px;}
+.cas-text{font-size:13px;font-weight:700;color:#fff;}
+
+/* WHY CHECKS */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.why-item{background:var(--greenlight);border:2px solid var(--green);border-radius:14px;padding:12px;}
+.why-icon{font-size:28px;margin-bottom:6px;}
+.why-title{font-family:'Fredoka One',sans-serif;font-size:13px;color:#1A8C5B;margin-bottom:4px;}
+.why-desc{font-size:11.5px;color:#555;line-height:1.5;}
+
+/* CHECKLIST */
+.chk-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.chk-item{background:var(--teallight);border:2px solid var(--teal);border-radius:14px;padding:12px;display:flex;gap:9px;align-items:flex-start;cursor:pointer;}
+.chk-box{width:20px;height:20px;border-radius:5px;border:2.5px solid var(--teal);background:#fff;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;}
+.chk-item p{font-size:12px;color:#444;line-height:1.5;}
+
+/* CASOS */
+.caso{border-radius:18px;padding:15px;margin-bottom:10px;}
+.ca{background:var(--greenlight);border-left:5px solid var(--green);}
+.cb{background:var(--teallight);border-left:5px solid var(--teal);}
+.cc{background:var(--skylight);border-left:5px solid var(--sky);}
+.cd{background:var(--orangelight);border-left:5px solid var(--orange);}
+.caso-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.caso-emoji{font-size:28px;}
+.caso-name{font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--dark);}
+.caso-page{font-size:11px;color:#aaa;font-weight:800;margin-left:auto;}
+.caso-body{font-size:12.5px;color:#444;line-height:1.6;}
+.caso-win{display:inline-block;background:var(--greenlight);color:#1A8C5B;font-size:11px;font-weight:900;padding:4px 12px;border-radius:12px;margin-top:8px;border:1px solid var(--green);}
+
+/* QUOTE */
+.quote{background:var(--skylight);border-left:5px solid var(--sky);border-radius:0 16px 16px 0;padding:12px 16px;margin-top:12px;display:flex;gap:10px;align-items:flex-start;}
+.quote.green{background:var(--greenlight);border-left-color:var(--green);}
+.quote.orange{background:var(--orangelight);border-left-color:var(--orange);}
+.quote.yellow{background:#FFFDE7;border-left-color:var(--yellow);}
+.quote.purple{background:var(--purplelight);border-left-color:var(--purple);}
+.quote-e{font-size:26px;flex-shrink:0;}
+.quote-t{font-size:13px;color:var(--dark);line-height:1.55;font-style:italic;font-weight:700;}
+
+/* STATS */
+.stats-row{display:flex;gap:10px;margin-top:10px;}
+.stat-box{flex:1;background:var(--greenlight);border:2px solid var(--green);border-radius:16px;padding:13px;text-align:center;}
+.stat-num{font-family:'Fredoka One',sans-serif;font-size:28px;color:#1A8C5B;line-height:1;margin-bottom:4px;}
+.stat-label{font-size:11px;color:#555;line-height:1.4;}
+
+/* STITLE */
+.stitle{font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--dark);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* ALERTA */
+.alerta{border-radius:16px;padding:13px 16px;display:flex;gap:10px;align-items:flex-start;margin-top:12px;}
+.alerta-red{background:var(--redlight);border:2px solid var(--red);}
+.alerta-yellow{background:#FFFDE7;border:2px solid var(--yellow);}
+.alerta-green{background:var(--greenlight);border:2px solid var(--green);}
+.alerta-icon{font-size:26px;flex-shrink:0;}
+.alerta-body strong{font-size:13px;color:var(--dark);display:block;margin-bottom:3px;}
+.alerta-body span{font-size:12px;color:#555;line-height:1.5;}
+
+/* FOOTER */
+.footer{background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);border-radius:24px;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;margin-top:18px;box-shadow:0 4px 16px rgba(10,22,40,0.25);}
+.footer-l{font-size:13px;color:rgba(255,255,255,0.65);}
+.footer-l strong{color:var(--yellow);}
+.footer-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.fp{background:rgba(255,255,255,0.13);color:#fff;font-size:12px;font-weight:800;padding:5px 13px;border-radius:22px;}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="header-emoji">🎯</div>
+  <div class="header-text">
+    <h1>4DX — Disciplina 2</h1>
+    <div class="header-sub">➜ Actuar sobre las Medidas de Predicción</div>
+    <p>📘 Págs. 169–187 (Cap. 7) y 263–281 (Cap. 13) · Resumen Visual para Líderes y Jefaturas</p>
+  </div>
+  <div class="header-pills">
+    <span class="hpill">🏹 2 Tipos de Medidas</span>
+    <span class="hpill">🪜 4 Pasos</span>
+    <span class="hpill">🔬 6 Criterios</span>
+    <span class="hpill">❌ 6 Errores</span>
+    <span class="hpill">✅ Checklist</span>
+  </div>
+</div>
+
+<!-- ===== BANNERS ===== -->
+<div class="cap-banners">
+  <div class="cap-card cc13a">
+    <div class="cap-art">🧭</div>
+    <div>
+      <span class="cap-num">Capítulo 7</span>
+      <div class="cap-title">Contexto Organizacional</div>
+      <div class="cap-desc">Por qué las batallas clave no son medidas de predicción. La D2 en la cascada de iniciativas.</div>
+      <div class="cap-page">📖 Págs. 169–187</div>
+    </div>
+  </div>
+  <div class="cap-card cc13b">
+    <div class="cap-art">🔬</div>
+    <div>
+      <span class="cap-num">Capítulo 13 · Parte I</span>
+      <div class="cap-title">Concepto y Tipos de Medidas</div>
+      <div class="cap-desc">Qué son las medidas de predicción, los 2 tipos y los 4 pasos para construirlas con el equipo.</div>
+      <div class="cap-page">📖 Págs. 263–273</div>
+    </div>
+  </div>
+  <div class="cap-card cc13c">
+    <div class="cap-art">✍️</div>
+    <div>
+      <span class="cap-num">Capítulo 13 · Parte II</span>
+      <div class="cap-title">Redacción, Errores y Checklist</div>
+      <div class="cap-desc">Cómo definir la medida final, los errores más frecuentes y el checklist de aprobación.</div>
+      <div class="cap-page">📖 Págs. 274–281</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECCIÓN 1: CONCEPTO CENTRAL ===== -->
+<div class="stitle">🧠 El Concepto Central — ¿Qué es una Medida de Predicción?</div>
+<div class="g2">
+
+  <!-- COMPARATIVA -->
+  <div class="card">
+    <div class="dot-bg">📊</div>
+    <div class="card-title">
+      📊 Medida Histórica vs. Medida de Predicción
+      <span class="cap-tag" style="background:var(--teallight);color:#0077A8;">Págs. 263–264</span>
+    </div>
+    <div class="concepto-box" style="background:var(--teallight);">
+      💡 Esta distinción es el corazón de la Disciplina 2. No puedes influir en el marcador final de un partido ya jugado. Sí puedes influir en las jugadas que ocurren <em>ahora mismo</em>.
+    </div>
+
+    <div class="comp-row">
+      <div class="comp-item ci-hist">
+        <div class="ci-label">📉 Medida Histórica</div>
+        <div class="ci-detail">Mide el resultado <strong>ya ocurrido</strong>. Es el marcador al final del partido. No puedes cambiarla — ya pasó.</div>
+        <div class="ci-detail" style="margin-top:7px;"><em>"Aumentar ingresos de S/22M a S/31M para dic."</em></div>
+        <span class="ci-tag">No influenciable</span>
+      </div>
+      <div class="comp-item ci-pred">
+        <div class="ci-label">🎯 Medida de Predicción</div>
+        <div class="ci-detail">Mide acciones que el equipo hace <strong>HOY</strong>. Predice si alcanzarás la iniciativa. El marcador en tiempo real.</div>
+        <div class="ci-detail" style="margin-top:7px;"><em>"Realizar 2 visitas presenciales por empleado/semana"</em></div>
+        <span class="ci-tag">100% influenciable</span>
+      </div>
+    </div>
+
+    <div class="alerta alerta-red">
+      <div class="alerta-icon">⚠️</div>
+      <div class="alerta-body">
+        <strong>Las batallas clave NO son medidas de predicción <span class="pref">Pág. 176</span></strong>
+        <span>En Cap. 7 el libro aclara: las batallas (sub-iniciativas) son medidas históricas intermedias, aunque estén "debajo" de la iniciativa primaria. La pregunta clave: ¿el equipo puede influir en esto HOY, o ya ocurrió?</span>
+      </div>
+    </div>
+
+    <div class="alerta alerta-green" style="margin-top:8px;">
+      <div class="alerta-icon">💬</div>
+      <div class="alerta-body">
+        <strong>El secreto de la excelencia en la ejecución <span class="pref">Pág. 263</span></strong>
+        <span><em>"Los equipos sobresalientes invierten su mejor esfuerzo en las pocas actividades que tienen el mayor impacto en su iniciativa: las medidas de predicción."</em></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOS TIPOS -->
+  <div class="card">
+    <div class="dot-bg">🏷️</div>
+    <div class="card-title">
+      🏷️ Los 2 Tipos de Medidas de Predicción
+      <span class="cap-tag" style="background:var(--orangelight);color:#D35400;">Págs. 265–266</span>
+    </div>
+    <div class="concepto-box" style="background:var(--orangelight);">
+      💡 No existe uno mejor que el otro. La elección depende del nivel de madurez del equipo y de qué quieres instalar: un resultado semanal o un hábito de conducta.
+    </div>
+
+    <div class="tipo-row tipo-a">
+      <div class="tipo-head">
+        <div class="tipo-icon">🏆</div>
+        <div class="tipo-name">Tipo A — Resultados Pequeños <span class="pref">Pág. 265</span></div>
+      </div>
+      <div class="tipo-desc">El equipo se enfoca en alcanzar un <strong>resultado semanal</strong>. Cada miembro elige cómo lograrlo. Libertad en el método, responsabilidad sobre el producto entregado.</div>
+      <div class="tipo-ej">📌 Ej: "Limitar productos agotados de alta demanda a 20 o menos por semana"</div>
+      <div class="tipo-ej" style="margin-top:4px;">✦ Ventaja: flexibilidad en el cómo · ✦ Requiere buena disciplina previa del equipo</div>
+    </div>
+
+    <div class="tipo-row tipo-b" style="margin-bottom:0;">
+      <div class="tipo-head">
+        <div class="tipo-icon">🔁</div>
+        <div class="tipo-name">Tipo B — Comportamientos Palanca <span class="pref">Pág. 265</span></div>
+      </div>
+      <div class="tipo-desc">Se monitorea una <strong>conducta específica</strong> que el equipo debe ejecutar con cierta frecuencia y constancia. Instala hábitos nuevos de forma medible.</div>
+      <div class="tipo-ej">📌 Ej: "Hacer 2 revisiones adicionales de anaqueles cada día"</div>
+      <div class="tipo-ej" style="margin-top:4px;">✦ Ventaja: genera hábito duradero · ✦ Ideal cuando hay conductas a instalar</div>
+    </div>
+
+    <div style="background:#FFFDE7;border:2px solid var(--yellow);border-radius:12px;padding:11px;margin-top:10px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:13px;color:#E67E00;margin-bottom:4px;">🔑 Regla práctica para elegir</div>
+      <div style="font-size:12px;color:#555;line-height:1.55;">Si el equipo ya tiene disciplina básica → <strong>Resultado Pequeño</strong>. Si necesita instalar nuevos hábitos primero → empieza con <strong>Comportamiento Palanca</strong> y ve sumando conductas.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== SECCIÓN 2: LOS 4 PASOS ===== -->
+<div class="stitle">🪜 Los 4 Pasos para Construir Medidas de Predicción</div>
+<div class="g2">
+
+  <!-- PASOS 1 y 2 -->
+  <div class="card">
+    <div class="dot-bg">🌊</div>
+    <div class="card-title">
+      🌊 Paso 1 — Considera las Posibilidades
+      <span class="cap-tag" style="background:var(--teallight);color:#0077A8;">Págs. 267–268</span>
+    </div>
+    <div class="concepto-box" style="background:var(--teallight);">
+      💡 No elijas demasiado rápido. La experiencia muestra que a más ideas generadas, mayor calidad tiene la medida final. El facilitador <strong>no decide</strong> por el equipo en este paso.
+    </div>
+
+    <div class="paso ps1">
+      <div class="paso-num pn1">1</div>
+      <div class="paso-body">
+        <strong>¿Qué podemos hacer, que no hayamos hecho antes, para marcar diferencia en la iniciativa? <span class="pref">Pág. 267</span></strong>
+        <span>Identifica acciones <em>nuevas</em> que el equipo nunca ha intentado sistematizar. El enfoque debe estar en conductas o resultados que <strong>muevan la iniciativa</strong>, no en "cosas buenas en general".</span>
+      </div>
+    </div>
+
+    <div class="paso ps2">
+      <div class="paso-num pn2">2</div>
+      <div class="paso-body">
+        <strong>¿Cuáles son las fortalezas del equipo que podemos usar como palancas? <span class="pref">Pág. 267</span></strong>
+        <span>Usa los <em>cúmulos de excelencia internos</em>. ¿Qué hacen diferente los mejores miembros del equipo? ¿Qué prácticas locales ya están funcionando?</span>
+      </div>
+    </div>
+
+    <div class="paso ps3">
+      <div class="paso-num pn3">3</div>
+      <div class="paso-body">
+        <strong>¿Qué debilidades nos impiden alcanzar la iniciativa? ¿En qué podemos ser más constantes? <span class="pref">Pág. 267</span></strong>
+        <span>Resuelve inconsistencias actuales. Muchas veces las medidas de predicción no hacen más que <em>cerrar la brecha entre saber qué se debe hacer y hacerlo</em>.</span>
+      </div>
+    </div>
+
+    <div class="alerta alerta-red" style="margin-top:4px;">
+      <div class="alerta-icon">🚫</div>
+      <div class="alerta-body">
+        <strong>Solo ideas que muevan la iniciativa</strong>
+        <span>No te distraigas discutiendo "cosas buenas que podrían hacerse en general". Si la idea no tiene impacto predecible sobre la iniciativa del equipo, descártala de la lista.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:16px;color:var(--dark);margin-bottom:10px;">🏅 Paso 2 — Califica por Impacto <span class="pref" style="font-size:12px;">Págs. 268–270</span></div>
+      <div class="concepto-box" style="background:var(--orangelight);margin-bottom:10px;">
+        💡 "Una palanca debe moverse <strong>mucho</strong> para hacer que la roca se mueva <strong>un poco</strong>." Si hay demasiadas medidas, el esfuerzo se disipa. Concentra en 2–3 palancas máximo.
+      </div>
+      <div style="display:flex;gap:10px;">
+        <div style="flex:1;background:#FFFDE7;border:2px solid var(--yellow);border-radius:14px;padding:13px;text-align:center;">
+          <div style="font-family:'Fredoka One',sans-serif;font-size:38px;color:#E67E00;line-height:1;">2–3</div>
+          <div style="font-size:12px;color:#555;margin-top:4px;">medidas máximo<br>por equipo</div>
+        </div>
+        <div style="flex:2;background:var(--skylight);border:2px solid var(--sky);border-radius:14px;padding:13px;font-size:12px;color:#444;line-height:1.6;">
+          De toda la lista, selecciona las ideas con mayor impacto potencial. Pregunta por cada candidata:<br><br>
+          <em style="color:#1a60cc;font-weight:800;">"¿Si el equipo hiciera esto sistemáticamente, movería la iniciativa de forma significativa?"</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 CRITERIOS (PASO 3) -->
+  <div class="card">
+    <div class="dot-bg">🔬</div>
+    <div class="card-title">
+      🔬 Paso 3 — Pon a Prueba con 6 Criterios
+      <span class="cap-tag" style="background:var(--redlight);color:#C0392B;">Págs. 270–273</span>
+    </div>
+    <div class="concepto-box" style="background:var(--redlight);">
+      🚨 Si la candidata <strong>reprueba el Criterio 1</strong>, descártala de inmediato — no sigas evaluando los demás. Sin poder predictivo, ninguna otra virtud la salva.
+    </div>
+
+    <div class="crit-grid">
+      <div class="crit-item cr1">
+        <div class="crit-num cn1">①</div>
+        <div class="crit-body">
+          <strong>¿Es predictiva? <span class="pref">Pág. 270</span></strong>
+          <span>¿Puede predecir el éxito de la iniciativa? Filtro absoluto — el más importante.</span>
+        </div>
+      </div>
+      <div class="crit-item cr2">
+        <div class="crit-num cn2">②</div>
+        <div class="crit-body">
+          <strong>¿Es influenciable? <span class="pref">Pág. 271</span></strong>
+          <span>¿El equipo tiene al menos el 80% del control? Sin depender significativamente de otros.</span>
+        </div>
+      </div>
+      <div class="crit-item cr3">
+        <div class="crit-num cn3">③</div>
+        <div class="crit-body">
+          <strong>¿Es proceso continuo? <span class="pref">Pág. 271</span></strong>
+          <span>¿Genera hábito? ¿No es "flor de un día"? Debe ser repetible semana a semana.</span>
+        </div>
+      </div>
+      <div class="crit-item cr4">
+        <div class="crit-num cn4">④</div>
+        <div class="crit-body">
+          <strong>¿El juego es del equipo? <span class="pref">Pág. 272</span></strong>
+          <span>¿Todos pueden participar? Si solo el líder puede moverla, el equipo pierde interés.</span>
+        </div>
+      </div>
+      <div class="crit-item cr5">
+        <div class="crit-num cn5">⑤</div>
+        <div class="crit-body">
+          <strong>¿Se puede medir? <span class="pref">Pág. 272</span></strong>
+          <span>¿Existe o se puede crear un sistema de seguimiento viable?</span>
+        </div>
+      </div>
+      <div class="crit-item cr6">
+        <div class="crit-num cn6">⑥</div>
+        <div class="crit-body">
+          <strong>¿Vale la pena medirla? <span class="pref">Pág. 273</span></strong>
+          <span>¿El esfuerzo de medición justifica el impacto? Evitar consecuencias no intencionales.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--purplelight);border:2px solid var(--purple);border-radius:14px;padding:13px;margin-top:4px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:#6C3483;margin-bottom:7px;">🧩 Medidas de predicción en procesos <span class="pref">Págs. 277–278</span></div>
+      <div style="font-size:12px;color:#555;line-height:1.6;">Si la iniciativa surge de un proceso (ventas, manufactura, proyectos), identifica los <strong>puntos palanca</strong>: pasos críticos donde el desempeño falla. Convierte esos puntos en medidas de predicción, no intentes mejorar todo el proceso a la vez.</div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:#444;">
+        <span style="background:var(--orangelight);border:1.5px solid var(--orange);border-radius:8px;padding:4px 10px;font-weight:800;">Paso del proceso</span>
+        <span>→</span>
+        <span style="background:var(--redlight);border:1.5px solid var(--red);border-radius:8px;padding:4px 10px;font-weight:800;">Punto palanca</span>
+        <span>→</span>
+        <span style="background:var(--teallight);border:1.5px solid var(--teal);border-radius:8px;padding:4px 10px;font-weight:800;">Medida de predicción</span>
+        <span>→</span>
+        <span style="background:var(--greenlight);border:1.5px solid var(--green);border-radius:8px;padding:4px 10px;font-weight:800;">Medida histórica (iniciativa)</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== PASO 4: REDACCIÓN FINAL ===== -->
+<div class="stitle">✍️ Paso 4 — Define la Redacción Final</div>
+<div class="card" style="margin-bottom:18px;">
+  <div class="card-title">
+    ✍️ La Fórmula de Redacción + Las Decisiones Clave
+    <span class="cap-tag" style="background:var(--purplelight);color:#6C3483;">Págs. 274–279</span>
+  </div>
+
+  <div class="formula-bar">
+    <div class="fb-part">
+      <div class="fb-lbl" style="color:#69F0AE;">VERBO</div>
+      <div class="fb-sub">acción clara y directa</div>
+    </div>
+    <div class="fb-part">
+      <div class="fb-lbl" style="color:#fff;">+ QUÉ</div>
+      <div class="fb-sub">el comportamiento o resultado</div>
+    </div>
+    <div class="fb-part">
+      <div class="fb-lbl" style="color:var(--yellow);">+ CUÁNTO</div>
+      <div class="fb-sub">estándar cuantitativo</div>
+    </div>
+    <div class="fb-part">
+      <div class="fb-lbl" style="color:#CE93D8;">+ FRECUENCIA</div>
+      <div class="fb-sub">diario o semanal</div>
+    </div>
+  </div>
+
+  <div class="dec-grid">
+    <div class="dec-card dc-teal">
+      <div class="dec-title">👥 ¿Marcador individual o de equipo? <span class="pref">Pág. 274</span></div>
+      <div class="dec-opt"><div class="dec-opt-ico">🔵</div><div><strong>Individual:</strong> Alta rendición de cuentas — todos deben cumplir la cifra. Una sola persona lleva el marcador. Los datos son muy detallados.</div></div>
+      <div class="dec-opt"><div class="dec-opt-ico">🟢</div><div><strong>Equipo:</strong> Los de mejor rendimiento compensan a otros. El equipo gana o pierde como unidad. Mayor flexibilidad táctica.</div></div>
+      <div class="dec-std">🔑 Elige individual para máxima rendición de cuentas; equipo para mayor cohesión</div>
+    </div>
+    <div class="dec-card dc-purple">
+      <div class="dec-title">📅 ¿Medición diaria o semanal? <span class="pref">Pág. 274</span></div>
+      <div class="dec-opt"><div class="dec-opt-ico">🔴</div><div><strong>Diaria:</strong> Máxima rendición de cuentas — mismo desempeño cada día. Los resultados deben verse a diario.</div></div>
+      <div class="dec-opt"><div class="dec-opt-ico">🟣</div><div><strong>Semanal:</strong> Permite variaciones por día. El compromiso es acumular la cifra en la semana. Mayor flexibilidad táctica.</div></div>
+      <div class="dec-std">🔑 Mínimo una actualización por semana para mantener el compromiso</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+    <div style="background:var(--orangelight);border:2px solid var(--orange);border-radius:14px;padding:13px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:#D35400;margin-bottom:7px;">📏 Estándar cuantitativo <span class="pref">Pág. 275</span></div>
+      <div style="font-size:12px;color:#555;line-height:1.6;">"¿Cuánto, con qué frecuencia y con cuánta constancia deberíamos operar?" Elige cifras que representen un <strong>reto real</strong> sin convertirse en un juego imposible de ganar.</div>
+    </div>
+    <div style="background:var(--greenlight);border:2px solid var(--green);border-radius:14px;padding:13px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:#1A8C5B;margin-bottom:7px;">🎖️ Estándar cualitativo <span class="pref">Pág. 275</span></div>
+      <div style="font-size:12px;color:#555;line-height:1.6;">Las más impactantes no solo fijan frecuencia, sino también <strong>nivel de calidad</strong>. Ej: "2 visitas presenciales <em>de alta calidad</em>" — la calidad es parte de la medida.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--teallight);border:2px solid var(--teal);border-radius:14px;padding:14px;margin-bottom:0;">
+    <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:#0077A8;margin-bottom:8px;">✅ Ejemplo final — Equipo de Serena, Hotel <span class="pref">Pág. 279</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:#fff;border-radius:10px;padding:10px;font-size:12.5px;color:#444;line-height:1.6;">
+        🎯 <strong>Iniciativa del equipo:</strong><br>Incrementar ingresos por eventos corporativos de S/22M a S/31M para el 31 de diciembre.
+      </div>
+      <div style="background:#fff;border-radius:10px;padding:10px;font-size:12.5px;color:#444;line-height:1.6;">
+        🏹 <strong>Medida 1:</strong> Llevar a cabo <em>2 visitas presenciales de alta calidad</em>, por empleado, cada semana.<br><br>
+        🍾 <strong>Medida 2:</strong> Convencer a los clientes de adquirir el paquete de barra premium en el <em>90% de los eventos</em>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CASO CASCADA ===== -->
+<div class="stitle">🏨 Caso Completo — Cascada de Iniciativas y Medidas</div>
+<div class="g2">
+
+  <div class="card">
+    <div class="dot-bg">🔗</div>
+    <div class="card-title">
+      🔗 Cascada de Iniciativa a Medidas de Predicción
+      <span class="cap-tag" style="background:var(--skylight);color:#1a60cc;">Cap. 7 págs. 176–180 · Cap. 13 pág. 279</span>
+    </div>
+    <div class="cascade">
+      <div class="cas-item cas-1">
+        <div class="cas-lbl">Iniciativa General</div>
+        <div class="cas-text">Aumentar ganancias totales de S/54M a S/62M para el 31 de diciembre</div>
+      </div>
+      <div class="cas-item cas-2">
+        <div class="cas-lbl">Iniciativa de Equipo</div>
+        <div class="cas-text">Incrementar ingresos por eventos corporativos de S/22M a S/31M para el 31 de diciembre</div>
+      </div>
+      <div class="cas-item cas-3">
+        <div class="cas-lbl">Medida de Predicción 1 — Comportamiento Palanca</div>
+        <div class="cas-text">Llevar a cabo 2 visitas presenciales de alta calidad, por empleado, cada semana</div>
+      </div>
+      <div class="cas-item cas-4">
+        <div class="cas-lbl">Medida de Predicción 2 — Resultado Pequeño</div>
+        <div class="cas-text">Convencer a los clientes de adquirir el paquete de barra premium en el 90% de los eventos</div>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Predictivas</div>
+        <div class="why-desc">Más visitas → más cierres. Más paquetes premium → mayores márgenes.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💪</div>
+        <div class="why-title">Influenciables</div>
+        <div class="why-desc">El equipo de Serena las ejecuta directamente, sin depender de otros equipos.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🔁</div>
+        <div class="why-title">Proceso continuo</div>
+        <div class="why-desc">Son conductas semanales repetibles, no acciones de una sola vez.</div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">👥</div>
+        <div class="why-title">Juego de equipo</div>
+        <div class="why-desc">Todos los miembros participan. No solo Serena, la líder.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ERRORES -->
+  <div class="card">
+    <div class="dot-bg">❌</div>
+    <div class="card-title">
+      ❌ Los 6 Errores Más Frecuentes
+      <span class="cap-tag" style="background:var(--redlight);color:#C0392B;">Págs. 263–279</span>
+    </div>
+
+    <div class="error-card ec1">
+      <div class="error-icon">🌊</div>
+      <div class="error-body">
+        <strong>Confundir batallas clave con medidas de predicción</strong>
+        <span>Las sub-iniciativas (batallas) son medidas históricas intermedias, aunque estén "debajo" de la iniciativa primaria.</span>
+        <div class="error-fix">→ ¿El equipo puede influir en esto HOY?</div>
+      </div>
+    </div>
+
+    <div class="error-card ec2">
+      <div class="error-icon">🌪️</div>
+      <div class="error-body">
+        <strong>Elegir demasiadas medidas de predicción</strong>
+        <span>"Si hay demasiadas medidas, el esfuerzo se disipa." Máximo 2–3 por equipo.</span>
+        <div class="error-fix">→ Menos palancas, más fuerza en cada una</div>
+      </div>
+    </div>
+
+    <div class="error-card ec3">
+      <div class="error-icon">🌸</div>
+      <div class="error-body">
+        <strong>Medidas "flor de un día" — acciones únicas</strong>
+        <span>Capacitaciones puntuales, compras de equipos, inscripciones no generan hábito ni mejora continua.</span>
+        <div class="error-fix">→ Exige comportamientos repetibles semanalmente</div>
+      </div>
+    </div>
+
+    <div class="error-card ec4">
+      <div class="error-icon">👑</div>
+      <div class="error-body">
+        <strong>El juego es solo del líder</strong>
+        <span>Si únicamente el líder puede mover la medida (contratar, autorizar, planificar), el equipo pierde interés.</span>
+        <div class="error-fix">→ Todos deben poder ejecutarla</div>
+      </div>
+    </div>
+
+    <div class="error-card ec5">
+      <div class="error-icon">👁️</div>
+      <div class="error-body">
+        <strong>No medir o medir con rezago</strong>
+        <span>Sin seguimiento semanal visible, la medida se convierte en intención. Necesita ser vista al menos una vez por semana.</span>
+        <div class="error-fix">→ Diseña el sistema de medición al definir la medida</div>
+      </div>
+    </div>
+
+    <div class="error-card ec6">
+      <div class="error-icon">🌫️</div>
+      <div class="error-body">
+        <strong>Redacción vaga sin verbo ni cifra</strong>
+        <span>"Mejorar el servicio" o "ser más proactivos" no son accionables ni medibles. No sirven como palancas.</span>
+        <div class="error-fix">→ Verbo + qué + cuánto + frecuencia. Siempre.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CHECKLIST ===== -->
+<div class="stitle">✅ Checklist de Aprobación Final</div>
+<div class="card" style="margin-bottom:18px;">
+  <div class="card-title">
+    ✅ ¿Tu medida está lista? Marca cada casilla antes de pasar a la Disciplina 3
+    <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 280–281</span>
+  </div>
+  <div class="concepto-box" style="background:var(--greenlight);margin-bottom:16px;">
+    💡 Úsalo con tu equipo. Cada "NO" es un punto de mejora antes de lanzar la medida al tablero de resultados.
+  </div>
+  <div class="chk-grid">
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Las medidas fueron construidas con participación del equipo, no solo del líder</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Tiene impacto predecible y directo sobre la iniciativa del equipo</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>El equipo puede llevarla a cabo sin depender significativamente de otros</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Requiere que todo el equipo participe, no solo el líder o un subgrupo</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>La iniciativa está formulada como: "de X a Y antes del [fecha]"</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Cada medida de predicción comienza con un verbo de acción concreto</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Es un proceso continuo repetible, no una acción de una sola vez</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Tiene un estándar cuantitativo claro (cuánto, con qué frecuencia)</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>Existe o se puede crear un sistema de medición semanal</p>
+    </div>
+    <div class="chk-item" onclick="toggle(this)">
+      <div class="chk-box"></div>
+      <p>El equipo puede enunciarla en una sola oración clara y simple</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div class="footer-l"><strong>4DX Disciplina 2</strong> — Actuar sobre las Medidas de Predicción · Págs. 169–187 y 263–281</div>
+  <div class="footer-pills">
+    <span class="fp">🎯 2 Tipos</span>
+    <span class="fp">🪜 4 Pasos</span>
+    <span class="fp">🔬 6 Criterios</span>
+    <span class="fp">❌ 6 Errores</span>
+    <span class="fp">✅ Checklist</span>
+  </div>
+</div>
+
+<script>
+function toggle(el) {
+  const box = el.querySelector('.chk-box');
+  const checked = el.dataset.checked === '1';
+  el.dataset.checked = checked ? '0' : '1';
+  if (!checked) {
+    box.innerHTML = '✓';
+    box.style.background = '#27AE60';
+    box.style.borderColor = '#1A8C5B';
+    box.style.color = '#fff';
+    box.style.fontWeight = '900';
+    el.style.opacity = '.72';
+  } else {
+    box.innerHTML = '';
+    box.style.background = '#fff';
+    box.style.borderColor = '#00B4D8';
+    el.style.opacity = '1';
+  }
+}
+</script>
+</body>
+</html>
