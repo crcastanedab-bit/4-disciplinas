@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4DX — Caps. 7, 8 y 9 · Iniciativa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap');
+:root {
+  --bg:#F5F9FF;
+  --dark:#1E2A38;
+  --navy:#1B3A6B;
+  --sky:#74B9FF;
+  --skylight:#EAF4FF;
+  --teal:#00B4D8;
+  --teallight:#E0F7FF;
+  --green:#27AE60;
+  --greenlight:#E8F8EF;
+  --yellow:#FFD93D;
+  --orange:#F0932B;
+  --orangelight:#FFF3E0;
+  --red:#EB4D4B;
+  --redlight:#FFE9E9;
+  --purple:#9B59B6;
+  --purplelight:#F5EEFF;
+  --pink:#E84393;
+  --pinklight:#FFF0F8;
+  --white:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg);
+  font-family:'Nunito',sans-serif;
+  color:var(--dark);
+  padding:22px;
+  background-image:
+    radial-gradient(circle at 5% 10%,rgba(0,180,216,0.08) 0%,transparent 40%),
+    radial-gradient(circle at 95% 90%,rgba(39,174,96,0.07) 0%,transparent 40%);
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);
+  border-radius:28px;padding:26px 32px;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:20px;
+  box-shadow:0 8px 28px rgba(10,22,40,0.3);
+  position:relative;overflow:hidden;
+}
+.header::after{content:'🎯';position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:90px;opacity:0.08;}
+.header-emoji{font-size:68px;}
+.header-text h1{font-family:'Fredoka One',sans-serif;font-size:34px;color:var(--yellow);line-height:1.1;}
+.header-sub{font-size:17px;color:var(--yellow);font-weight:900;margin-top:4px;}
+.header-text p{font-size:13px;color:rgba(255,255,255,0.72);margin-top:4px;font-weight:700;}
+.header-pills{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;max-width:300px;justify-content:flex-end;}
+.hpill{background:rgba(255,255,255,0.13);color:#fff;font-size:12px;font-weight:800;padding:6px 13px;border-radius:22px;}
+
+/* CAP BANNERS */
+.cap-banners{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.cap-card{border-radius:22px;padding:18px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+.cc7{background:linear-gradient(135deg,#E8F0FE 0%,#C5D8FF 100%);border:3px solid var(--sky);}
+.cc8{background:linear-gradient(135deg,#E8F8EF 0%,#B8EFC8 100%);border:3px solid var(--green);}
+.cc9{background:linear-gradient(135deg,#FFF3E0 0%,#FFD6A5 100%);border:3px solid var(--orange);}
+.cap-art{font-size:52px;flex-shrink:0;}
+.cap-num{font-family:'Fredoka One',sans-serif;font-size:13px;padding:3px 12px;border-radius:12px;display:inline-block;margin-bottom:6px;color:#fff;}
+.cc7 .cap-num{background:var(--sky);color:var(--dark);}
+.cc8 .cap-num{background:var(--green);}
+.cc9 .cap-num{background:var(--orange);}
+.cap-title{font-family:'Fredoka One',sans-serif;font-size:18px;margin-bottom:5px;}
+.cc7 .cap-title{color:#1a60cc;}
+.cc8 .cap-title{color:#1A8C5B;}
+.cc9 .cap-title{color:#D35400;}
+.cap-desc{font-size:13px;color:#555;line-height:1.5;}
+.cap-page{font-size:11px;color:#999;font-weight:800;margin-top:5px;}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px;}
+
+/* CARD */
+.card{background:var(--white);border-radius:24px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,0.07);position:relative;overflow:hidden;}
+.card-title{font-family:'Fredoka One',sans-serif;font-size:18px;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--dark);}
+.cap-tag{margin-left:auto;font-size:11px;font-weight:900;padding:4px 11px;border-radius:12px;white-space:nowrap;}
+.dot-bg{position:absolute;top:8px;right:14px;font-size:34px;opacity:0.07;}
+
+/* PREF */
+.pref{display:inline-block;background:#F0F0F0;color:#888;font-size:10px;font-weight:900;padding:2px 8px;border-radius:8px;margin-left:5px;}
+
+/* STITLE */
+.stitle{font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--dark);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* REGLAS */
+.regla{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:13px;margin-bottom:10px;background:var(--skylight);border-left:4px solid var(--sky);}
+.regla.g{background:var(--greenlight);border-left-color:var(--green);}
+.regla.o{background:var(--orangelight);border-left-color:var(--orange);}
+.regla.p{background:var(--purplelight);border-left-color:var(--purple);}
+.regla-num{width:34px;height:34px;border-radius:50%;background:var(--sky);color:var(--dark);font-family:'Fredoka One',sans-serif;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.regla.g .regla-num{background:var(--green);color:#fff;}
+.regla.o .regla-num{background:var(--orange);color:#fff;}
+.regla.p .regla-num{background:var(--purple);color:#fff;}
+.regla-body strong{font-size:14px;color:var(--dark);display:block;margin-bottom:3px;}
+.regla-body span{font-size:12.5px;color:#555;line-height:1.5;}
+
+/* TIPOS ESTRUCTURA */
+.tipo{border-radius:16px;padding:13px;margin-bottom:10px;border-left:4px solid var(--sky);}
+.tipo.a{background:var(--skylight);border-left-color:var(--sky);}
+.tipo.b{background:var(--teallight);border-left-color:var(--teal);}
+.tipo.c{background:var(--greenlight);border-left-color:var(--green);}
+.tipo-icon{font-size:22px;margin-bottom:5px;}
+.tipo-title{font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--dark);margin-bottom:5px;}
+.tipo-desc{font-size:12.5px;color:#555;line-height:1.5;margin-bottom:6px;}
+.tipo-ej{font-size:12px;color:#888;font-style:italic;}
+
+/* CASCADA */
+.cascada{display:flex;flex-direction:column;align-items:center;gap:4px;margin:14px 0;}
+.cas-row{display:flex;gap:8px;justify-content:center;width:100%;}
+.cas-box{padding:10px 14px;border-radius:12px;text-align:center;font-size:12px;font-weight:700;line-height:1.4;}
+.cas-arrow{text-align:center;color:#ccc;font-size:18px;line-height:1.2;}
+.cas-top{background:var(--teallight);border:2px solid var(--teal);color:#0077A8;min-width:220px;}
+.cas-mid{background:var(--skylight);border:2px solid var(--sky);color:#1a60cc;flex:1;}
+.cas-bot{background:var(--greenlight);border:2px solid var(--green);color:#1A8C5B;flex:1;font-size:11px;}
+
+/* MENTALIDADES */
+.ment-card{border-radius:18px;padding:15px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;}
+.mt{background:var(--skylight);border-left:5px solid var(--sky);}
+.mc{background:var(--greenlight);border-left:5px solid var(--green);}
+.mi{background:var(--orangelight);border-left:5px solid var(--orange);}
+.ment-icon{font-size:36px;flex-shrink:0;}
+.ment-body strong{font-size:14px;color:var(--dark);display:block;margin-bottom:4px;}
+.ment-body span{font-size:12.5px;color:#555;line-height:1.5;}
+.ment-tip{display:inline-block;font-size:11px;font-weight:900;padding:3px 10px;border-radius:10px;margin-top:6px;}
+.mt .ment-tip{background:var(--sky);color:var(--dark);}
+.mc .ment-tip{background:var(--green);color:#fff;}
+.mi .ment-tip{background:var(--orange);color:#fff;}
+
+/* 5 PASOS */
+.paso{display:flex;gap:12px;align-items:flex-start;border-radius:16px;padding:13px;margin-bottom:10px;}
+.ps1{background:var(--skylight);border-left:4px solid var(--sky);}
+.ps2{background:#E8F4FE;border-left:4px solid #5B9BD5;}
+.ps3{background:var(--greenlight);border-left:4px solid var(--green);}
+.ps4{background:var(--orangelight);border-left:4px solid var(--orange);}
+.ps5{background:var(--purplelight);border-left:4px solid var(--purple);}
+.paso-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',sans-serif;font-size:19px;color:#fff;flex-shrink:0;}
+.pn1{background:var(--sky);color:var(--dark);}
+.pn2{background:#5B9BD5;}
+.pn3{background:var(--green);}
+.pn4{background:var(--orange);}
+.pn5{background:var(--purple);}
+.paso-body strong{font-size:14px;color:var(--dark);display:block;margin-bottom:3px;}
+.paso-body span{font-size:12.5px;color:#555;line-height:1.5;}
+
+/* CASOS */
+.caso{border-radius:18px;padding:15px;margin-bottom:10px;}
+.ca{background:var(--greenlight);border-left:5px solid var(--green);}
+.cb{background:var(--teallight);border-left:5px solid var(--teal);}
+.cc{background:var(--skylight);border-left:5px solid var(--sky);}
+.cd{background:var(--orangelight);border-left:5px solid var(--orange);}
+.caso-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.caso-emoji{font-size:28px;}
+.caso-name{font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--dark);}
+.caso-page{font-size:11px;color:#aaa;font-weight:800;margin-left:auto;}
+.caso-body{font-size:12.5px;color:#444;line-height:1.6;}
+.caso-win{display:inline-block;background:var(--greenlight);color:#1A8C5B;font-size:11px;font-weight:900;padding:4px 12px;border-radius:12px;margin-top:8px;border:1px solid var(--green);}
+
+/* TRAMPA */
+.trampa{border-radius:14px;padding:11px;margin-bottom:10px;background:var(--redlight);border-left:4px solid var(--red);display:flex;gap:10px;align-items:flex-start;}
+.trampa-icon{font-size:24px;flex-shrink:0;}
+.trampa-body strong{font-size:13px;color:#C0392B;display:block;margin-bottom:3px;}
+.trampa-body span{font-size:12px;color:#555;line-height:1.5;}
+
+/* SITUACIONES PROYECTOS */
+.sit-card{border-radius:18px;padding:15px;margin-bottom:10px;}
+.sit1{background:var(--teallight);border:2px solid var(--teal);}
+.sit2{background:#FFF3E0;border:2px solid var(--orange);}
+.sit-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.sit-icon{font-size:30px;}
+.sit-name{font-family:'Fredoka One',sans-serif;font-size:15px;color:var(--dark);}
+.sit-page{font-size:11px;color:#aaa;font-weight:800;margin-left:auto;}
+.sit-body{font-size:12.5px;color:#444;line-height:1.6;}
+.sit-win{display:inline-block;background:var(--greenlight);color:#1A8C5B;font-size:11px;font-weight:900;padding:4px 12px;border-radius:12px;margin-top:8px;border:1px solid var(--green);}
+
+/* DISCIPLINAS EN PROYECTOS */
+.d4-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+.d4-card{border-radius:16px;padding:13px;}
+.d41{background:var(--teallight);border-left:4px solid var(--teal);}
+.d42{background:var(--skylight);border-left:4px solid var(--sky);}
+.d43{background:var(--orangelight);border-left:4px solid var(--orange);}
+.d44{background:var(--purplelight);border-left:4px solid var(--purple);}
+.d4-tag{font-family:'Fredoka One',sans-serif;font-size:13px;margin-bottom:5px;}
+.d41 .d4-tag{color:#0077A8;}
+.d42 .d4-tag{color:#1a60cc;}
+.d43 .d4-tag{color:#D35400;}
+.d44 .d4-tag{color:#7D3C98;}
+.d4-body{font-size:12.5px;color:#444;line-height:1.55;}
+
+/* QUOTE */
+.quote{background:var(--skylight);border-left:5px solid var(--sky);border-radius:0 16px 16px 0;padding:12px 16px;margin-top:12px;display:flex;gap:10px;align-items:flex-start;}
+.quote.green{background:var(--greenlight);border-left-color:var(--green);}
+.quote.orange{background:var(--orangelight);border-left-color:var(--orange);}
+.quote.yellow{background:#FFFDE7;border-left-color:var(--yellow);}
+.quote.purple{background:var(--purplelight);border-left-color:var(--purple);}
+.quote-e{font-size:26px;flex-shrink:0;}
+.quote-t{font-size:13px;color:var(--dark);line-height:1.55;font-style:italic;font-weight:700;}
+
+/* STATS */
+.stats-row{display:flex;gap:10px;margin-top:10px;}
+.stat-box{flex:1;background:var(--greenlight);border:2px solid var(--green);border-radius:16px;padding:13px;text-align:center;}
+.stat-box.blue{background:var(--skylight);border-color:var(--sky);}
+.stat-box.orange{background:var(--orangelight);border-color:var(--orange);}
+.stat-num{font-family:'Fredoka One',sans-serif;font-size:26px;color:#1A8C5B;line-height:1;margin-bottom:4px;}
+.stat-box.blue .stat-num{color:#1a60cc;}
+.stat-box.orange .stat-num{color:#D35400;}
+.stat-label{font-size:11px;color:#555;line-height:1.4;}
+
+/* APOLO */
+.apolo-box{background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);border-radius:20px;padding:17px 22px;margin-top:14px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 4px 14px rgba(10,22,40,0.25);}
+.apolo-icon{font-size:52px;flex-shrink:0;}
+.apolo-title{font-family:'Fredoka One',sans-serif;font-size:17px;color:var(--yellow);margin-bottom:6px;}
+.apolo-desc{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.55;}
+
+/* FLUJO DECISIONES */
+.flujo{display:flex;align-items:stretch;gap:6px;margin:14px 0;flex-wrap:wrap;}
+.flujo-box{border-radius:14px;padding:12px 14px;text-align:center;flex:1;}
+.fb-a{background:var(--skylight);border:2px solid var(--sky);}
+.fb-b{background:var(--greenlight);border:2px solid var(--green);}
+.flujo-arr{font-size:20px;color:#ccc;font-weight:900;flex-shrink:0;display:flex;align-items:center;}
+.flujo-box .ft{font-family:'Fredoka One',sans-serif;font-size:13px;margin-bottom:4px;}
+.fb-a .ft{color:#1a60cc;}
+.fb-b .ft{color:#1A8C5B;}
+.flujo-box .fd{font-size:11.5px;color:#555;line-height:1.4;}
+
+/* HITOS */
+.hito-list{background:var(--skylight);border-radius:12px;padding:11px 14px;margin-bottom:10px;font-size:12px;color:#444;line-height:2.0;}
+
+/* INSIGHT BOX */
+.insight{border-radius:12px;padding:11px 14px;display:flex;gap:9px;align-items:flex-start;font-size:12.5px;line-height:1.55;margin-top:8px;}
+.insight-ico{font-size:18px;flex-shrink:0;}
+
+/* FOOTER */
+.footer{background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);border-radius:24px;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;margin-top:4px;box-shadow:0 4px 16px rgba(10,22,40,0.25);}
+.footer-l{font-size:13px;color:rgba(255,255,255,0.65);}
+.footer-l strong{color:var(--yellow);}
+.footer-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.fp{background:rgba(255,255,255,0.13);color:#fff;font-size:12px;font-weight:800;padding:5px 13px;border-radius:22px;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-emoji">🏆</div>
+  <div class="header-text">
+    <h1>4DX — Capítulos 7, 8 y 9</h1>
+    <div class="header-sub">➜ Cascada de Iniciativas · Líderes al Tren · Proyectos 4DX</div>
+    <p>📘 Págs. 153–210 · Resumen Visual para Líderes y Jefaturas · PRECOTEX</p>
+  </div>
+  <div class="header-pills">
+    <span class="hpill">🗺️ Cascada de Iniciativas</span>
+    <span class="hpill">🧠 3 Mentalidades</span>
+    <span class="hpill">🪜 5 Pasos</span>
+    <span class="hpill">🏗️ Proyectos 4DX</span>
+    <span class="hpill">🤝 Compromiso Voluntario</span>
+  </div>
+</div>
+
+<!-- BANNERS CAP -->
+<div class="cap-banners">
+  <div class="cap-card cc7">
+    <div class="cap-art">🗺️</div>
+    <div>
+      <span class="cap-num">Capítulo 7</span>
+      <div class="cap-title">Traducir el Enfoque a Iniciativas Ejecutables</div>
+      <div class="cap-desc">La cascada de iniciativas, las 4 reglas del líder de líderes, los 3 enfoques organizacionales y 3 casos reales.</div>
+      <div class="cap-page">📖 Págs. 153–188</div>
+    </div>
+  </div>
+  <div class="cap-card cc8">
+    <div class="cap-art">🚂</div>
+    <div>
+      <span class="cap-num">Capítulo 8</span>
+      <div class="cap-title">Lograr que tus Líderes se Suban al Tren</div>
+      <div class="cap-desc">Las 3 mentalidades esenciales y los 5 pasos para alinear y comprometer a todo el equipo de liderazgo.</div>
+      <div class="cap-page">📖 Págs. 189–200</div>
+    </div>
+  </div>
+  <div class="cap-card cc9">
+    <div class="cap-art">🏗️</div>
+    <div>
+      <span class="cap-num">Capítulo 9</span>
+      <div class="cap-title">Ejecución de Proyectos con las 4DX</div>
+      <div class="cap-desc">Las 2 situaciones, cómo aplicar las 4 disciplinas en proyectos y el caso Mountain Land.</div>
+      <div class="cap-page">📖 Págs. 201–210</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CAP 7 ===== -->
+<div class="stitle">🗺️ Cap. 7 — Traducir el Enfoque Organizacional a Iniciativas Ejecutables</div>
+
+<div class="g2">
+
+  <!-- 4 REGLAS -->
+  <div class="card">
+    <div class="dot-bg">📏</div>
+    <div class="card-title">
+      📏 Las 4 Reglas del Líder de Líderes
+      <span class="cap-tag" style="background:var(--skylight);color:#1a60cc;">Págs. 169–172</span>
+    </div>
+    <div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:14px;background:var(--skylight);border-radius:12px;padding:11px 14px;">
+      💡 Estas reglas responden la pregunta más difícil del líder de líderes: <em>"¿Cuántas iniciativas debo crear y cómo las organizo en toda la organización?"</em>
+    </div>
+    <div class="regla">
+      <div class="regla-num">1</div>
+      <div class="regla-body">
+        <strong>🧠 Nadie en más de 2 iniciativas a la vez <span class="pref">Pág. 170</span></strong>
+        <span>El torbellino ya consume el 80% de la energía. Más iniciativas = equipo disperso, sin resultados. <em>La concentración es la primera disciplina del líder.</em></span>
+      </div>
+    </div>
+    <div class="regla g">
+      <div class="regla-num">2</div>
+      <div class="regla-body">
+        <strong>⚔️ Las batallas deben ganar la guerra <span class="pref">Pág. 170</span></strong>
+        <span>La iniciativa de cada equipo no solo debe apoyar la primaria — debe <strong>GARANTIZAR</strong> su éxito. Pregunta clave: ¿cuál es la <em>menor</em> cantidad de batallas necesarias para ganar?</span>
+      </div>
+    </div>
+    <div class="regla o">
+      <div class="regla-num">3</div>
+      <div class="regla-body">
+        <strong>🤝 El líder veta, pero NO impone <span class="pref">Pág. 171</span></strong>
+        <span>Los líderes de primera línea eligen la iniciativa de su equipo. El líder de líderes puede rechazarla si no contribuye, pero jamás debe imponer ni revelar su preferencia personal.</span>
+      </div>
+    </div>
+    <div class="regla p">
+      <div class="regla-num">4</div>
+      <div class="regla-body">
+        <strong>📐 Toda iniciativa: de X a Y antes del [fecha] <span class="pref">Pág. 171</span></strong>
+        <span>Sin punto de partida, meta concreta y fecha límite no hay línea de llegada, no hay marcador y nadie sabe si está ganando o perdiendo.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 ENFOQUES -->
+  <div class="card">
+    <div class="dot-bg">🏗️</div>
+    <div class="card-title">
+      🏗️ Las 3 Formas de Estructurar las Iniciativas
+      <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 172–175</span>
+    </div>
+    <div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:14px;background:var(--greenlight);border-radius:12px;padding:11px 14px;">
+      💡 No existe una única forma correcta. La estructura depende del tipo de organización, su tamaño y el nivel de autonomía por equipo.
+    </div>
+    <div class="tipo a">
+      <div class="tipo-icon">🎯</div>
+      <div class="tipo-title">A — Una Sola Iniciativa Primaria <span class="pref">Pág. 172</span></div>
+      <div class="tipo-desc">Toda la organización apunta al mismo blanco. Los equipos crean sus propias batallas para contribuir. Genera efecto dominó: una iniciativa bien elegida mejora múltiples métricas.</div>
+      <div class="tipo-ej">🔑 Ideal cuando hay UN problema crítico que, si se resuelve, arrastra todo lo demás.</div>
+    </div>
+    <div class="tipo b">
+      <div class="tipo-icon">⚔️</div>
+      <div class="tipo-title">B — Varias Iniciativas Críticas Simultáneas <span class="pref">Pág. 173</span></div>
+      <div class="tipo-desc">La estrategia requiere cambios en áreas distintas al mismo tiempo. Cada equipo se alinea a la iniciativa donde más puede impactar, distribuyendo la "divisa del cambio de comportamiento".</div>
+      <div class="tipo-ej">🔑 Ideal cuando hay dos frentes igualmente urgentes que no pueden esperar uno al otro.</div>
+    </div>
+    <div class="tipo c" style="margin-bottom:0;">
+      <div class="tipo-icon">🧩</div>
+      <div class="tipo-title">C — Autonomía por Equipo <span class="pref">Pág. 174</span></div>
+      <div class="tipo-desc">Cada equipo elige su propia iniciativa siempre que se alinee con una estrategia corporativa definida. Genera el mayor nivel de apropiación y compromiso real. Funciona en franquicias y unidades con alta independencia operativa.</div>
+      <div class="tipo-ej">🔑 Ideal en organizaciones grandes con equipos distribuidos que necesitan flexibilidad local.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CASCADA VISUAL -->
+<div class="card" style="margin-bottom:18px;">
+  <div class="card-title">
+    🔽 La Cascada de Iniciativas — De la Estrategia al Equipo de Primera Línea
+    <span class="cap-tag" style="background:var(--teallight);color:#0077A8;">Págs. 171–175</span>
+  </div>
+  <div style="font-size:13px;color:#555;margin-bottom:14px;background:var(--teallight);border-radius:12px;padding:11px 14px;">
+    💡 La traducción fluye <strong>de arriba hacia abajo</strong> para la iniciativa primaria y las batallas clave. La elección de la iniciativa de equipo fluye <strong>de abajo hacia arriba</strong>: los líderes de primera línea eligen, los líderes de líderes validan.
+  </div>
+  <div class="cascada">
+    <div class="cas-row">
+      <div class="cas-box cas-top" style="min-width:280px;">🏆 Iniciativa Primaria<br><span style="font-size:11px;font-weight:400;">"De X a Y antes del [fecha]" — elegida por líderes de líderes</span></div>
+    </div>
+    <div class="cas-arrow">↓ &nbsp;↓ &nbsp;↓</div>
+    <div class="cas-row">
+      <div class="cas-box cas-mid">⚔️ Batalla Clave 1<br><span style="font-size:10px;font-weight:400;">Sub-iniciativa</span></div>
+      <div class="cas-box cas-mid">⚔️ Batalla Clave 2<br><span style="font-size:10px;font-weight:400;">Sub-iniciativa</span></div>
+      <div class="cas-box cas-mid">⚔️ Batalla Clave 3<br><span style="font-size:10px;font-weight:400;">Sub-iniciativa</span></div>
+    </div>
+    <div class="cas-arrow">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+    <div class="cas-row" style="gap:6px;">
+      <div class="cas-box cas-bot">Iniciativa<br>Equipo A</div>
+      <div class="cas-box cas-bot">Iniciativa<br>Equipo B</div>
+      <div class="cas-box cas-bot">Iniciativa<br>Equipo C</div>
+      <div class="cas-box cas-bot">Iniciativa<br>Equipo D</div>
+      <div class="cas-box cas-bot">Iniciativa<br>Equipo E</div>
+      <div class="cas-box cas-bot">Iniciativa<br>Equipo F</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+    <div style="background:var(--skylight);border-radius:12px;padding:11px;font-size:12px;color:#444;line-height:1.6;">
+      <strong style="color:#1a60cc;">⬆️ De Arriba Abajo</strong><br>
+      Iniciativa primaria y batallas: <strong>líderes de líderes deciden</strong>. Los de primera línea dan retroalimentación y asesoran — pero no votan.
+    </div>
+    <div style="background:var(--greenlight);border-radius:12px;padding:11px;font-size:12px;color:#444;line-height:1.6;">
+      <strong style="color:#1A8C5B;">⬇️ De Abajo Arriba</strong><br>
+      Iniciativa de equipo: <strong>líderes de primera línea eligen</strong>. El líder puede vetar si no se alinea. Jamás impone su preferencia personal.
+    </div>
+  </div>
+</div>
+
+<!-- 3 CASOS REALES -->
+<div class="stitle">🏆 Cap. 7 — Los 3 Casos Reales: Reglas y Enfoques en Acción</div>
+<div class="g3">
+
+  <!-- OPRYLAND -->
+  <div class="card">
+    <div class="dot-bg">🏨</div>
+    <div class="card-title">
+      🏨 Hotel Opryland — Enfoque A
+      <span class="cap-tag" style="background:var(--skylight);color:#1a60cc;">Págs. 170–178</span>
+    </div>
+    <div style="font-size:12px;color:#888;margin-bottom:10px;font-weight:700;">📌 Regla 2 aplicada: "menor cantidad de batallas para ganar la guerra"</div>
+    <div class="caso ca">
+      <div class="caso-head"><div class="caso-emoji">🎯</div><div class="caso-name">Iniciativa Primaria</div></div>
+      <div class="caso-body">Top Box satisfacción huéspedes: <strong>de 42% → 55%</strong> antes del 31/12<br><em>Empezaron con 17 batallas candidatas. Eligieron solo 3.</em></div>
+    </div>
+    <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--dark);margin:10px 0 8px;">⚔️ Las 3 Batallas (de 17 candidatas)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:10px;">
+      <div style="background:#FFF3E0;border:2px solid var(--orange);border-radius:12px;padding:9px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">✈️</div>
+        <div style="font-family:'Fredoka One',sans-serif;font-size:11px;color:#D35400;">Experiencia de llegada</div>
+      </div>
+      <div style="background:var(--teallight);border:2px solid var(--teal);border-radius:12px;padding:9px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🔧</div>
+        <div style="font-family:'Fredoka One',sans-serif;font-size:11px;color:#0077A8;">Resolución de problemas</div>
+      </div>
+      <div style="background:var(--greenlight);border:2px solid var(--green);border-radius:12px;padding:9px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:4px;">🍽️</div>
+        <div style="font-family:'Fredoka One',sans-serif;font-size:11px;color:#1A8C5B;">Calidad A&B</div>
+      </div>
+    </div>
+    <div class="caso cb">
+      <div class="caso-head"><div class="caso-emoji">🛎️</div><div class="caso-name">Regla 3 en acción: Equipo de Botones</div><div class="caso-page">Pág. 176</div></div>
+      <div class="caso-body">Eligieron su propia iniciativa: tiempo de entrega de equipaje <strong>de 106 → 20 min</strong>. Nadie se los pidió. El líder no impuso. Lo eligieron solos.</div>
+      <span class="caso-win">🏆 Llegaron a 12 min. Superaron su propia meta. Hotel: 42 → 61%</span>
+    </div>
+  </div>
+
+  <!-- GRAN MINORISTA -->
+  <div class="card">
+    <div class="dot-bg">🛒</div>
+    <div class="card-title">
+      🛒 Gran Minorista — Enfoque A con Autonomía
+      <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 179–183</span>
+    </div>
+    <div style="font-size:12px;color:#888;margin-bottom:10px;font-weight:700;">📌 Regla 3 aplicada: cada tienda eligió su propia versión X → Y</div>
+    <div class="caso ca">
+      <div class="caso-head"><div class="caso-emoji">🎯</div><div class="caso-name">Iniciativa Primaria</div></div>
+      <div class="caso-body">Probabilidad de recomendación: <strong>de 74% → 78%</strong><br><em>La misma para todas las tiendas. La forma de llegar: diferente en cada una.</em></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;margin:10px 0;">
+      <div style="background:var(--skylight);border-left:4px solid var(--sky);border-radius:0 10px 10px 0;padding:8px 12px;font-size:12px;color:#444;">👋 <strong style="color:#1a60cc;">Interacción con clientes</strong> — contacto visual, saludo, ayuda proactiva</div>
+      <div style="background:var(--teallight);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:8px 12px;font-size:12px;color:#444;">📦 <strong style="color:#0077A8;">Productos agotados</strong> — reducir estantes vacíos</div>
+      <div style="background:var(--greenlight);border-left:4px solid var(--green);border-radius:0 10px 10px 0;padding:8px 12px;font-size:12px;color:#444;">💳 <strong style="color:#1A8C5B;">Velocidad de pago</strong> — tiempo de espera en caja</div>
+    </div>
+    <div style="background:#FFFDE7;border:2px solid var(--yellow);border-radius:12px;padding:11px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:13px;color:#E67E00;margin-bottom:4px;">🔑 Lección de la Regla 3</div>
+      <div style="font-size:12px;color:#555;line-height:1.5;">Cada tienda personalizó su meta X→Y y eligió sus medidas de predicción. El corporativo fijó el blanco; los equipos eligieron cómo llegar. Nadie fue obligado a replicar las acciones de otra tienda.</div>
+    </div>
+  </div>
+
+  <!-- DESPACHO FISCAL -->
+  <div class="card">
+    <div class="dot-bg">🏦</div>
+    <div class="card-title">
+      🏦 Despacho Fiscal — La Trampa Corregida
+      <span class="cap-tag" style="background:var(--orangelight);color:#D35400;">Págs. 184–188</span>
+    </div>
+    <div style="font-size:12px;color:#888;margin-bottom:10px;font-weight:700;">📌 Regla 4 aplicada: iniciativa demasiado amplia → palanca específica con X→Y</div>
+    <div class="trampa">
+      <div class="trampa-icon">🌊</div>
+      <div class="trampa-body">
+        <strong>Iniciativa inválida — Era el torbellino completo</strong>
+        <span>"Aumentar ingresos totales del despacho" — abarcaba todo. Sin cambio de comportamiento real, sin palanca específica.</span>
+      </div>
+    </div>
+    <div class="caso ca" style="margin-top:10px;margin-bottom:10px;">
+      <div class="caso-head"><div class="caso-emoji">✅</div><div class="caso-name">Iniciativa Corregida</div></div>
+      <div class="caso-body">"Aumentar ingresos por servicios de <strong>consultoría</strong> de X a Y antes del 31/12"<br><br>Exigía un cambio real: pasar de solo hacer impuestos a vender asesoría estratégica a los mismos clientes.</div>
+      <span class="caso-win">✅ Cerraron el 15% de brecha postergada 3 años</span>
+    </div>
+    <div style="background:#FFFDE7;border:2px solid var(--yellow);border-radius:12px;padding:11px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:13px;color:#E67E00;margin-bottom:4px;">💡 La lección más contraintuitiva <span class="pref">Pág. 187</span></div>
+      <div style="font-size:12px;color:#555;line-height:1.5;">A veces la decisión más estratégica es elegir una iniciativa <strong>MÁS PEQUEÑA y específica</strong>, no la más grande. "Hagan todo y háganlo más rápido" es lo opuesto a la Disciplina 1.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CAP 8 ===== -->
+<div class="stitle">🚂 Cap. 8 — Lograr que tus Líderes se Suban al Tren</div>
+
+<div class="g2">
+
+  <!-- 3 MENTALIDADES -->
+  <div class="card">
+    <div class="dot-bg">🧠</div>
+    <div class="card-title">
+      🧠 Las 3 Mentalidades — ¿Qué son y por qué importan?
+      <span class="cap-tag" style="background:var(--skylight);color:#1a60cc;">Págs. 190–194</span>
+    </div>
+    <div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:14px;background:var(--skylight);border-radius:12px;padding:11px 14px;">
+      💡 Antes de definir iniciativas en todos los niveles, el líder de líderes necesita adoptar 3 mentalidades. Sin ellas, el proceso se convierte en <em>imposición disfrazada de participación</em>.
+    </div>
+
+    <div class="ment-card mt">
+      <div class="ment-icon">🔍</div>
+      <div class="ment-body">
+        <strong>1. Mentalidad de Transparencia <span class="pref">Pág. 190</span></strong>
+        <span>Compartir abiertamente la versión <em>preliminar</em> de la iniciativa — no como verdad absoluta sino como punto de partida. Incluir opciones descartadas, preocupaciones pendientes y preguntas sin responder. La transparencia genera confianza más rápido que cualquier argumento.</span>
+        <div class="ment-tip">🔑 "No permitas que tu gran deseo de unidad se convierta en apoyo forzado."</div>
+      </div>
+    </div>
+    <div class="ment-card mc">
+      <div class="ment-icon">👂</div>
+      <div class="ment-body">
+        <strong>2. Mentalidad Comprensiva <span class="pref">Pág. 191</span></strong>
+        <span>La clave de la influencia está en <em>primero dejarse influir</em>. Entender de verdad las ideas y preocupaciones antes de tomar la decisión final. Se puede entender algo aunque no se esté de acuerdo. Lo que más necesita el alma humana es ser comprendida.</span>
+        <div class="ment-tip">🔑 "Repite la retroalimentación antes de responderla — garantiza que fue escuchada."</div>
+      </div>
+    </div>
+    <div class="ment-card mi">
+      <div class="ment-icon">🤝</div>
+      <div class="ment-body">
+        <strong>3. Mentalidad de Involucramiento <span class="pref">Pág. 192</span></strong>
+        <span>Los líderes de primera línea <em>asesoran</em> sobre la iniciativa primaria y <em>eligen</em> la iniciativa de su equipo. El líder puede vetar, nunca imponer. Donde antes había hostilidad, aparece el compromiso voluntario más poderoso de todos.</span>
+        <div class="ment-tip">🔑 "La gente debe expresar su verdad, pero no tiene que hacer su voluntad."</div>
+      </div>
+    </div>
+
+    <div style="background:var(--greenlight);border-radius:12px;padding:12px;margin-top:4px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:#1A8C5B;margin-bottom:7px;">📊 ¿Quién decide qué? <span class="pref">Pág. 193</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#fff;border-radius:10px;padding:10px;font-size:12px;color:#444;line-height:1.6;">
+          <strong style="color:#1a60cc;">⬆️ De Arriba Abajo</strong><br>
+          Iniciativa primaria y batallas: los <strong>líderes de líderes deciden</strong>. Los de primera línea asesoran y retroalimentan.
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:10px;font-size:12px;color:#444;line-height:1.6;">
+          <strong style="color:#1A8C5B;">⬇️ De Abajo Arriba</strong><br>
+          Iniciativa de equipo: los <strong>líderes de primera línea eligen</strong>. El líder puede vetar. Jamás impone.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 PASOS -->
+  <div class="card">
+    <div class="dot-bg">🪜</div>
+    <div class="card-title">
+      🪜 Los 5 Pasos para Definir Iniciativas en Todos los Niveles
+      <span class="cap-tag" style="background:var(--greenlight);color:#1A8C5B;">Págs. 194–199</span>
+    </div>
+    <div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:14px;background:var(--greenlight);border-radius:12px;padding:11px 14px;">
+      💡 Estos 5 pasos son la aplicación práctica de las 3 mentalidades. Pueden ocurrir en una sola reunión o en varias sesiones. Lo crucial es seguirlos en orden y no saltarse ninguno.
+    </div>
+
+    <div class="paso ps1">
+      <div class="paso-num pn1">1</div>
+      <div class="paso-body">
+        <strong>Asegurar el entendimiento <span class="pref">Pág. 195</span></strong>
+        <span>Compartir la iniciativa primaria y las batallas clave: cómo y por qué fueron elegidas. <em>El entendimiento debe preceder a la acción.</em> Que algo no sea iniciativa no significa que no sea importante.</span>
+      </div>
+    </div>
+    <div class="paso ps2">
+      <div class="paso-num pn2">2</div>
+      <div class="paso-body">
+        <strong>Responder preguntas esclarecedoras <span class="pref">Pág. 195</span></strong>
+        <span>Solo preguntas — todavía NO retroalimentación. A mayor claridad, menor resistencia después. Cada pregunta revela un punto de posible confusión que, si se ignora, generará fricción más adelante.</span>
+      </div>
+    </div>
+    <div class="paso ps3">
+      <div class="paso-num pn3">3</div>
+      <div class="paso-body">
+        <strong>Aceptar la retroalimentación <span class="pref">Pág. 196</span></strong>
+        <span>Grupos pequeños comparten retroalimentación. El líder escucha y entiende — no debate. Repetir la retroalimentación antes de responder garantiza que fue escuchada con respeto genuino.</span>
+      </div>
+    </div>
+    <div class="paso ps4">
+      <div class="paso-num pn4">4</div>
+      <div class="paso-body">
+        <strong>Tomar la decisión final <span class="pref">Pág. 197</span></strong>
+        <span>Los líderes de líderes se reúnen solos y crean la versión final. No esperar entusiasmo inmediato — llegará en el Paso 5. Presentar reconociendo qué retroalimentación fue considerada y por qué.</span>
+      </div>
+    </div>
+    <div class="paso ps5">
+      <div class="paso-num pn5">5</div>
+      <div class="paso-body">
+        <strong>Crear las iniciativas de equipo <span class="pref">Pág. 198</span></strong>
+        <span>Aquí ocurre el mayor cambio. Los líderes de primera línea pasan de <em>asesores</em> a <em>socios</em>. Al elegir la iniciativa de su propio equipo, la hostilidad anterior desaparece y nace el compromiso voluntario.</span>
+      </div>
+    </div>
+
+    <div class="apolo-box">
+      <div class="apolo-icon">🚀</div>
+      <div>
+        <div class="apolo-title">Apolo 13 — El Paso 5 en su máxima expresión <span style="font-size:12px;color:rgba(255,255,255,0.5);">Pág. 199</span></div>
+        <div class="apolo-desc">El ingeniero reúne a su equipo, arroja partes sobre la mesa y enuncia la iniciativa: <em>"Necesitamos convertir ESTO en ESTO usando únicamente ESTO."</em> Una docena de personas empieza a trabajar de inmediato. Nadie puede duplicar ese nivel de compromiso cuando la iniciativa del equipo podría marcar la diferencia entre el fracaso y la victoria.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== CAP 9 ===== -->
+<div class="stitle">🏗️ Cap. 9 — Ejecución de Proyectos con las 4DX</div>
+
+<div class="g2">
+
+  <!-- 2 SITUACIONES -->
+  <div class="card">
+    <div class="dot-bg">🏗️</div>
+    <div class="card-title">
+      🏗️ Las 2 Situaciones — ¿Cuándo y cómo usar las 4DX en proyectos?
+      <span class="cap-tag" style="background:var(--orangelight);color:#D35400;">Págs. 201–205</span>
+    </div>
+    <div style="font-size:13px;color:#555;line-height:1.6;margin-bottom:14px;background:var(--orangelight);border-radius:12px;padding:11px 14px;">
+      💡 Las 4DX <strong>no reemplazan</strong> ninguna metodología de proyectos (PMI, Agile, etc.). Las complementan y garantizan que el proyecto más importante no muera en el torbellino. La clave es saber en cuál situación estás.
+    </div>
+
+    <div class="sit-card sit1">
+      <div class="sit-head">
+        <div class="sit-icon">🏭</div>
+        <div class="sit-name">Situación 1 — Taller de Proyectos</div>
+        <div class="sit-page">Pág. 201</div>
+      </div>
+      <div class="sit-body">
+        <strong>¿Quién es?</strong> Equipos cuyo rol PRINCIPAL es gestionar proyectos continuamente (dev de software, marketing, PMO).<br><br>
+        <strong>¿Cómo se aplican las 4DX?</strong> No en un proyecto individual. En la <em>operación de todos los proyectos</em>. Pregunta clave:<br>
+        <em>"¿En qué aspecto de todos nuestros proyectos necesitamos el mayor avance?"</em><br><br>
+        📌 Ej.: "Mejorar entrega a tiempo de 72% → 90% antes del 31/12"<br>
+        📌 Ej.: "Reducir proyectos fuera de presupuesto de 30% → 8%"<br><br>
+        Las medidas de predicción surgen de los pasos del proceso actual de gestión de proyectos.
+      </div>
+    </div>
+
+    <div class="sit-card sit2">
+      <div class="sit-head">
+        <div class="sit-icon">⭐</div>
+        <div class="sit-name">Situación 2 — UN Proyecto Crucial (no gestores)</div>
+        <div class="sit-page">Pág. 204</div>
+      </div>
+      <div class="sit-body">
+        <strong>¿Quién es?</strong> Equipos cuyo trabajo normal NO son proyectos, pero tienen uno vital que lleva años postergado por el torbellino.<br><br>
+        <strong>¿Cómo se aplican las 4DX?</strong> El proyecto mismo ES la iniciativa. Los hitos son las medidas de predicción (espaciados cada 2–6 semanas). El compromiso semanal mueve el hito activo.<br><br>
+        <strong>Pregunta D4 para proyectos:</strong> <em>"¿Qué puedo hacer esta semana para alcanzar nuestro siguiente hito?"</em>
+      </div>
+      <span class="sit-win">⭐ Aquí las 4DX han sido MÁS efectivas para proyectos vitales</span>
+    </div>
+
+    <div style="background:#FFFDE7;border:2px solid var(--yellow);border-radius:12px;padding:11px;margin-top:10px;">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:#E67E00;margin-bottom:5px;">💡 La diferencia fundamental <span class="pref">Pág. 210</span></div>
+      <div style="font-size:12.5px;color:#555;line-height:1.5;">"<em>¡Un plan de proyecto NO es un tablero de resultados!</em>" — Jim Stuart, co-creador 4DX. Los mejores gerentes de proyectos del mundo aún necesitan un tablero de resultados convincente para ejecutar con constancia.</div>
+    </div>
+  </div>
+
+  <!-- CASO MOUNTAIN LAND -->
+  <div class="card">
+    <div class="dot-bg">🏔️</div>
+    <div class="card-title">
+      🏔️ Caso Mountain Land — Situación 2 en Acción
+      <span class="cap-tag" style="background:var(--orangelight);color:#D35400;">Págs. 205–210</span>
+    </div>
+    <div style="font-size:12px;color:#888;margin-bottom:10px;font-weight:700;">📌 Un proyecto crucial postergado 12 años por el torbellino, resuelto en 6 meses con las 4DX</div>
+
+    <div class="caso cd" style="margin-bottom:10px;">
+      <div class="caso-head"><div class="caso-emoji">🏥</div><div class="caso-name">Contexto</div></div>
+      <div class="caso-body">37 clínicas de fisioterapia. El equipo corporativo (RRHH, TI, Finanzas) necesitaba un sistema de capacitación que <strong>llevaba 12 años postergado</strong>. Siempre fue importante, nunca urgente.</div>
+    </div>
+
+    <div class="caso ca" style="margin-bottom:10px;">
+      <div class="caso-head"><div class="caso-emoji">🎯</div><div class="caso-name">D1 — La Iniciativa del Proyecto</div></div>
+      <div class="caso-body">
+        "Completar 100% de módulos de entrenamiento identificados antes del 31/12"<br><br>
+        <strong>Criterios de éxito definidos (no % vago):</strong><br>
+        ✅ Puntos de aprendizaje resumidos y detallados<br>
+        ✅ Cuestionario de evaluación incluido<br>
+        ✅ Aprobación del comité de capacitación
+      </div>
+    </div>
+
+    <!-- 4 DISCIPLINAS EN PROYECTOS -->
+    <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--dark);margin-bottom:8px;">🔩 Las 4 Disciplinas aplicadas al proyecto</div>
+    <div class="d4-grid">
+      <div class="d4-card d41">
+        <div class="d4-tag">D1 — Iniciativa del proyecto</div>
+        <div class="d4-body">Incluye: fecha límite + entregables específicos + criterios de aprobación. Evita el % de avance ambiguo — usa módulos completados como medida objetiva.</div>
+      </div>
+      <div class="d4-card d42">
+        <div class="d4-tag">D2 — Hitos como medidas de predicción</div>
+        <div class="d4-body">12 hitos de alto nivel, espaciados cada 1–2 semanas. El equipo se enfoca solo en 1–2 hitos activos a la vez. No en el proyecto completo.</div>
+      </div>
+      <div class="d4-card d43">
+        <div class="d4-tag">D3 — Solo el hito activo en el tablero</div>
+        <div class="d4-body">Cuando se completa un hito, aparece el siguiente. Si vence sin completarse, permanece visible junto al nuevo. Esto genera urgencia real, sin presión artificial.</div>
+      </div>
+      <div class="d4-card d44">
+        <div class="d4-tag">D4 — La pregunta cambia</div>
+        <div class="d4-body">"¿Qué puedo hacer esta semana para alcanzar nuestro <em>siguiente hito</em>?" El foco es el hito activo, no el proyecto completo ni el % de avance general.</div>
+      </div>
+    </div>
+
+    <div style="font-family:'Fredoka One',sans-serif;font-size:14px;color:var(--dark);margin:10px 0 8px;">📅 D2 — Los 8 Hitos principales (de 12 en total)</div>
+    <div class="hito-list">
+      📌 1 Jun → Completar descripción de puestos actuales<br>
+      📌 20 Jun → Entrevistar líderes sobre módulos necesarios<br>
+      📌 7 Jul → Entregar propuesta de lista de módulos<br>
+      📌 14 Jul → Finalizar lista de módulos identificados<br>
+      📌 21 Jul → Completar lineamientos de formato<br>
+      📌 18 Oct → Completar primer tercio para aprobación<br>
+      📌 10 Nov → Completar segundo tercio para aprobación<br>
+      📌 15 Dic → Completar último tercio para aprobación
+    </div>
+
+    <div class="stats-row" style="margin-bottom:10px;">
+      <div class="stat-box"><div class="stat-num">239</div><div class="stat-label">Módulos completados al 100% en menos de 6 meses</div></div>
+      <div class="stat-box orange"><div class="stat-num">12 años</div><div class="stat-label">Postergado. Resuelto en 6 meses con 4DX</div></div>
+    </div>
+
+    <div class="quote orange">
+      <div class="quote-e">💬</div>
+      <div class="quote-t">"Siempre fue algo importante, pero nunca urgente. Cada año reiterábamos su importancia y cada año algo más se interponía en nuestro camino." — Rick Lybbert, dueño MLR <span class="pref">Pág. 205</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SÍNTESIS FINAL -->
+<div style="background:linear-gradient(135deg,#0A1628 0%,#1B3A6B 100%);border-radius:28px;padding:24px 30px;margin-bottom:18px;box-shadow:0 8px 28px rgba(10,22,40,0.3);">
+  <div style="font-family:'Fredoka One',sans-serif;font-size:22px;color:var(--yellow);margin-bottom:14px;display:flex;align-items:center;gap:10px;">🔗 Los 3 Capítulos en Una Sola Línea de Acción</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:18px;padding:16px;border:1px solid rgba(116,185,255,0.3);">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:15px;color:var(--sky);margin-bottom:8px;">🗺️ Cap. 7 — TRADUCE</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);line-height:1.6;">La estrategia en iniciativas ejecutables en cascada (primaria → batallas clave → equipo), usando la menor cantidad posible de batallas. La forma de llegar: elegida por cada equipo.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.08);border-radius:18px;padding:16px;border:1px solid rgba(39,174,96,0.4);">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:15px;color:#6EE89B;margin-bottom:8px;">🚂 Cap. 8 — INVOLUCRA</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);line-height:1.6;">A los líderes con transparencia, comprensión e involucramiento — generando compromiso voluntario, no obediencia forzada. El Paso 5 transforma asesores en socios.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.08);border-radius:18px;padding:16px;border:1px solid rgba(240,147,43,0.4);">
+      <div style="font-family:'Fredoka One',sans-serif;font-size:15px;color:#FAC75B;margin-bottom:8px;">🏗️ Cap. 9 — EJECUTA</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);line-height:1.6;">Los proyectos con hitos como medidas de predicción, tablero activo y compromisos semanales enfocados en el siguiente hito. Un plan de proyecto NO es un tablero de resultados.</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;background:rgba(255,217,61,0.12);border:1px solid rgba(255,217,61,0.3);border-radius:14px;padding:12px 16px;font-size:13px;color:rgba(255,255,255,0.9);line-height:1.6;">
+    🔑 <strong style="color:var(--yellow);">Clave integradora:</strong> Juntos forman el puente entre la estrategia corporativa y la ejecución diaria de los equipos de primera línea. Cap. 7 define el qué. Cap. 8 construye el quién. Cap. 9 garantiza que incluso los proyectos postergados por años finalmente lleguen a la línea de llegada.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">
+    <strong>Las 4 Disciplinas de la Ejecución</strong> · McChesney, Covey & Huling · 2ª Edición<br>
+    Caps. 7, 8 y 9 · Págs. 153–210 · Material interno para líderes y jefaturas · PRECOTEX
+  </div>
+  <div class="footer-pills">
+    <span class="fp">📏 4 Reglas</span>
+    <span class="fp">🏗️ 3 Enfoques</span>
+    <span class="fp">🧠 3 Mentalidades</span>
+    <span class="fp">🪜 5 Pasos</span>
+    <span class="fp">🏗️ Proyectos 4DX</span>
+    <span class="fp">🤝 Compromiso Voluntario</span>
+  </div>
+</div>
+
+</body>
+</html>
